@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/view/core/CoreView.dart';
 import 'package:mvvm_flutter_app/view/login/LoginView.dart';
-import 'file:///C:/Users/Windows%2010/AndroidStudioProjects/mvvm_flutter_app/lib/old/2.dart';
-import 'file:///C:/Users/Windows%2010/AndroidStudioProjects/mvvm_flutter_app/lib/old/2.dart';
 import 'package:mvvm_flutter_app/view/survey/SurveyView.dart';
 
 const String core = '/';
