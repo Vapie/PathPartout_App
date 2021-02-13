@@ -31,9 +31,6 @@ class _RandoContainerState extends State<RandoContainer> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Fetch Data Example'),
-      ),
       body: Center(
         child: FutureBuilder<Rando>(
           future: futureRando,
