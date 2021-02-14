@@ -6,7 +6,6 @@ import 'package:mvvm_flutter_app/widget/rando/rando-detail.dart';
 
 class RandosList extends StatefulWidget {
 
-
   RandosList( {Key key}) : super(key: key);
 
 
@@ -38,7 +37,7 @@ class _RandosListState extends State<RandosList> {
                 for ( var element in snapshot.data ) Column(
                   children: [
                     Text(element.name),
-                    Text(element.duration),
+                    Text(element.duration.toString()),
                     Text(element.difficulty.toString())
                   ],
                 )
