@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/naviguation/routes.dart';
 import 'package:mvvm_flutter_app/view/login/LoginViewModel.dart';
 import 'package:mvvm_flutter_app/view/picture/PictureViewModel.dart';
-import 'package:mvvm_flutter_app/widget/rando/rando-container.dart';
+import 'package:mvvm_flutter_app/widget/rando/rando-detail.dart';
+import 'package:mvvm_flutter_app/widget/rando/randos-list.dart';
 
 import 'package:stacked/stacked.dart';
 
@@ -15,7 +16,7 @@ class PictureView extends StatelessWidget {
       builder: (context, model, child) => Scaffold(
           body: Stack (children: [
             Center(child: Text("Picture")),
-            RandoContainer(2)
+            RandosList()
           ],),
 
       ),

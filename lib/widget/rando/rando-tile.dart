@@ -2,29 +2,27 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
+import 'package:mvvm_flutter_app/widget/rando/rando-detail.dart';
 
-class RandoContainer extends StatefulWidget {
-  var RandoId;
+class RandosContainer extends StatefulWidget {
 
 
-  RandoContainer(int RandoId, {Key key}) : super(key: key){
-    this.RandoId = RandoId;
-  }
+  RandosContainer( {Key key}) : super(key: key);
 
 
   @override
-  _RandoContainerState createState() => _RandoContainerState();
+  _RandosContainerState createState() => _RandosContainerState();
 }
 
-class _RandoContainerState extends State<RandoContainer> {
-  Future<Rando> futureRando;
+class _RandosContainerState extends State<RandosContainer> {
+  Future<List<Rando>> futureRandos;
 
 
 
   @override
   void initState() {
     super.initState();
-    futureRando = Rando.fetchRando(widget.RandoId);
+    futureRandos = Rando.fetchRandos();
   }
 
 
@@ -32,15 +30,16 @@ class _RandoContainerState extends State<RandoContainer> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: FutureBuilder<Rando>(
-          future: futureRando,
+        child: FutureBuilder<List<Rando>>(
+          future: futureRandos,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return Text(snapshot.data.name);
+              return Column(children:[
+                for ( var element in snapshot.data ) RandoTile()
+              ]);
             } else if (snapshot.hasError) {
               return Text("${snapshot.error}");
             }
-
             // By default, show a loading spinner.
             return CircularProgressIndicator();
           },
