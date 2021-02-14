@@ -8,10 +8,14 @@ class Rando {
   final int duration;
   final int pos_elevation;
   final int neg_elevation;
-  final String start_point;
   final List<dynamic> tags;
+  final int summit;
+  final dynamic gpx;
+  final dynamic start_point;
+  final dynamic end_point;
+  final List<dynamic> images;
 
-  Rando({this.id,this.name,this.difficulty,this.duration,this.pos_elevation,this.neg_elevation,this.start_point,this.tags});
+  Rando({this.id,this.name,this.difficulty,this.duration,this.pos_elevation,this.neg_elevation,this.start_point,this.tags,this.summit, this.gpx, this.end_point, this.images});
 
   factory Rando.fromJson(Map<String, dynamic> json) {
     return Rando(
@@ -22,7 +26,12 @@ class Rando {
       pos_elevation: json['pos_elevation'],
       neg_elevation: json['neg_elevation'],
       start_point: json['start_point'],
-      tags : json['tags']
+      end_point: json['end_point'],
+      tags : json['tags'],
+      summit: json['summit'],
+      gpx: json['gpx'],
+      images: json['images']
+
     );
   }
 
@@ -34,9 +43,8 @@ class Rando {
   }
 
   static Future<Rando> fetchRando(int id) async{
-    final randos = await fetchRandos();
-    return randos.singleWhere((element) => element.id == id);
-
+    final randoJson = await fetchRequestSingle('iutannecy-deptinfo.fr:3000','randonnee/'+id.toString());
+    return Rando.fromJson(randoJson);
   }
 }
 

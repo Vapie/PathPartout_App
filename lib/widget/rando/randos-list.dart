@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
-import 'package:mvvm_flutter_app/widget/rando/rando-detail.dart';
+import 'package:mvvm_flutter_app/widget/rando/rando-tile.dart';
 
 class RandosList extends StatefulWidget {
 
@@ -34,13 +34,7 @@ class _RandosListState extends State<RandosList> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return Column(children:[
-                for ( var element in snapshot.data ) Column(
-                  children: [
-                    Text(element.name),
-                    Text(element.duration.toString()),
-                    Text(element.difficulty.toString())
-                  ],
-                )
+                for ( var element in snapshot.data ) RandoTile(element)
               ]);
             } else if (snapshot.hasError) {
               return Text("${snapshot.error}");
