@@ -13,9 +13,10 @@ class Rando {
   final dynamic gpx;
   final dynamic start_point;
   final dynamic end_point;
+  final double distance;
   final List<dynamic> images;
 
-  Rando({this.id,this.name,this.difficulty,this.duration,this.pos_elevation,this.neg_elevation,this.start_point,this.tags,this.summit, this.gpx, this.end_point, this.images});
+  Rando({this.id,this.name,this.difficulty,this.duration,this.pos_elevation,this.neg_elevation,this.start_point,this.tags,this.summit, this.gpx, this.end_point, this.images, this.distance});
 
   factory Rando.fromJson(Map<String, dynamic> json) {
     return Rando(
@@ -30,8 +31,8 @@ class Rando {
       tags : json['tags'],
       summit: json['summit'],
       gpx: json['gpx'],
-      images: json['images']
-
+      images: json['images'],
+      distance: json['distance']
     );
   }
 
