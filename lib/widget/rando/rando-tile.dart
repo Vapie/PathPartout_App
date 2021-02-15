@@ -67,7 +67,7 @@ class RandoTile extends StatelessWidget {
                         foregroundDecoration: BoxDecoration(
                             border: Border(
                                 bottom:
-                                BorderSide(width: 10, color: getColor(rando.difficulty))
+                                BorderSide(width: 10, color: Colors.red)
                             )
                         ),
                       ),
@@ -106,4 +106,5 @@ class RandoTile extends StatelessWidget {
     }
     return Color(0xFFE0F7FA);
   }
+}
 }

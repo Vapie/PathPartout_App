@@ -21,7 +21,7 @@ class _RandosListState extends State<RandosList> {
   @override
   void initState() {
     super.initState();
-    futureRandos = Rando.fetchRandos();
+    futureRandos = Rando.fetchFilteredRando(tags: ["Balcons","Boucle"],name:"Tournette");
   }
 
 
