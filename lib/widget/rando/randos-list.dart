@@ -21,7 +21,7 @@ class _RandosListState extends State<RandosList> {
   @override
   void initState() {
     super.initState();
-    futureRandos = Rando.fetchFilteredRando(tags: ["Balcons","Boucle"],name:"Tournette");
+    futureRandos = Rando.fetchRandos();
   }
 
 
@@ -33,9 +33,31 @@ class _RandosListState extends State<RandosList> {
           future: futureRandos,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              return Column(children:[
-                for ( var element in snapshot.data ) RandoTile(element)
-              ]);
+              return ListView(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.5,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                       children:[ Expanded(child:
+                           FittedBox(
+                             fit: BoxFit.cover,
+                             child: RandoTile(snapshot.data.elementAt(0)),
+                       )
+                       ) ]
+                    )
+                  ),
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          for ( var element in snapshot.data.skip(1)) RandoTile(element),
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              );
             } else if (snapshot.hasError) {
               return Text("${snapshot.error}");
             }
