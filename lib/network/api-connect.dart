@@ -2,11 +2,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mvvm_flutter_app/network/token.dart';
+import 'package:mvvm_flutter_app/storage/secured-storage.dart';
 
 //
 Future<dynamic> fetchRequestSingle(String adress,String params) async {
-  var token = new Token().getToken();
-  var paramsAndToken = token+"/"+params;
+  var mystorage = new SecuredStorage();
+  var paramsAndToken = mystorage.storage.read(key: "apiToken").toString()+"/"+params;
 
   final response =
       await http.get(Uri.http(adress,paramsAndToken));
@@ -24,9 +25,11 @@ Future<dynamic> fetchRequestSingle(String adress,String params) async {
 }
 
  Future<dynamic> fetchRequestMultiple(String adress,String params) async {
-  var token = new Token().getToken();
-  var paramsAndToken = token+"/"+params;
-  final response =
+   var mystorage = new SecuredStorage();
+
+   var paramsAndToken = mystorage.storage.read(key: "apiToken").toString()+"/"+params;
+
+   final response =
       await http.get(Uri.http(adress,paramsAndToken));
 
   if (response.statusCode == 200) {
