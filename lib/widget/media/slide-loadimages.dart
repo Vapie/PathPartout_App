@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter_swiper/flutter_swiper.dart';
-
 import 'loadimage.dart';
 
 // ignore: must_be_immutable
@@ -34,6 +32,5 @@ class SlideLoadImage extends StatelessWidget {
         ),
           constraints:new BoxConstraints.loose(new Size(width, height))
     );
-
   }
 }

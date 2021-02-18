@@ -39,7 +39,6 @@ class _RandoDetailState extends State<RandoDetail> {
               return Column(children: [
                 Text(snapshot.data.name),
                 Text(snapshot.data.duration.toString()),
-                Text(snapshot.data.start_point),
                 Text(snapshot.data.difficulty.toString()),
                 Text(snapshot.data.pos_elevation.toString()),
                 Text(snapshot.data.neg_elevation.toString()),
