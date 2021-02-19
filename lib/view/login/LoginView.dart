@@ -4,6 +4,8 @@ import 'package:mvvm_flutter_app/view/login/LoginViewModel.dart';
 
 import 'package:stacked/stacked.dart';
 
+import '../../widget/rando/rando-detail.dart';
+
 class LoginView extends StatelessWidget {
   const LoginView({Key key}) : super(key: key);
 
@@ -14,7 +16,7 @@ class LoginView extends StatelessWidget {
          floatingActionButton: FloatingActionButton(onPressed: (){
         Navigator.pushNamed(context, survey, arguments: 'Data from home');
         },),
-          body: Center(child: Text("Login")),
+          body: Center(child: RandoDetail(1)),
       ),
       viewModelBuilder: () => LoginViewModel(),
       onModelReady: (model) => model.newstring(),
