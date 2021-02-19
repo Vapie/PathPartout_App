@@ -34,6 +34,8 @@ Future<dynamic> fetchRequestSingle(String adress,String params) async {
 
     // If the server did return a 200 OK response,
     // then parse the JSON.
+    // TODO : vérifier que c'est le bon return
+    return jsonDecore(response.body)
     //return jsonDecode('[{"id":1,"name":"Le Mont Veyrier","difficulty":4,"duration":360,"pos_elevation":966,"neg_elevation":967,"summit":1289,"start_point":{"name":"Petit port à Albigny","coordinates":"45.903812, 6.159952"},"end_point":{"name":"Retour au point de départ"},"tags":["Forêt","Ombre","Boucle"]},{"id":2,"name":"Les Clefs du tour de la Tournette","difficulty":4,"distance":13.39,"duration":465,"pos_elevation":1379,"neg_elevation":1381,"summit":2341,"start_point":{"name":"Terminus de la route de la Tournette","coordinates":"45.843236, 6.312728"},"end_point":{"name":"Retour au point de départ"},"tags":["Balcons","Boucle","Hors-piste"],"images":["https://www.visorando.com/images/original/combe-des-fretes-visorando-125771.jpg","https://www.visorando.com/images/original/ligne-de-crete-visorando-125768.jpg","https://www.visorando.com/images/original/raide-couloir-visorando-125767.jpg","https://www.visorando.com/images/original/balcon-de-la-tournette-visorando-125755.jpg"]}]') ;
   } else {
     // If the server did not return a 200 OK response,
