@@ -5,6 +5,7 @@ import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/ui/level.dart';
 import 'package:mvvm_flutter_app/widget/media/loadimage.dart';
 import 'package:mvvm_flutter_app/widget/media/slide-loadimages.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class RandoTile extends StatelessWidget {
   var rando;
@@ -17,7 +18,7 @@ class RandoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height * 0.30,
+        height: MediaQuery.of(context).size.height * 0.3,
         width: MediaQuery.of(context).size.width * 0.5,
         child: Expanded(
           child: Card(
@@ -40,7 +41,7 @@ class RandoTile extends StatelessWidget {
                             child: LoadImage(rando.images[0])
                           ),
                           Container(
-                            height: MediaQuery.of(context).size.height * 0.19,
+                            height: MediaQuery.of(context).size.height * 0.2,
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
@@ -55,9 +56,11 @@ class RandoTile extends StatelessWidget {
                           ),
                           Padding(
                             padding: const EdgeInsets.all(12.0),
-                            child: Text(
+                            child:  Text(
                               rando.name,
-                              style: TextStyle(color: Colors.white, fontSize: 30),
+                              textScaleFactor: 1,
+                              strutStyle: StrutStyle(fontSize: 25),
+                              style: TextStyle(color: Colors.white, fontSize: 25),
                             ),
                           ),
                           Padding(padding: EdgeInsets.all(16.0))
@@ -77,7 +80,7 @@ class RandoTile extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               if(rando.distance != null) Text(
-                                rando.distance.toString() + 'km',
+                                rando.distance.round().toString() + 'km',
                                 style: TextStyle(color: Colors.black, fontSize: 25),
                               ),
                               Text(
