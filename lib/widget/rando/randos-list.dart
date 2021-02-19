@@ -41,9 +41,9 @@ class _RandosListState extends State<RandosList> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                        children:[ Expanded(child:
                            FittedBox(
-                             fit: BoxFit.cover,
+                             fit: BoxFit.fitWidth,
                              child: RandoTile(snapshot.data.elementAt(0)),
-                       )
+                            )
                        ) ]
                     )
                   ),
