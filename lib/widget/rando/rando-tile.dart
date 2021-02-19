@@ -5,7 +5,6 @@ import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/ui/level.dart';
 import 'package:mvvm_flutter_app/widget/media/loadimage.dart';
 import 'package:mvvm_flutter_app/widget/media/slide-loadimages.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
 class RandoTile extends StatelessWidget {
   var rando;
