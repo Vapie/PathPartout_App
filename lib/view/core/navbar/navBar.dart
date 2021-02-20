@@ -1,23 +1,53 @@
  import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/view/login/LoginView.dart';
-import 'package:mvvm_flutter_app/view/picture/PictureView.dart';
+
 import 'package:mvvm_flutter_app/view/plan/PlanView.dart';
 import 'package:mvvm_flutter_app/view/profile/ProfileView.dart';
+import 'package:mvvm_flutter_app/view/randos/RandosView.dart';
+
+//SI ON NAVIGUE ICI IL/ FAUT RENSEIGNER RANDOSCOLLECTION AU MINIMUM
 class MyNavigationBar extends StatefulWidget {
-  MyNavigationBar ({Key key}) : super(key: key);
+  Map data;
+  MyNavigationBar (Map data, {Key key}) : super(key: key){
+    this.data = data;
+  }
+
   @override
-  _MyNavigationBarState createState() => _MyNavigationBarState();
+  _MyNavigationBarState createState() => _MyNavigationBarState(data);
 }
 class _MyNavigationBarState extends State<MyNavigationBar > {
   int _selectedIndex = 0;
-  static const List<Widget> _options = <Widget>[
-    ProfileView(),
-    PlanView(),
-    PictureView(),
+  List<Rando> randos;
+   List<Widget> _options;
 
-  ];
+
+
+  _MyNavigationBarState(Map data){
+    _selectedIndex = data["selectedIndex"];
+      if (data.containsKey("randosCollection")){
+        randos = data["randosCollection"];
+    }else{
+        //TODO remove final
+        print("Il faut ajouter randosCollection sur la nav vers core ");
+      }
+
+
+
+    _options = <Widget>[
+      RandosView(randos),
+      PlanView(),
+      ProfileView(),
+    ];
+  }
   void _onItemTap(int index) {
+    _options = <Widget>[
+      RandosView(randos),
+      PlanView(),
+      ProfileView(),
+
+    ];
     setState(() {
       _selectedIndex = index;
     });
@@ -31,8 +61,8 @@ class _MyNavigationBarState extends State<MyNavigationBar > {
       bottomNavigationBar: BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-                icon: Icon(Icons.person_outlined),
-                label: 'Profile',
+                icon: Icon(Icons.filter_hdr_outlined),
+                label: 'Randos',
                 backgroundColor: Colors.white
             ),
             BottomNavigationBarItem(
@@ -41,8 +71,8 @@ class _MyNavigationBarState extends State<MyNavigationBar > {
                 backgroundColor: Colors.white
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.photo_camera_outlined),
-              label: 'Picture',
+              icon: Icon(Icons.person_outlined),
+              label: 'Profile',
               backgroundColor: Colors.white,
             ),
           ],
