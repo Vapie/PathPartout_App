@@ -95,18 +95,18 @@ class RandoTile extends StatelessWidget {
           ),
         )
     );
-
-  //Return color based on difficulty of the hike
-  Color getColor(int level) {
-    switch(level){
-      case 1:
-        return Color(0xFFB2FF59);
-      case 2:
-        return Color(0xFFFFA000);
-      case 4:
-        return Color(0xFFFF8A65);
-    }
-    return Color(0xFFE0F7FA);
   }
 }
+
+//Return color based on difficulty of the hike
+Color getColor(int level) {
+  switch(level){
+    case 1:
+      return Color(0xFFB2FF59);
+    case 2:
+      return Color(0xFFFFA000);
+    case 4:
+      return Color(0xFFFF8A65);
+  }
+  return Color(0xFFE0F7FA);
 }
