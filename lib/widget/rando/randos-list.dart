@@ -21,7 +21,7 @@ class RandosList extends StatelessWidget {
           print(randos);
           if(randos.length==0){
 
-            return  Text("yo");}
+            return  Text("Aucune Rando de dispo");}
 
           return  ListView(
             children: [
