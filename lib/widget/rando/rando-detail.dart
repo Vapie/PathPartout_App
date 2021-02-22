@@ -298,7 +298,18 @@ class _RandoDetailState extends State<RandoDetail> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          if(snapshot.data.images != null)
                           GalleryLoadImage(snapshot.data.images, MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.2)
+
+                          else Container(
+                            padding: EdgeInsets.only(left: 20.0),
+                            child: Text(
+                              "Il n'y a aucune image.. N'hésitez pas à en ajouter !",
+                              style: TextStyle(
+                                color: Colors.grey[600]
+                              )
+                            )
+                          )
                         ],
                       ),
                       // Avis - En-tête
