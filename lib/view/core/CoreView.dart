@@ -8,13 +8,14 @@ import 'package:stacked/stacked.dart';
 import '../../widget/appbar/appBar.dart';
 
 class CoreView extends StatelessWidget {
-  const CoreView({Key key}) : super(key: key);
+  final Map data;
+  CoreView({Key key,  @required this.data}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<CoreViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-          bottomNavigationBar: MyNavigationBar() ,
+          bottomNavigationBar: MyNavigationBar(data) ,
 
       ),
       viewModelBuilder: () => CoreViewModel(),

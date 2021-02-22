@@ -14,7 +14,8 @@ class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case core:
-        return MaterialPageRoute(builder: (_) => CoreView() );
+        var data = settings.arguments as Map;
+        return MaterialPageRoute(builder: (_) => CoreView(data : data) );
       case survey:
         return MaterialPageRoute(builder: (_) => SurveyView());
       case login:

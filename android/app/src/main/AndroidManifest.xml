@@ -45,4 +45,7 @@
             android:value="2" />
     </application>
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-sdk
+        android:minSdkVersion="18"
+        android:targetSdkVersion="18" />
 </manifest>

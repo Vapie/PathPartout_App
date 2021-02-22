@@ -8,4 +8,6 @@ class Token{
   String getMapToken() {
     return this.maptoken;
   }
+
+
 }
