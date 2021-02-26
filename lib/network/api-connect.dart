@@ -11,10 +11,16 @@ Future<dynamic> fetchRequestSingle(String adress,String params) async {
   }
     else {
       var token = new Token().getToken();
-      var paramsAndToken = token + "/" + params;
-
+      print(adress+"/"+params);
       final response =
-      await http.get(Uri.http(adress, paramsAndToken));
+      await  http.post(Uri.http(adress,params),
+        headers: <String, String>{
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: {
+          'token': token,
+        },
+      );
 
       if (response.statusCode == 200) {
         // If the server did return a 200 OK response,
@@ -23,7 +29,7 @@ Future<dynamic> fetchRequestSingle(String adress,String params) async {
       } else {
         // If the server did not return a 200 OK response,
         // then throw an exception.
-        throw Exception('Failed to load data');
+        throw Exception('Failed to load data' + response.statusCode.toString());
       }
   }
 }
@@ -34,10 +40,15 @@ Future<dynamic> fetchRequestMultiple(String adress,String params) async {
     return jsonDecode('[{"id":1,"name":"Le Mont Veyrier","difficulty":4,"duration":360,"pos_elevation":966,"neg_elevation":967,"summit":1289,"start_point":{"name":"Petit port à Albigny","coordinates":"45.903812, 6.159952"},"end_point":{"name":"Retour au point de départ"},"tags":["Forêt","Ombre","Boucle"]},{"id":2,"name":"Les Clefs du tour de la Tournette","difficulty":4,"distance":13.39,"duration":465,"pos_elevation":1379,"neg_elevation":1381,"summit":2341,"start_point":{"name":"Terminus de la route de la Tournette","coordinates":"45.843236, 6.312728"},"end_point":{"name":"Retour au point de départ"},"tags":["Balcons","Boucle","Hors-piste"],"images":["https://www.visorando.com/images/original/combe-des-fretes-visorando-125771.jpg","https://www.visorando.com/images/original/ligne-de-crete-visorando-125768.jpg","https://www.visorando.com/images/original/raide-couloir-visorando-125767.jpg","https://www.visorando.com/images/original/balcon-de-la-tournette-visorando-125755.jpg"]}]') ;
   }
   else{
+    print(adress+"/"+params);
     var token = new Token().getToken();
-    var paramsAndToken = token+"/"+params;
     final response =
-    await http.get(Uri.http(adress,paramsAndToken));
+    await http.post(Uri.http(adress,params),
+      headers: <String, String>{
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: {"token" : token},
+    );
 
     if (response.statusCode == 200) {
 
@@ -47,7 +58,7 @@ Future<dynamic> fetchRequestMultiple(String adress,String params) async {
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
-      throw Exception('Failed to load data');
+      throw Exception('Failed to load data' + response.statusCode.toString());
     }
   }
 }

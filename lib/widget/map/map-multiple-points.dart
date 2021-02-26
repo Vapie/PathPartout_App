@@ -40,9 +40,9 @@ class _MyMapMultiMarkersState extends State<MyMapMultiMarkers> {
               print(snapshot.data);
               return new FlutterMap(
                 options: new MapOptions(
-                  // center: new LatLng(
-                  //     snapshot.data, snapshot.data.gpx[0][0]),
-                  zoom: 13.0,
+                  center: new LatLng(
+                      45.839, 6.211),
+                  zoom: 11.0,
                 ),
                 layers: [
                   new TileLayerOptions(
