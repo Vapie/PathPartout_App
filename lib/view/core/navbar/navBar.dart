@@ -4,6 +4,7 @@ import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/view/login/LoginView.dart';
 
 import 'package:mvvm_flutter_app/view/plan/PlanView.dart';
+import 'package:mvvm_flutter_app/view/planmultiple/PlanMultipleView.dart';
 import 'package:mvvm_flutter_app/view/profile/ProfileView.dart';
 import 'package:mvvm_flutter_app/view/randos/RandosView.dart';
 
@@ -34,14 +35,14 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
 
     _options = <Widget>[
       RandosView(randos),
-      PlanView(),
+      PlanMultipleView(),
       ProfileView(),
     ];
   }
   void _onItemTap(int index) {
     _options = <Widget>[
       RandosView(randos),
-      PlanView(),
+      PlanMultipleView(),
       ProfileView(),
     ];
     setState(() {

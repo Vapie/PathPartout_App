@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
+import 'package:mvvm_flutter_app/navigation/routes.dart';
+import 'package:mvvm_flutter_app/widget/appbar/appBar.dart';
+import 'package:mvvm_flutter_app/widget/appbar/drawer/drawer.dart';
 import 'package:mvvm_flutter_app/widget/media/gallery-loadimages.dart';
 import 'package:mvvm_flutter_app/widget/media/loadimage.dart';
 import 'package:mvvm_flutter_app/widget/rando/rando-tile.dart';
@@ -29,6 +32,9 @@ class _RandoDetailState extends State<RandoDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: myAppBar(),
+      endDrawer:AppDrawer(),
+
       body: Center(
         child: FutureBuilder<Rando>(
           future: futureRando,
@@ -143,17 +149,30 @@ class _RandoDetailState extends State<RandoDetail> {
                               children: [
                                 Column(
                                   children: [
-                                    Text(snapshot.data.name,
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.bold))
+                                    Container(
+                                      padding: const EdgeInsets.only(
+                                          left: 10.0, top: 10.0, bottom: 5.0),
+                                      width: MediaQuery.of(context)
+                                          .size
+                                          .width *
+                                          0.65,
+                                      child: new Column(
+                                        children: <Widget>[
+                                          new  Text(snapshot.data.name,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 25,
+                                                  fontWeight: FontWeight.bold))
+                                        ],
+                                      ),
+                                    )
+
                                   ],
                                 ),
                                 Column(
                                   children: [
                                     TextButton(
-                                        onPressed: null,
+                                        onPressed: ()=> {Navigator.pushNamed(context, mapRando, arguments: snapshot.data.id)} ,
                                         child: Text(
                                           "Let's Go",
                                           style: TextStyle(color: Colors.white),
