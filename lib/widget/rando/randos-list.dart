@@ -17,7 +17,7 @@ class RandosList extends StatelessWidget {
           child: ((() {
         print(randos);
         if (randos.length == 0) {
-          return Text("Aucune Rando de dispo");
+          return Text("Aucune randonnée disponible :(");
         }
 
         return ListView(
