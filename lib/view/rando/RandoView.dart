@@ -16,8 +16,17 @@ class RandoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<RandoViewModel>.reactive(
-      builder: (context, model, child) =>  RandoDetail(randoId: this.randoId),
 
+      builder: (context, model, child) => Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, survey);
+          },
+        ),
+        body: Center(child: RandoDetail(randoId: this.randoId)),
+        appBar: myAppBar(),
+        endDrawer: AppDrawer()
+      ),
       viewModelBuilder: () => RandoViewModel(),
       onModelReady: (model) => model.newString(),
     );

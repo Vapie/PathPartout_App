@@ -89,7 +89,7 @@ class _RandoDetailState extends State<RandoDetail> {
                   Container(
                     foregroundDecoration: BoxDecoration(
                         border: Border(
-                            bottom: BorderSide(width: 10, color: Colors.red))),
+                            bottom: BorderSide(width: 10, color: getColor(snapshot.data.difficulty)))),
                   ),
                   Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -445,10 +445,7 @@ class _RandoDetailState extends State<RandoDetail> {
                                         Container(
                                           padding: const EdgeInsets.only(
                                               left: 20.0, top: 10.0),
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.75,
+                                          width: MediaQuery.of(context).size.width * 0.75,
                                           child: new Column(
                                             children: <Widget>[
                                               new Text(
