@@ -5,7 +5,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
 import "package:latlong/latlong.dart";
 import 'package:mvvm_flutter_app/network/token.dart';
-
+import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
@@ -54,13 +54,19 @@ class _MyMapMultiMarkersState extends State<MyMapMultiMarkers> {
                     },
                   ),
                  new MarkerLayerOptions(
+
                     markers: [ for ( var element in snapshot.data ) if(element.start_point!=null) new Marker(
                                         width: 80.0,
                                         height: 80.0,
+
                                         point: new LatLng(
                                             double.parse(element.start_point["coordinates"].replaceAll(" ","").split(',')[0]),double.parse(element.start_point["coordinates"].replaceAll(" ","").split(',')[1])),
-                                        builder: (ctx) => new Container(
-                                          child:  Icon(Icons.room_rounded, size: 80.0 , color: Colors.red),
+                                        builder: (ctx) =>  GestureDetector(
+                                              onTap: () {
+                                               print("afzeohgfuizeww");
+                                              },
+                                              child:   Icon(Icons.room_rounded, size: 80.0 , color: Colors.red),
+
                                         ),
                                       ),
                                   ],
