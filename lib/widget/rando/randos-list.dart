@@ -37,7 +37,14 @@ class RandosList extends StatelessWidget {
               children: [
                 Column(
                   children: [
-                    for (var element in randos.skip(1)) RandoTile(element),
+                    //TODO maybe viewmodel
+                    for (var i=0;i < randos.skip(1).length; i++ ) if (i%2 == 1 )  RandoTile(randos[i+1]),
+                  ],
+                ),
+                Column(
+                  //TODO maybeviewmodel
+                  children: [
+                    for (var i=0;i < randos.skip(1).length; i++ ) if (i%2 == 0 )  RandoTile(randos[i+1]),
                   ],
                 )
               ],

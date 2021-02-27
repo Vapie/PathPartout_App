@@ -16,6 +16,7 @@ class RandoView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<RandoViewModel>.reactive(
+
       builder: (context, model, child) => Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
