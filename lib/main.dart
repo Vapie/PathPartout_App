@@ -1,12 +1,7 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-
 import 'locator.dart';
-import 'naviguation/routes.dart' as navRoute;
-
+import 'navigation/routes.dart' as navRoute;
 
 void main() {
   SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
@@ -17,7 +12,7 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    runApp( MaterialApp(
+    runApp(MaterialApp(
       onGenerateRoute: navRoute.Router.generateRoute,
       initialRoute: navRoute.login,
     ));
@@ -25,6 +20,3 @@ class MyApp extends StatelessWidget {
 //Navigator.pushNamed(context, secondScreenRoute, arguments: 'Data from home');
 
 }
-
-
-

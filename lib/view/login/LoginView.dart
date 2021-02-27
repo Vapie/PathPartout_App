@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:mvvm_flutter_app/naviguation/routes.dart';
+import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/view/login/LoginViewModel.dart';
-
 import 'package:stacked/stacked.dart';
-
 import '../../widget/rando/rando-detail.dart';
 
 class LoginView extends StatelessWidget {
@@ -13,14 +11,15 @@ class LoginView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-         floatingActionButton: FloatingActionButton(onPressed: (){
-        Navigator.pushNamed(context, survey, arguments: 'Data from home');
-        },),
-          body: Center(child: RandoDetail(randoId: 1)),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, survey, arguments: 'Data from home');
+          },
+        ),
+        body: Center(child: RandoDetail(randoId: 1)),
       ),
       viewModelBuilder: () => LoginViewModel(),
-      onModelReady: (model) => model.newstring(),
+      onModelReady: (model) => model.newString(),
     );
   }
 }
-

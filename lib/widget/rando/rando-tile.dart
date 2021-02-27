@@ -2,7 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
-import 'package:mvvm_flutter_app/naviguation/routes.dart';
+import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/ui/level.dart';
 import 'package:mvvm_flutter_app/widget/media/loadimage.dart';
 import 'package:mvvm_flutter_app/widget/media/slide-loadimages.dart';
@@ -107,8 +107,7 @@ Color getColor(int level) {
       return Color(0xFFB2FF59);
     case 2:
       return Color(0xFFFFA000);
-    case 4:
+    default:
       return Color(0xFFFF8A65);
   }
-  return Color(0xFFE0F7FA);
 }

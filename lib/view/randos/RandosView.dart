@@ -9,7 +9,7 @@ import 'package:stacked/stacked.dart';
 class RandosView extends StatelessWidget {
   List<Rando> randos;
 
-  RandosView(List<Rando> randos, {Key key}) : super(key: key){
+  RandosView(List<Rando> randos, {Key key}) : super(key: key) {
     this.randos = randos;
     print(randos);
   }
@@ -18,15 +18,12 @@ class RandosView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<RandosViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-          body: Stack (children: [
-            Center(child: Text("Randos")),
-            RandosList(this.randos)
-          ],),
-        appBar: myAppBar(),
-        endDrawer:AppDrawer()
-      ),
+          body: Stack(
+            children: [Center(child: Text("Randos")), RandosList(this.randos)],
+          ),
+          appBar: myAppBar(),
+          endDrawer: AppDrawer()),
       viewModelBuilder: () => RandosViewModel(),
     );
   }
 }
-
