@@ -1,6 +1,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/ui/level.dart';
@@ -71,7 +72,7 @@ class RandoTile extends StatelessWidget {
                         foregroundDecoration: BoxDecoration(
                             border: Border(
                                 bottom:
-                                BorderSide(width: 10, color: Colors.red)
+                                BorderSide(width: 10, color: getColor(rando.difficulty))
                             )
                         ),
                       ),
@@ -104,7 +105,7 @@ class RandoTile extends StatelessWidget {
 Color getColor(int level) {
   switch(level){
     case 1:
-      return Color(0xFFB2FF59);
+      return Color(0xFF00E676);
     case 2:
       return Color(0xFFFFA000);
     default:

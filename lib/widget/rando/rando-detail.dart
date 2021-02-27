@@ -83,7 +83,7 @@ class _RandoDetailState extends State<RandoDetail> {
                   Container(
                     foregroundDecoration: BoxDecoration(
                         border: Border(
-                            bottom: BorderSide(width: 10, color: Colors.red))),
+                            bottom: BorderSide(width: 10, color: getColor(snapshot.data.difficulty)))),
                   ),
                   Padding(
                       padding: const EdgeInsets.all(10.0),
