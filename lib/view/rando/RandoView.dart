@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
+import 'package:mvvm_flutter_app/widget/appbar/appBar.dart';
+import 'package:mvvm_flutter_app/widget/appbar/drawer/drawer.dart';
 import 'package:stacked/stacked.dart';
 import '../../widget/rando/rando-detail.dart';
 import 'RandoViewModel.dart';
@@ -21,6 +23,8 @@ class RandoView extends StatelessWidget {
           },
         ),
         body: Center(child: RandoDetail(randoId: this.randoId)),
+        appBar: myAppBar(),
+        endDrawer: AppDrawer()
       ),
       viewModelBuilder: () => RandoViewModel(),
       onModelReady: (model) => model.newString(),
