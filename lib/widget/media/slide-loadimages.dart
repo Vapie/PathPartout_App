@@ -9,28 +9,23 @@ class SlideLoadImage extends StatelessWidget {
   double width;
   double height;
 
-
-  SlideLoadImage(images, double width, double height){
+  SlideLoadImage(images, double width, double height) {
     this.images = images;
     this.width = width;
     this.height = height;
   }
 
   @override
-  Widget build(BuildContext context){
-    return
-      ConstrainedBox(
-          child: new Swiper(
-          outer:false,
+  Widget build(BuildContext context) {
+    return ConstrainedBox(
+        child: new Swiper(
+          outer: false,
           itemBuilder: (c, i) {
             return LoadImage(images[i]);
           },
-          pagination: new SwiperPagination(
-              margin: new EdgeInsets.all(0.0)
-          ),
+          pagination: new SwiperPagination(margin: new EdgeInsets.all(0.0)),
           itemCount: images.length,
         ),
-          constraints:new BoxConstraints.loose(new Size(width, height))
-    );
+        constraints: new BoxConstraints.loose(new Size(width, height)));
   }
 }

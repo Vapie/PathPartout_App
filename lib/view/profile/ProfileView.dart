@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mvvm_flutter_app/naviguation/routes.dart';
-import 'package:mvvm_flutter_app/view/login/LoginViewModel.dart';
-
 import 'package:stacked/stacked.dart';
-
 import 'ProfileViewModel.dart';
 
 class ProfileView extends StatelessWidget {
@@ -13,12 +9,9 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-
-          body: Center(child: Text("Profile")),
+        body: Center(child: Text("Profile")),
       ),
       viewModelBuilder: () => ProfileViewModel(),
-
     );
   }
 }
-

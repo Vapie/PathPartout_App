@@ -4,14 +4,13 @@ import 'package:flutter/widgets.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/widget/media/gallery-loadimages.dart';
 import 'package:mvvm_flutter_app/widget/media/loadimage.dart';
-import 'package:mvvm_flutter_app/widget/media/slide-loadimages.dart';
 import 'package:mvvm_flutter_app/widget/rando/rando-tile.dart';
 
 class RandoDetail extends StatefulWidget {
-  var RandoId;
+  var randoId;
 
-  RandoDetail({Key key, int RandoId}) : super(key: key) {
-    this.RandoId = RandoId;
+  RandoDetail({Key key, int randoId}) : super(key: key) {
+    this.randoId = randoId;
   }
 
   @override
@@ -24,7 +23,7 @@ class _RandoDetailState extends State<RandoDetail> {
   @override
   void initState() {
     super.initState();
-    futureRando = Rando.fetchRando(widget.RandoId);
+    futureRando = Rando.fetchRando(widget.randoId);
   }
 
   @override
@@ -290,26 +289,23 @@ class _RandoDetailState extends State<RandoDetail> {
                               child: Text("Photos",
                                   style: TextStyle(
                                       fontSize: 25,
-                                      fontWeight: FontWeight.bold)
-                              )
-                          ),
+                                      fontWeight: FontWeight.bold))),
                         ],
                       ),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          if(snapshot.data.images != null)
-                          GalleryLoadImage(snapshot.data.images, MediaQuery.of(context).size.width, MediaQuery.of(context).size.height * 0.2)
-
-                          else Container(
-                            padding: EdgeInsets.only(left: 20.0),
-                            child: Text(
-                              "Il n'y a aucune image.. N'hésitez pas à en ajouter !",
-                              style: TextStyle(
-                                color: Colors.grey[600]
-                              )
-                            )
-                          )
+                          if (snapshot.data.images != null)
+                            GalleryLoadImage(
+                                snapshot.data.images,
+                                MediaQuery.of(context).size.width,
+                                MediaQuery.of(context).size.height * 0.2)
+                          else
+                            Container(
+                                padding: EdgeInsets.only(left: 20.0),
+                                child: Text(
+                                    "Il n'y a aucune image.. N'hésitez pas à en ajouter !",
+                                    style: TextStyle(color: Colors.grey[600])))
                         ],
                       ),
                       // Avis - En-tête
@@ -385,13 +381,11 @@ class _RandoDetailState extends State<RandoDetail> {
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Column(
-                                  children:[
-                                    CircleAvatar(
-                                      backgroundColor: Colors.grey,
-                                    ),
-                                  ]
-                                ),
+                                Column(children: [
+                                  CircleAvatar(
+                                    backgroundColor: Colors.grey,
+                                  ),
+                                ]),
                                 // Avis - Description
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -401,43 +395,46 @@ class _RandoDetailState extends State<RandoDetail> {
                                         Column(
                                           children: [
                                             Padding(
-                                              padding: EdgeInsets.only(left: 20.0, right: 10.0),
-                                              child: Text("Lauren",
-                                                textAlign: TextAlign.left,
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.bold
-                                                )
-                                              )
-                                            )
+                                                padding: EdgeInsets.only(
+                                                    left: 20.0, right: 10.0),
+                                                child: Text("Lauren",
+                                                    textAlign: TextAlign.left,
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold)))
                                           ],
                                         ),
-                                        Column(
-                                          children: [
-                                            Container(
-                                              padding: EdgeInsets.all(5.0),
-                                              child: Text(
-                                                "Curieuse aguerrie",
-                                                style: TextStyle(
-                                                  color: Colors.white
-                                                ),
-                                              ),
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(const Radius.circular(15.0)),
-                                                color: Colors.red[300]
-                                              ),
+                                        Column(children: [
+                                          Container(
+                                            padding: EdgeInsets.all(5.0),
+                                            child: Text(
+                                              "Curieuse aguerrie",
+                                              style: TextStyle(
+                                                  color: Colors.white),
                                             ),
-                                          ]
-                                        )
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                    const Radius.circular(
+                                                        15.0)),
+                                                color: Colors.red[300]),
+                                          ),
+                                        ])
                                       ],
                                     ),
                                     Row(
                                       children: [
                                         Container(
-                                          padding: const EdgeInsets.only(left: 20.0, top: 10.0),
-                                          width: MediaQuery.of(context).size.width * 0.75,
-                                          child: new Column (
+                                          padding: const EdgeInsets.only(
+                                              left: 20.0, top: 10.0),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.75,
+                                          child: new Column(
                                             children: <Widget>[
-                                              new Text ("Super randonnée, je l’ai faite avec mes enfants, ils ont adoré ! Difficulté correcte pour des gens un peu sportifs.", textAlign: TextAlign.left)
+                                              new Text(
+                                                  "Super randonnée, je l’ai faite avec mes enfants, ils ont adoré ! Difficulté correcte pour des gens un peu sportifs.",
+                                                  textAlign: TextAlign.left)
                                             ],
                                           ),
                                         )
@@ -476,10 +473,9 @@ Text getDifficulty(int level) {
       return Text("Intermédiaire",
           style:
               TextStyle(color: getColor(level), fontWeight: FontWeight.bold));
-    case 4:
+    default:
       return Text("Avancée",
           style:
               TextStyle(color: getColor(level), fontWeight: FontWeight.bold));
   }
-  return Text("Non définie", style: TextStyle(fontWeight: FontWeight.bold));
 }

@@ -10,17 +10,16 @@ const String survey = '/Survey';
 const String login = '/Login';
 const String detailRando = '/DetailRando';
 
-
 // from https://medium.com/flutter-community/clean-navigation-in-flutter-using-generated-routes-891bd6e000df
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case core:
         var data = settings.arguments as Map;
-        return MaterialPageRoute(builder: (_) => CoreView(data : data) );
+        return MaterialPageRoute(builder: (_) => CoreView(data: data));
       case detailRando:
         var data = settings.arguments as int;
-        return MaterialPageRoute(builder: (_) => RandoDetail(RandoId : data) );
+        return MaterialPageRoute(builder: (_) => RandoDetail(randoId: data));
       case survey:
         return MaterialPageRoute(builder: (_) => SurveyView());
       case login:
@@ -28,9 +27,9 @@ class Router {
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
-              body: Center(
-                  child: Text('No route defined for ${settings.name}')),
-            ));
+                  body: Center(
+                      child: Text('No route defined for ${settings.name}')),
+                ));
     }
   }
 }

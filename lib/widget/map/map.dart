@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
 import "package:latlong/latlong.dart";
 import 'package:mvvm_flutter_app/network/token.dart';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
 
 class MyMap extends StatefulWidget {
-  var RandoId;
+  var randoId;
 
-  MyMap(int RandoId, {Key key}) : super(key: key) {
-    this.RandoId = RandoId;
+  MyMap(int randoId, {Key key}) : super(key: key) {
+    this.randoId = randoId;
   }
 
   @override
@@ -27,7 +23,7 @@ class _MyMapState extends State<MyMap> {
   @override
   void initState() {
     super.initState();
-    futureRando = Rando.fetchRando(widget.RandoId);
+    futureRando = Rando.fetchRando(widget.randoId);
   }
 
   @override
@@ -53,17 +49,20 @@ class _MyMapState extends State<MyMap> {
                       'id': 'mapbox.satellite',
                     },
                   ),
-
                   PolylineLayerOptions(polylines: [
                     Polyline(
-                      points:  [for ( var element in snapshot.data.gpx ) new LatLng(element[1],element[0])],
+                      points: [
+                        for (var element in snapshot.data.gpx)
+                          new LatLng(element[1], element[0])
+                      ],
                       isDotted: true,
                       color: Color(0xFF669DF6),
                       strokeWidth: 3.0,
                       borderColor: Color(0xFF1967D2),
                       borderStrokeWidth: 0.1,
                     )
-                  ]), new MarkerLayerOptions(
+                  ]),
+                  new MarkerLayerOptions(
                     markers: [
                       new Marker(
                         width: 80.0,
@@ -71,7 +70,8 @@ class _MyMapState extends State<MyMap> {
                         point: new LatLng(
                             snapshot.data.gpx[0][1], snapshot.data.gpx[0][0]),
                         builder: (ctx) => new Container(
-                          child:  Icon(Icons.room_rounded, size: 80.0 , color: Colors.red),
+                          child: Icon(Icons.room_rounded,
+                              size: 80.0, color: Colors.red),
                         ),
                       ),
                     ],

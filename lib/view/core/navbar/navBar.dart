@@ -1,4 +1,4 @@
- import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/view/login/LoginView.dart';
@@ -7,33 +7,30 @@ import 'package:mvvm_flutter_app/view/plan/PlanView.dart';
 import 'package:mvvm_flutter_app/view/profile/ProfileView.dart';
 import 'package:mvvm_flutter_app/view/randos/RandosView.dart';
 
-//SI ON NAVIGUE ICI IL/ FAUT RENSEIGNER RANDOSCOLLECTION AU MINIMUM
+// Si on navigue ici, il faut renseigner randosCollection au minimum
 class MyNavigationBar extends StatefulWidget {
   Map data;
-  MyNavigationBar (Map data, {Key key}) : super(key: key){
+  MyNavigationBar(Map data, {Key key}) : super(key: key) {
     this.data = data;
   }
 
   @override
   _MyNavigationBarState createState() => _MyNavigationBarState(data);
 }
-class _MyNavigationBarState extends State<MyNavigationBar > {
+
+class _MyNavigationBarState extends State<MyNavigationBar> {
   int _selectedIndex = 0;
   List<Rando> randos;
-   List<Widget> _options;
+  List<Widget> _options;
 
-
-
-  _MyNavigationBarState(Map data){
+  _MyNavigationBarState(Map data) {
     _selectedIndex = data["selectedIndex"];
-      if (data.containsKey("randosCollection")){
-        randos = data["randosCollection"];
-    }else{
-        //TODO remove final
-        print("Il faut ajouter randosCollection sur la nav vers core ");
-      }
-
-
+    if (data.containsKey("randosCollection")) {
+      randos = data["randosCollection"];
+    } else {
+      //TODO remove final
+      print("Il faut ajouter randosCollection sur la nav vers core ");
+    }
 
     _options = <Widget>[
       RandosView(randos),
@@ -46,12 +43,12 @@ class _MyNavigationBarState extends State<MyNavigationBar > {
       RandosView(randos),
       PlanView(),
       ProfileView(),
-
     ];
     setState(() {
       _selectedIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,13 +60,11 @@ class _MyNavigationBarState extends State<MyNavigationBar > {
             BottomNavigationBarItem(
                 icon: Icon(Icons.filter_hdr_outlined),
                 label: 'Randos',
-                backgroundColor: Colors.white
-            ),
+                backgroundColor: Colors.white),
             BottomNavigationBarItem(
                 icon: Icon(Icons.map_outlined),
                 label: 'Map',
-                backgroundColor: Colors.white
-            ),
+                backgroundColor: Colors.white),
             BottomNavigationBarItem(
               icon: Icon(Icons.person_outlined),
               label: 'Profile',
@@ -82,8 +77,7 @@ class _MyNavigationBarState extends State<MyNavigationBar > {
           unselectedItemColor: Colors.grey,
           iconSize: 40,
           onTap: _onItemTap,
-          elevation: 5
-      ),
+          elevation: 5),
     );
   }
 }
