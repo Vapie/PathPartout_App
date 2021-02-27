@@ -10,7 +10,7 @@ import 'package:mvvm_flutter_app/widget/rando/rando-tile.dart';
 class RandoDetail extends StatefulWidget {
   var RandoId;
 
-  RandoDetail(int RandoId, {Key key}) : super(key: key) {
+  RandoDetail({Key key, int RandoId}) : super(key: key) {
     this.RandoId = RandoId;
   }
 

@@ -1,24 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/naviguation/routes.dart';
-import 'package:mvvm_flutter_app/view/login/LoginViewModel.dart';
+
 
 import 'package:stacked/stacked.dart';
 
 import '../../widget/rando/rando-detail.dart';
+import 'RandoViewModel.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({Key key}) : super(key: key);
+class RandoView extends StatelessWidget {
+  int RandoId;
+
+  RandoView(int RandoId, {Key key}) : super(key: key){
+    this.RandoId = RandoId;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return ViewModelBuilder<LoginViewModel>.reactive(
+    return ViewModelBuilder<RandoViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
          floatingActionButton: FloatingActionButton(onPressed: (){
-        Navigator.pushNamed(context, survey, arguments: 'Data from home');
+        Navigator.pushNamed(context, survey);
         },),
-          body: Center(child: RandoDetail(RandoId: 1)),
+          body: Center(child: RandoDetail(RandoId: this.RandoId)),
       ),
-      viewModelBuilder: () => LoginViewModel(),
+      viewModelBuilder: () => RandoViewModel(),
       onModelReady: (model) => model.newstring(),
     );
   }

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
 import "package:latlong/latlong.dart";
+import 'package:mvvm_flutter_app/naviguation/routes.dart';
 import 'package:mvvm_flutter_app/network/token.dart';
 import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:flutter/cupertino.dart';
@@ -63,7 +64,7 @@ class _MyMapMultiMarkersState extends State<MyMapMultiMarkers> {
                                             double.parse(element.start_point["coordinates"].replaceAll(" ","").split(',')[0]),double.parse(element.start_point["coordinates"].replaceAll(" ","").split(',')[1])),
                                         builder: (ctx) =>  GestureDetector(
                                               onTap: () {
-                                               print("afzeohgfuizeww");
+                                                Navigator.pushNamed(context, detailRando, arguments: element.id);
                                               },
                                               child:   Icon(Icons.room_rounded, size: 80.0 , color: Colors.red),
 
