@@ -10,6 +10,7 @@ class AppDrawer extends StatelessWidget {
   final nameController = TextEditingController();
 
   var _currentSliderValue = 5.0;
+  var filterSlider = FilterSlider();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -57,7 +58,7 @@ class AppDrawer extends StatelessWidget {
                               color: Colors.grey[500],
                               fontWeight: FontWeight.bold))),
                 ),
-                FilterSlider(),
+                filterSlider,
 
                 // Filtre de difficulté
                 Container(
@@ -84,22 +85,20 @@ class AppDrawer extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18.0
-                      ),
+                          fontSize: 18.0),
                     ),
-                    gradient: LinearGradient(
-                        colors: [
-                          Colors.lightBlue,
-                          Colors.lightGreenAccent[100]
-                        ]
-                    ),
+                    gradient: LinearGradient(colors: [
+                      Colors.lightBlue,
+                      Colors.lightGreenAccent[100]
+                    ]),
                     width: MediaQuery.of(context).size.width * 0.4,
                     onPressed: () async {
+                      print(FilterSlider().distanceMin);
                       final List<Rando> futureRandos =
-                      await Rando.fetchFilteredRando(
-                          name: nameController.text,
-                          distancemin: _currentSliderValue,
-                      );
+                          await Rando.fetchFilteredRando(
+                              name: nameController.text,
+                              distancemin: filterSlider.distanceMin,
+                              distancemax: filterSlider.distanceMax);
                       Navigator.pushNamed(context, core, arguments: {
                         "selectedIndex": 0,
                         "randosCollection": futureRandos,

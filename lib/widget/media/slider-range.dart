@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 /// This is the stateful widget that the main application instantiates.
 class FilterSlider extends StatefulWidget {
+  double distanceMax;
+  double distanceMin;
   FilterSlider({Key key}) : super(key: key);
 
   @override
@@ -10,21 +12,32 @@ class FilterSlider extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _FilterSliderState extends State<FilterSlider> {
-  double _currentSliderValue = 5;
+  RangeValues _currentRangeValues = const RangeValues(5, 15);
+
+  double distanceMin(){
+    return widget.distanceMax = _currentRangeValues.start.toDouble();
+  }
+
+  double distanceMax(){
+    return widget.distanceMin = _currentRangeValues.end.toDouble();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Slider(
-          value: _currentSliderValue,
+        RangeSlider(
+          values: _currentRangeValues,
           min: 0,
           max: 50,
           divisions: 10,
-          label: _currentSliderValue.round().toString(),
-          onChanged: (double value) {
+          labels: RangeLabels(
+            _currentRangeValues.start.round().toString(),
+            _currentRangeValues.end.round().toString(),
+          ),
+          onChanged: (RangeValues values) {
             setState(() {
-              _currentSliderValue = value;
+              _currentRangeValues = values;
             });
           },
         ),
