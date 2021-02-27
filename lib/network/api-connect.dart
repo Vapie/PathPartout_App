@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:mvvm_flutter_app/network/token.dart';
 
 // Permet de travailler avec les données rentrées en dur et non celles de l'API (conflit avec MacOS)
-var offlineMode = true;
+var offlineMode = false;
 
 Future<dynamic> fetchRequestSingle(String address, String params) async {
   if (offlineMode == true) {
