@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
+import 'package:mvvm_flutter_app/naviguation/routes.dart';
 import 'package:mvvm_flutter_app/ui/level.dart';
 import 'package:mvvm_flutter_app/widget/media/loadimage.dart';
 import 'package:mvvm_flutter_app/widget/media/slide-loadimages.dart';
@@ -28,6 +29,7 @@ class RandoTile extends StatelessWidget {
               child: new InkWell(
                 onTap: () {
                   print("tapped " + rando.name);
+                  Navigator.pushNamed(context, detailRando, arguments: rando.id);
                 },
                 child: Column(
                   children: [

@@ -56,12 +56,12 @@ class _MyMapMultiMarkersState extends State<MyMapMultiMarkers> {
                   ),
                  new MarkerLayerOptions(
 
-                    markers: [ for ( var element in snapshot.data ) if(element.start_point!=null) new Marker(
+                    markers: [ for ( var element in snapshot.data ) if(element.startPoint!=null) new Marker(
                                         width: 80.0,
                                         height: 80.0,
 
                                         point: new LatLng(
-                                            double.parse(element.start_point["coordinates"].replaceAll(" ","").split(',')[0]),double.parse(element.start_point["coordinates"].replaceAll(" ","").split(',')[1])),
+                                            double.parse(element.startPoint["coordinates"].replaceAll(" ","").split(',')[0]),double.parse(element.startPoint["coordinates"].replaceAll(" ","").split(',')[1])),
                                         builder: (ctx) =>  GestureDetector(
                                               onTap: () {
                                                 Navigator.pushNamed(context, detailRando, arguments: element.id);

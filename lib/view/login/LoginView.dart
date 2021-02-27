@@ -16,7 +16,7 @@ class LoginView extends StatelessWidget {
          floatingActionButton: FloatingActionButton(onPressed: (){
         Navigator.pushNamed(context, survey, arguments: 'Data from home');
         },),
-          body: Center(child: RandoDetail(RandoId: 1)),
+          body: Center(child: RandoDetail(randoId: 1)),
       ),
       viewModelBuilder: () => LoginViewModel(),
       onModelReady: (model) => model.newstring(),

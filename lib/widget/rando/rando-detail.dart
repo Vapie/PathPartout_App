@@ -8,10 +8,10 @@ import 'package:mvvm_flutter_app/widget/media/slide-loadimages.dart';
 import 'package:mvvm_flutter_app/widget/rando/rando-tile.dart';
 
 class RandoDetail extends StatefulWidget {
-  var RandoId;
+  var randoId;
 
-  RandoDetail({Key key, int RandoId}) : super(key: key) {
-    this.RandoId = RandoId;
+  RandoDetail({Key key, int randoId}) : super(key: key) {
+    this.randoId = randoId;
   }
 
   @override
@@ -24,7 +24,7 @@ class _RandoDetailState extends State<RandoDetail> {
   @override
   void initState() {
     super.initState();
-    futureRando = Rando.fetchRando(widget.RandoId);
+    futureRando = Rando.fetchRando(widget.randoId);
   }
 
   @override

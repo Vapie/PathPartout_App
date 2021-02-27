@@ -9,18 +9,18 @@ class Rando {
   final String name;
   final int difficulty;
   final int duration;
-  final int pos_elevation;
-  final int neg_elevation;
+  final int posElevation;
+  final int negElevation;
   final List<dynamic> tags;
   final int summit;
   final List<List<double>> gpx;
-  final dynamic start_point;
-  final dynamic end_point;
+  final dynamic startPoint;
+  final dynamic endPoint;
   final double distance;
   final List<dynamic> images;
 
   Rando(
-      {this.id, this.name, this.difficulty, this.duration, this.pos_elevation, this.neg_elevation, this.start_point, this.tags, this.summit, this.gpx, this.end_point, this.images, this.distance});
+      {this.id, this.name, this.difficulty, this.duration, this.posElevation, this.negElevation, this.startPoint, this.tags, this.summit, this.gpx, this.endPoint, this.images, this.distance});
 
   factory Rando.fromJson(Map<String, dynamic> json) {
     return Rando(
@@ -28,10 +28,10 @@ class Rando {
         name: json['name'],
         difficulty: json['difficulty'],
         duration: json['duration'],
-        pos_elevation: json['pos_elevation'],
-        neg_elevation: json['neg_elevation'],
-        start_point: json['start_point'],
-        end_point: json['end_point'],
+        posElevation: json['pos_elevation'],
+        negElevation: json['neg_elevation'],
+        startPoint: json['start_point'],
+        endPoint: json['end_point'],
         tags: json['tags'],
         summit: json['summit'],
         gpx: getGpxStringAsArray(json["gpx"].toString()),
@@ -91,51 +91,46 @@ class Rando {
         }
       }
       randos = finalRandos;
-      finalRandos=[];
-
+      finalRandos = [];
     }
 
     if (difficulty != null) {
       for (var rando in randos) {
-        if (rando.difficulty==difficulty) {
+        if (rando.difficulty == difficulty) {
           finalRandos.add(rando);
         }
       }
       randos = finalRandos;
-      finalRandos=[];
-
+      finalRandos = [];
     }
 
     if (durationmax != null) {
       for (var rando in randos) {
-        if (rando.duration<=durationmax) {
+        if (rando.duration <= durationmax) {
           finalRandos.add(rando);
         }
       }
       randos = finalRandos;
-      finalRandos=[];
-
+      finalRandos = [];
     }
 
     if (durationmax != null) {
       for (var rando in randos) {
-        if (rando.duration>=durationmin) {
+        if (rando.duration >= durationmin) {
           finalRandos.add(rando);
         }
       }
       randos = finalRandos;
-      finalRandos=[];
-
+      finalRandos = [];
     }
     if (distancemax != null) {
       for (var rando in randos) {
-        if (rando.distance<=distancemax) {
+        if (rando.distance <= distancemax) {
           finalRandos.add(rando);
         }
       }
       randos = finalRandos;
-      finalRandos=[];
-
+      finalRandos = [];
     }
 
     if (distancemin != null) {
@@ -145,9 +140,9 @@ class Rando {
         }
       }
       randos = finalRandos;
-      finalRandos=[];
-
+      finalRandos = [];
     }
+
     if (tags != null){
       for (var tag in tags) {
         for (var rando in randos) {
@@ -156,7 +151,7 @@ class Rando {
           }
         }
         randos = finalRandos;
-        finalRandos=[];
+        finalRandos = [];
       }
     }
     return randos;

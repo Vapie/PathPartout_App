@@ -8,20 +8,20 @@ import '../../widget/rando/rando-detail.dart';
 import 'RandoViewModel.dart';
 
 class RandoView extends StatelessWidget {
-  int RandoId;
+  int randoId;
 
-  RandoView(int RandoId, {Key key}) : super(key: key){
-    this.RandoId = RandoId;
+  RandoView(int randoId, {Key key}) : super(key: key){
+    this.randoId = randoId;
   }
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<RandoViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-         floatingActionButton: FloatingActionButton(onPressed: (){
-        Navigator.pushNamed(context, survey);
+        floatingActionButton: FloatingActionButton(onPressed: (){
+          Navigator.pushNamed(context, survey);
         },),
-          body: Center(child: RandoDetail(RandoId: this.RandoId)),
+          body: Center(child: RandoDetail(randoId: this.randoId)),
       ),
       viewModelBuilder: () => RandoViewModel(),
       onModelReady: (model) => model.newstring(),

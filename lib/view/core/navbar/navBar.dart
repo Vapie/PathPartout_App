@@ -1,4 +1,4 @@
- import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/view/login/LoginView.dart';
@@ -22,8 +22,6 @@ class _MyNavigationBarState extends State<MyNavigationBar > {
   List<Rando> randos;
    List<Widget> _options;
 
-
-
   _MyNavigationBarState(Map data){
     _selectedIndex = data["selectedIndex"];
       if (data.containsKey("randosCollection")){
@@ -32,8 +30,6 @@ class _MyNavigationBarState extends State<MyNavigationBar > {
         //TODO remove final
         print("Il faut ajouter randosCollection sur la nav vers core ");
       }
-
-
 
     _options = <Widget>[
       RandosView(randos),

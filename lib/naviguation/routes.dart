@@ -20,7 +20,7 @@ class Router {
         return MaterialPageRoute(builder: (_) => CoreView(data : data) );
       case detailRando:
         var data = settings.arguments as int;
-        return MaterialPageRoute(builder: (_) => RandoDetail(RandoId : data) );
+        return MaterialPageRoute(builder: (_) => RandoDetail(randoId : data) );
       case survey:
         return MaterialPageRoute(builder: (_) => SurveyView());
       case login:
