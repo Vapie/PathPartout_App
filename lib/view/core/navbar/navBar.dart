@@ -72,7 +72,7 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
               backgroundColor: Colors.white,
             ),
           ],
-          type: BottomNavigationBarType.shifting,
+          type: BottomNavigationBarType.fixed,
           currentIndex: _selectedIndex,
           selectedItemColor: Colors.black87,
           unselectedItemColor: Colors.grey,
