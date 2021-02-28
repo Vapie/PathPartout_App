@@ -31,15 +31,13 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   flutter_swiper : ^1.1.6
-
-
   http: 0.12.2
-    # The following adds the Cupertino Icons font to your application.
-    # Use with the CupertinoIcons class for iOS style icons.
   stacked: ^1.2.4
-
   cached_network_image: ^2.5.0
   flutter_cache_manager: ^2.1.1
+
+  # Permet de changer l'icône de l'application
+  flutter_launcher_icons: ^0.8.1
 
   # dependency injection
   get_it: ^4.0.1
@@ -93,3 +91,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+# Définition des launcher_icons
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/picture/logo.png"
