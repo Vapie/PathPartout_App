@@ -60,6 +60,8 @@ class RandoTile extends StatelessWidget {
                             padding: const EdgeInsets.all(12.0),
                             child:  Text(
                               rando.name,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
                               textScaleFactor: 1,
                               strutStyle: StrutStyle(fontSize: 25),
                               style: TextStyle(color: Colors.white, fontSize: 25),

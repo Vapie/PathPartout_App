@@ -18,10 +18,6 @@ class SurveyView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SurveyViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-         floatingActionButton: FloatingActionButton(onPressed: () async {
-           final futureRandos = await Rando.fetchRandos();
-           Navigator.pushNamed(context, core, arguments: {"selectedIndex": 1,"randosCollection" : futureRandos });
-        },),
           body: Container(
             decoration: BoxDecoration(
                 gradient: RadialGradient(
@@ -104,7 +100,10 @@ class SurveyView extends StatelessWidget {
                                 ),
                                 SizedBox(height: 50),
                                 OutlineButton(
-                                  onPressed: null,
+                                  onPressed: () async {
+                                    final futureRandos = await Rando.fetchRandos();
+                                    Navigator.pushNamed(context, core, arguments: {"selectedIndex": 1,"randosCollection" : futureRandos });
+                                  },
                                   child: Text('Passer cette étape', style: TextStyle(color: Colors.white)),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
                                   borderSide: BorderSide(
