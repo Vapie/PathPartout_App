@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/view/core/CoreView.dart';
 import 'package:mvvm_flutter_app/view/login/LoginView.dart';
 import 'package:mvvm_flutter_app/view/survey/SurveyView.dart';
+import 'package:mvvm_flutter_app/view/splash/SplashView.dart';
 import 'package:mvvm_flutter_app/widget/rando/rando-detail.dart';
 
 const String core = '/';
 const String survey = '/Survey';
 const String login = '/Login';
 const String detailRando = '/DetailRando';
+const String splash = '/splash';
 
 // from https://medium.com/flutter-community/clean-navigation-in-flutter-using-generated-routes-891bd6e000df
 class Router {
@@ -24,6 +26,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => SurveyView());
       case login:
         return MaterialPageRoute(builder: (_) => LoginView());
+      case splash:
+        return MaterialPageRoute(builder: (_) => SplashView());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
