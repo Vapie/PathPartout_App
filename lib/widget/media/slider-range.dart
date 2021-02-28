@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class FilterSlider extends StatefulWidget {
   double distanceMax;
   double distanceMin;
+
   FilterSlider({Key key}) : super(key: key);
 
   @override
@@ -15,11 +16,11 @@ class _FilterSliderState extends State<FilterSlider> {
   RangeValues _currentRangeValues = const RangeValues(5, 15);
 
   double distanceMin(){
-    return widget.distanceMax = _currentRangeValues.start.toDouble();
+    widget.distanceMin = _currentRangeValues.start.toDouble();
   }
 
   double distanceMax(){
-    return widget.distanceMin = _currentRangeValues.end.toDouble();
+    widget.distanceMax = _currentRangeValues.end.toDouble();
   }
 
   @override
@@ -37,6 +38,8 @@ class _FilterSliderState extends State<FilterSlider> {
           ),
           onChanged: (RangeValues values) {
             setState(() {
+              this.distanceMin();
+              this.distanceMax();
               _currentRangeValues = values;
             });
           },

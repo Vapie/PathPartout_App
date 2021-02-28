@@ -46,7 +46,7 @@ class Rando {
         summit: json['summit'],
         gpx: getGpxStringAsArray(json["gpx"].toString()),
         images: json['images'],
-        distance: json['distance']);
+        distance: double.parse(json['distance'].toString()));
   }
 
   static List<List<double>> getGpxStringAsArray(String str) {
@@ -80,9 +80,11 @@ class Rando {
   }
 
   static Future<List<Rando>> fetchRandos() async {
+
     List<Rando> randos = [];
     final randosJson =
         await fetchRequestMultiple('iutannecy-deptinfo.fr:3000', 'randonnees');
+    print(randosJson);
     randosJson.forEach((element) => randos.add(Rando.fromJson(element)));
     return randos;
   }
@@ -91,6 +93,7 @@ class Rando {
     List<Rando> randos = [];
     final randosJson = await fetchRequestMultiple(
         'iutannecy-deptinfo.fr:3000', 'randonnee/' + id.toString());
+    print(randosJson);
     randosJson.forEach((element) => randos.add(Rando.fromJson(element)));
     return randos[0];
   }
@@ -119,8 +122,10 @@ class Rando {
 
     if (difficulty != null) {
       for (var rando in randos) {
-        if (rando.difficulty == difficulty) {
-          finalRandos.add(rando);
+        if (rando.difficulty != null) {
+          if (rando.difficulty == difficulty) {
+            finalRandos.add(rando);
+          }
         }
       }
       randos = finalRandos;
@@ -129,8 +134,10 @@ class Rando {
 
     if (durationmax != null) {
       for (var rando in randos) {
-        if (rando.duration <= durationmax) {
-          finalRandos.add(rando);
+        if (rando.duration != null) {
+          if (rando.duration <= durationmax) {
+            finalRandos.add(rando);
+          }
         }
       }
       randos = finalRandos;
@@ -139,8 +146,10 @@ class Rando {
 
     if (durationmax != null) {
       for (var rando in randos) {
-        if (rando.duration >= durationmin) {
-          finalRandos.add(rando);
+        if (rando.duration != null) {
+          if (rando.duration >= durationmin) {
+            finalRandos.add(rando);
+          }
         }
       }
       randos = finalRandos;
@@ -148,8 +157,10 @@ class Rando {
     }
     if (distancemax != null) {
       for (var rando in randos) {
-        if (rando.distance <= distancemax) {
-          finalRandos.add(rando);
+        if (rando.distance != null) {
+          if (distancemax >= rando.distance) {
+            finalRandos.add(rando);
+          }
         }
       }
       randos = finalRandos;
@@ -158,8 +169,10 @@ class Rando {
 
     if (distancemin != null) {
       for (var rando in randos) {
-        if (rando.distance >= distancemin) {
-          finalRandos.add(rando);
+        if (rando.distance != null) {
+          if (rando.distance >= distancemin) {
+            finalRandos.add(rando);
+          }
         }
       }
       randos = finalRandos;

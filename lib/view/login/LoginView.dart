@@ -16,7 +16,7 @@ class LoginView extends StatelessWidget {
             Navigator.pushNamed(context, survey, arguments: 'Data from home');
           },
         ),
-        body: Center(child: RandoDetail(randoId: 1)),
+        body: Center(child: Text("yo")),
       ),
       viewModelBuilder: () => LoginViewModel(),
       onModelReady: (model) => model.newString(),

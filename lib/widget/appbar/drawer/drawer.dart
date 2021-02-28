@@ -93,7 +93,6 @@ class AppDrawer extends StatelessWidget {
                     ]),
                     width: MediaQuery.of(context).size.width * 0.4,
                     onPressed: () async {
-                      print(FilterSlider().distanceMin);
                       final List<Rando> futureRandos =
                           await Rando.fetchFilteredRando(
                               name: nameController.text,
