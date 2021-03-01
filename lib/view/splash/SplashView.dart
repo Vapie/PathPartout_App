@@ -17,9 +17,14 @@ class SplashView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Image.asset(
+                FractionallySizedBox(
+                  widthFactor: 0.3,
+                  child: Image.asset(
                     'assets/picture/logo.png',
-                    height: 300,
+                  ),
+                ),
+                SizedBox(
+                  height: 25,
                 ),
                 Text(
                     'Path Partout'.toUpperCase(),
