@@ -4,7 +4,9 @@ import 'locator.dart';
 import 'navigation/routes.dart' as navRoute;
 
 void main() {
-  SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+  ));
   configure();
   runApp(MyApp());
 }
@@ -13,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     runApp(MaterialApp(
+      debugShowCheckedModeBanner: false,
       onGenerateRoute: navRoute.Router.generateRoute,
       initialRoute: navRoute.splash,
     ));
