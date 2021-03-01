@@ -36,14 +36,14 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
     _options = <Widget>[
       RandosView(randos),
       PlanMultipleView(),
-      ProfileView(),
+      LoginView(),
     ];
   }
   void _onItemTap(int index) {
     _options = <Widget>[
       RandosView(randos),
       PlanMultipleView(),
-      ProfileView(),
+      LoginView(),
     ];
     setState(() {
       _selectedIndex = index;

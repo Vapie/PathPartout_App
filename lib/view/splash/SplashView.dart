@@ -12,12 +12,17 @@ class SplashView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<SplashViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-          body: Center(
+
+
+          body: GestureDetector(
+            onTap: (){Navigator.pushNamed(context, survey);},
+            child:  Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 FractionallySizedBox(
+
                   widthFactor: 0.3,
                   child: Image.asset(
                     'assets/picture/logo.png',
@@ -37,10 +42,13 @@ class SplashView extends StatelessWidget {
               ]
             )
           ),
-
+          ),
       ),
       viewModelBuilder: () => SplashViewModel(),
-      onModelReady: (model) => model.newString(),
+      onModelReady: (model) => Future.delayed(const Duration(milliseconds: 3000), () {
+          Navigator.pushNamed(context, survey);
+        print("yo");
+      }),
     );
   }
 }

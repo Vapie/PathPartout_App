@@ -10,13 +10,15 @@ class myAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.white,
-      leading: Image.asset(
+      leading: FractionallySizedBox(
+        heightFactor: 0.7,
+      child : Image.asset(
         'assets/picture/logo.png',
         scale: 0.5,
-      ),
+      )),
       actions: [
-        IconButton(
-          icon: new Icon(Icons.dehaze_outlined, color: Colors.black87),
+         IconButton(
+          icon: new Icon(Icons.search, color: Colors.black87),
           onPressed: () => Scaffold.of(context).openEndDrawer(),
         )
       ],
