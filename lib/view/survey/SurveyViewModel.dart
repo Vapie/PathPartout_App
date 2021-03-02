@@ -1,3 +1,4 @@
+import 'package:mvvm_flutter_app/classes/user.dart';
 import 'package:stacked/stacked.dart';
 
 class SurveyViewModel extends BaseViewModel {
@@ -9,7 +10,8 @@ class SurveyViewModel extends BaseViewModel {
   String survey2 = 'randonneur(euse) occasionnel(le)';
   String survey3 = 'randonneur(euse) débutant';
   String btnSkip = 'Passer cette étape';
-  newString() {
-    return "survey un max ";
+
+  debug() {
+    User.debuguserfetch();
   }
 }

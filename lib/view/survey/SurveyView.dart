@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/view/survey/SurveyViewModel.dart';
+import 'package:mvvm_flutter_app/widget/podometer/Podometre.dart';
 import 'package:stacked/stacked.dart';
 
 int quizz;
@@ -119,7 +120,7 @@ class SurveyView extends StatelessWidget {
           )
       ),
       viewModelBuilder: () => SurveyViewModel(),
-      onModelReady: (model) => model.newString(),
+      onModelReady: (model) => model.debug(),
     );
   }
 }
