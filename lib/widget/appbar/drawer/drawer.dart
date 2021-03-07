@@ -87,10 +87,6 @@ class AppDrawer extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                           fontSize: 18.0),
                     ),
-                    gradient: LinearGradient(colors: [
-                      Colors.lightBlue,
-                      Colors.lightGreenAccent[100]
-                    ]),
                     width: MediaQuery.of(context).size.width * 0.4,
                     onPressed: () async {
                       final List<Rando> futureRandos =
