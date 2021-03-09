@@ -148,7 +148,6 @@ class _LoginDemoState extends State<LoginView> {
             Container(
                 height: 50,
                 width: 250,
-                margin: const EdgeInsets.only(bottom: 80.0),
                 alignment: Alignment.bottomRight,
                 decoration: BoxDecoration(
                     color: Colors.blue,

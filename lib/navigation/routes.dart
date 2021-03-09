@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/view/core/CoreView.dart';
 import 'package:mvvm_flutter_app/view/login/LoginView.dart';
 import 'package:mvvm_flutter_app/view/plan/PlanView.dart';
-import 'package:mvvm_flutter_app/view/register/register-view.dart';
+import 'package:mvvm_flutter_app/view/register/register_view.dart';
 import 'package:mvvm_flutter_app/view/survey/SurveyView.dart';
 import 'package:mvvm_flutter_app/view/splash/SplashView.dart';
 import 'package:mvvm_flutter_app/widget/rando/rando-detail.dart';
