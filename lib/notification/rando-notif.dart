@@ -100,9 +100,9 @@ class RandoNotif extends StatefulWidget {
 class _RandoNotifState extends State<RandoNotif> {
   @override
   Widget build(BuildContext context) {
-    return Row( 
+    return Row(
       children: [
-        FlatButton(onPressed: (){ widget.launchRando()}, child: Text(widget.currentRandoData.toString()))
+        FlatButton(onPressed: (){ print("a");/*widget.launchRando()*/}, child: Text(widget.currentRandoData.toString()))
       ],
     );
   }
