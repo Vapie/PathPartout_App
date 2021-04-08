@@ -54,7 +54,7 @@ class SurveyViewModel extends BaseViewModel {
         break;
       case 2:
         {
-          this.question = this.question2;
+          this.question = this.question3;
           this.answer1 = this.answer1_3;
           this.answer2 = this.answer2_3;
           this.answer3 = this.answer3_3;

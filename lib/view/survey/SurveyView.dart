@@ -9,7 +9,7 @@ import 'package:stacked/stacked.dart';
 int _quizz = null;
 Map<String, String> answers = {};
 int status = 0;
-var futureRandos;
+Future futureRandos;
 
 getRandos() async {
   futureRandos = await Rando;
@@ -139,8 +139,9 @@ class _SurveyViewState extends State<SurveyView> {
                                         setState(() {
                                           _quizz = null;
                                           status++;
-                                          if(status == 3) {
+                                          if(status >= 3) {
                                             model.storeAnswers(answers);
+                                            getRandos();
                                             Navigator.pushNamed(context, mapRando,
                                                 arguments: {
                                                   "selectedIndex": 1,
