@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mvvm_flutter_app/MainConfig.dart';
 import 'locator.dart';
 import 'navigation/routes.dart' as navRoute;
+
+MainConfig currentConfig = new MainConfig();
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -12,6 +15,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     runApp(MaterialApp(
@@ -23,3 +27,5 @@ class MyApp extends StatelessWidget {
 //Navigator.pushNamed(context, secondScreenRoute, arguments: 'Data from home');
 
 }
+
+

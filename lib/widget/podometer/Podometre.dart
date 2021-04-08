@@ -6,7 +6,7 @@ import 'dart:async';
 import 'package:pedometer/pedometer.dart';
 /// This is the stateful widget that the main application instantiates.
 class Podometre extends StatefulWidget {
-  String steps;
+  int steps = 0;
 
   Podometre({Key key}) : super(key: key);
 
@@ -16,29 +16,38 @@ class Podometre extends StatefulWidget {
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _PodometreState extends State<Podometre> {
+  int initialValue = 0;
+
 
   double setStep(){
-    widget.steps = _steps;
-    print(_steps);
+    widget.steps = _steps - initialValue;
+
   }
 
 
   Stream<StepCount> _stepCountStream;
   Stream<PedestrianStatus> _pedestrianStatusStream;
-  String _status = '?', _steps = '?';
+  String _status = "?";
+  int _steps = 0;
 
   @override
   void initState() {
     super.initState();
     initPlatformState();
+    widget.steps = 0;
+
+    this.initialValue = 0;
     this.setStep();
   }
 
   void onStepCount(StepCount event) {
     print(event);
     setState(() {
-      _steps = event.steps.toString();
+      _steps = event.steps;
       this.setStep();
+      if (initialValue == 0){
+        initialValue = _steps;
+    }
     });
   }
 
@@ -60,7 +69,7 @@ class _PodometreState extends State<Podometre> {
   void onStepCountError(error) {
     print('onStepCountError: $error');
     setState(() {
-      _steps = 'Step Count not available';
+      print('Step Count not available');
     });
   }
 
@@ -72,8 +81,8 @@ class _PodometreState extends State<Podometre> {
 
     _stepCountStream = Pedometer.stepCountStream;
     _stepCountStream.listen(onStepCount).onError(onStepCountError);
-
     if (!mounted) return;
+
   }
 
   @override

@@ -12,10 +12,5 @@ class RegisterViewModel extends BaseViewModel {
       'password': password
     });
     print(newUserJson);
-    return;
-  }
-
-  debug() {
-    User.debuguserfetch();
   }
 }
