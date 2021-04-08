@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_flutter_app/MainConfig.dart';
+import 'package:mvvm_flutter_app/notification/rando-notif.dart';
 import 'package:mvvm_flutter_app/view/plan/PlanViewModel.dart';
 import 'package:mvvm_flutter_app/widget/appbar/appBar.dart';
 import 'package:mvvm_flutter_app/widget/appbar/drawer/drawer.dart';
@@ -9,8 +11,11 @@ import 'package:stacked/stacked.dart';
 class PlanView extends StatelessWidget {
   int randoId;
 
-  PlanView({Key key,int randoId}) : super(key: key){
+  MainConfig currentConfig;
+
+  PlanView( {int randoId,MainConfig currentConfig,Key key}) : super(key: key){
     this.randoId = randoId;
+    this.currentConfig = currentConfig;
   }
 
   @override
@@ -18,7 +23,26 @@ class PlanView extends StatelessWidget {
     return ViewModelBuilder<PlanViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
 
-        body: Center(child: MyMap(this.randoId)),
+        body: Center(child: Stack(children : [
+          MyMap(this.randoId),
+         Positioned(
+           width:1000000000000,
+             bottom:0,
+             child: Container(
+            height: 25,
+            decoration: BoxDecoration(
+
+                  color: Colors.white,
+                ),
+            child: Row(
+              children: [
+                Text("Todso"),
+                currentConfig.myrandonotif
+              ],
+            )
+          )
+         )
+        ])),
         appBar: myAppBar(),
         endDrawer:AppDrawer()
       ),
@@ -27,6 +51,4 @@ class PlanView extends StatelessWidget {
     );
   }
 }
-
-
 
