@@ -55,7 +55,7 @@ Future<dynamic> fetchRequestParameters(String address, String params,Map<String,
     } else {
       // If the server did not return a 200 OK response,
       // then throw an exception.
-      throw Exception('Failed to load data' + response.statusCode.toString());
+      throw Exception('Failed to load data : ' + response.statusCode.toString());
     }
   }
 }

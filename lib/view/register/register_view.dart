@@ -130,7 +130,6 @@ class _RegisterState extends State<RegisterView> {
                       fontSize: 25),
                 ),
                 onPressed: () {
-                  print(emailController.text);
                   model.createUser(emailController.text, passwordController.text, confirmPasswordController.text);
                 },
               )),
