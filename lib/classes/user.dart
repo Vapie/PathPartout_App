@@ -40,7 +40,7 @@ class User {
   static Future<User> fetchUser(String id) async {
     List<User> users = [];
     final usersJson = await fetchRequestParameters(
-        'iutannecy-deptinfo.fr:3000', 'user/get',{
+        'pathpartoutapi.herokuapp.com', 'user/get',{
           'token': new Token().getToken(),
           'userId': id
     });
