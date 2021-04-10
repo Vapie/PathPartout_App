@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mvvm_flutter_app/navigation/routes.dart';
-import 'package:mvvm_flutter_app/view/register/register_view_model.dart';
-import 'package:mvvm_flutter_app/widget/media/gradient-button.dart';
+import 'package:mvvm_flutter_app/view/register/RegisterViewModel.dart';
 import 'package:mvvm_flutter_app/widget/media/outlined-gradient-button.dart';
 import 'package:stacked/stacked.dart';
 
@@ -130,7 +128,6 @@ class _RegisterState extends State<RegisterView> {
                       fontSize: 25),
                 ),
                 onPressed: () {
-                  print(emailController.text);
                   model.createUser(emailController.text, passwordController.text, confirmPasswordController.text);
                 },
               )),
