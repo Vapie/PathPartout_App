@@ -9,10 +9,10 @@ import 'package:stacked/stacked.dart';
 int _quizz = null;
 Map<String, String> answers = {};
 int status = 0;
-Future futureRandos;
+List<Rando> futureRandos;
 
 getRandos() async {
-  futureRandos = await Rando;
+  futureRandos = await Rando.fetchRandos();
 }
 
 
