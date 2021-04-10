@@ -142,7 +142,7 @@ class _SurveyViewState extends State<SurveyView> {
                                           if(status >= 3) {
                                             model.storeAnswers(answers);
                                             getRandos();
-                                            Navigator.pushNamed(context, mapRando,
+                                            Navigator.pushNamed(context, core,
                                                 arguments: {
                                                   "selectedIndex": 1,
                                                   "randosCollection": futureRandos
