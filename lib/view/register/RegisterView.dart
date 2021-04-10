@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mvvm_flutter_app/navigation/routes.dart';
-import 'package:mvvm_flutter_app/view/register/register_view_model.dart';
-import 'package:mvvm_flutter_app/widget/media/gradient-button.dart';
+import 'package:mvvm_flutter_app/view/register/RegisterViewModel.dart';
 import 'package:mvvm_flutter_app/widget/media/outlined-gradient-button.dart';
 import 'package:stacked/stacked.dart';
 
