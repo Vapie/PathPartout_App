@@ -136,7 +136,6 @@ class _LoginState extends State<LoginView> {
                             await model.authenticate(
                                 emailController.text, passwordController.text);
                             await getRandos();
-                            print("yo");
                             Navigator.pushNamed(context, core, arguments: {
                               "selectedIndex": 0,
                               "randosCollection": futureRandos
@@ -183,7 +182,7 @@ class _LoginState extends State<LoginView> {
                             ],
                           ),
                           onPressed: () async {
-                            final futureRandos = await Rando.fetchRandos();
+                            await getRandos();
                             Navigator.pushNamed(context, core, arguments: {
                               "selectedIndex": 0,
                               "randosCollection": futureRandos

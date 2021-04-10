@@ -142,9 +142,9 @@ class _SurveyViewState extends State<SurveyView> {
                                           if(status >= 3) {
                                             model.storeAnswers(answers);
                                             getRandos();
-                                            Navigator.pushNamed(context, mapRando,
+                                            Navigator.pushNamed(context, core,
                                                 arguments: {
-                                                  "selectedIndex": 1,
+                                                  "selectedIndex": 0,
                                                   "randosCollection": futureRandos
                                                 });
                                           }
@@ -161,13 +161,12 @@ class _SurveyViewState extends State<SurveyView> {
                                       ),
                                     ),
 
-                                      /*OutlineButton(
+                                      OutlineButton(
                                       onPressed: () async {
-                                        final futureRandos = await Rando
-                                            .fetchRandos();
+                                        getRandos();
                                         Navigator.pushNamed(context, core,
                                             arguments: {
-                                              "selectedIndex": 1,
+                                              "selectedIndex": 0,
                                               "randosCollection": futureRandos
                                             });
                                       },
@@ -180,7 +179,7 @@ class _SurveyViewState extends State<SurveyView> {
                                       borderSide: BorderSide(
                                         color: Colors.white,
                                       ),
-                                    )*/
+                                    )
                                   ]
                               )
                           ),
