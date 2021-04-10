@@ -12,6 +12,6 @@ class SurveyViewModel extends BaseViewModel {
   String btnSkip = 'Passer cette étape';
 
   debug() {
-    User.debuguserfetch();
+    // User.debuguserfetch();
   }
 }

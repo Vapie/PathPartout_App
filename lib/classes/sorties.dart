@@ -1,195 +1,63 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mvvm_flutter_app/MainConfig.dart';
+import 'package:mvvm_flutter_app/classes/rando.dart';
+import 'package:mvvm_flutter_app/classes/user.dart';
 
 import 'package:mvvm_flutter_app/network/api-connect.dart';
+import 'package:mvvm_flutter_app/network/token.dart';
+import '../main.dart';
+class Sortie {
+  final String id;
+  final int randonneeId;
+  final String userId;
+  final DateTime date;
+  final Rando randonnee;
+  final User user;
 
-class Rando {
-  final int id;
-  final String name;
-  final int difficulty;
-  final int duration;
-  final int posElevation;
-  final int negElevation;
-  final List<dynamic> tags;
-  final int summit;
-  final List<List<double>> gpx;
-  final dynamic startPoint;
-  final dynamic endPoint;
-  final double distance;
-  final List<dynamic> images;
-
-  Rando(
+  Sortie(
       {this.id,
-      this.name,
-      this.difficulty,
-      this.duration,
-      this.posElevation,
-      this.negElevation,
-      this.startPoint,
-      this.tags,
-      this.summit,
-      this.gpx,
-      this.endPoint,
-      this.images,
-      this.distance});
+      this.randonneeId,
+      this.userId,
+      this.date,
+      this.randonnee,
+      this.user
+      });
 
-  factory Rando.fromJson(Map<String, dynamic> json) {
-    return Rando(
-        id: json['id'],
-        name: json['name'],
-        difficulty: json['difficulty'],
-        duration: json['duration'],
-        posElevation: json['pos_elevation'],
-        negElevation: json['neg_elevation'],
-        startPoint: json['start_point'],
-        endPoint: json['end_point'],
-        tags: json['tags'],
-        summit: json['summit'],
-        gpx: getGpxStringAsArray(json["gpx"].toString()),
-        images: json['images'],
-        distance: double.parse(json['distance'].toString()));
+  factory Sortie.fromJson(Map<String, dynamic> json) {
+    return Sortie(
+        id: json['_id'],
+        randonneeId: json['randonneeId'],
+        userId: json['userId'],
+        date: DateTime.parse(json['date']),
+        randonnee: Rando.fromJson(json['randonnee'][0]),
+        user: User.fromJson(json['user'][0]));
   }
 
-  static List<List<double>> getGpxStringAsArray(String str) {
-    List<List<double>> finalArray = [];
-    if (str.length > 10) {
-      var j = str
-          .toString()
-          .split("MultiLineString")[1]
-          .toString()
-          .split("}")[0]
-          .split(":")[1]
-          .toString();
-      var i = j
-          .replaceAll("[", "")
-          .replaceAll("]", "")
-          .replaceAll(" ", "")
-          .split(",");
 
-      int tabindex = 0;
-      List<double> temparray = [];
-      for (String s in i) {
-        tabindex++;
-        temparray.add(double.parse(s));
-        if (tabindex % 3 == 0) {
-          finalArray.add(temparray);
-          temparray = [];
-        }
-      }
-    }
-    return finalArray;
+
+  static Future<List<Sortie>> fetchSorties() async {
+
+    List<Sortie> sorties = [];
+    final sortiesJson =
+        await fetchRequestMultiple('pathpartoutapi.herokuapp.com', 'sortie/all');
+    print(sortiesJson);
+    sortiesJson.forEach((element) => sorties.add(Sortie.fromJson(element)));
+    print(sorties.length.toString());
+    return sorties;
   }
 
-  static Future<List<Rando>> fetchRandos() async {
 
-    List<Rando> randos = [];
-    final randosJson =
-        await fetchRequestMultiple('pathpartoutapi.herokuapp.com', 'randonnees');
-    print(randosJson);
-    randosJson.forEach((element) => randos.add(Rando.fromJson(element)));
-    return randos;
+  static void createSortie(String performances) async {
+    final rep =
+    await fetchRequestParameters('pathpartoutapi.herokuapp.com', 'sortie/create', {
+      'token': new Token().token,
+      'randonneeId': currentConfig.currentRando.id.toString(),
+      //TODO Dynamic id user on login
+      'userId': "603517e4ef23520af406fc46"  ,
+      'performances': performances
+    });
   }
 
-  static Future<Rando> fetchRando(int id) async {
-    List<Rando> randos = [];
-    final randosJson = await fetchRequestMultiple(
-        'pathpartoutapi.herokuapp.com', 'randonnee/' + id.toString());
-    print(randosJson);
-    randosJson.forEach((element) => randos.add(Rando.fromJson(element)));
-    return randos[0];
-  }
 
-  static Future<List<Rando>> fetchFilteredRando(
-      {String name = null,
-      int difficulty = null,
-      int durationmax = null,
-      int durationmin = null,
-      List<String> tags = null,
-      double distancemax = null,
-      double distancemin = null}) async {
-    List<Rando> finalRandos = [];
-    List<Rando> randos = [];
-    final tempRandos = await fetchRandos();
-    randos = tempRandos;
-    if (name != null) {
-      for (var rando in randos) {
-        if (rando.name.contains(name)) {
-          finalRandos.add(rando);
-        }
-      }
-      randos = finalRandos;
-      finalRandos = [];
-    }
 
-    if (difficulty != null) {
-      for (var rando in randos) {
-        if (rando.difficulty != null) {
-          if (rando.difficulty == difficulty) {
-            finalRandos.add(rando);
-          }
-        }
-      }
-      randos = finalRandos;
-      finalRandos = [];
-    }
-
-    if (durationmax != null) {
-      for (var rando in randos) {
-        if (rando.duration != null) {
-          if (rando.duration <= durationmax) {
-            finalRandos.add(rando);
-          }
-        }
-      }
-      randos = finalRandos;
-      finalRandos = [];
-    }
-
-    if (durationmax != null) {
-      for (var rando in randos) {
-        if (rando.duration != null) {
-          if (rando.duration >= durationmin) {
-            finalRandos.add(rando);
-          }
-        }
-      }
-      randos = finalRandos;
-      finalRandos = [];
-    }
-    if (distancemax != null) {
-      for (var rando in randos) {
-        if (rando.distance != null) {
-          if (distancemax >= rando.distance) {
-            finalRandos.add(rando);
-          }
-        }
-      }
-      randos = finalRandos;
-      finalRandos = [];
-    }
-
-    if (distancemin != null) {
-      for (var rando in randos) {
-        if (rando.distance != null) {
-          if (rando.distance >= distancemin) {
-            finalRandos.add(rando);
-          }
-        }
-      }
-      randos = finalRandos;
-      finalRandos = [];
-    }
-
-    if (tags != null) {
-      for (var tag in tags) {
-        for (var rando in randos) {
-          if (rando.tags.contains(tag)) {
-            finalRandos.add(rando);
-          }
-        }
-        randos = finalRandos;
-        finalRandos = [];
-      }
-    }
-    return randos;
-  }
 }

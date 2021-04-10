@@ -1,17 +1,18 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mvvm_flutter_app/main.dart';
 
 import 'package:mvvm_flutter_app/network/api-connect.dart';
 import 'package:mvvm_flutter_app/network/token.dart';
 
 class User {
-  final String id;
-  final String firstname;
-  final String lastname;
-  final String mail;
-  final String photoUrl;
-  final int privilegeLevel;
-  final List<dynamic> avatar;
-  final List<dynamic> userData;
+  String id;
+  String firstname;
+  String lastname;
+  String mail;
+  String photoUrl;
+  int privilegeLevel;
+  List<dynamic> avatar;
+  List<dynamic> userData;
 
   User(
       {this.id,
@@ -48,8 +49,16 @@ class User {
     return users[0];
   }
 
-  static debuguserfetch() async {
-   final user  = await User.fetchUser("603517e4ef23520af406fc46");
-   print(user);
+   static Future<User> login(String id) async {
+         currentConfig.currentUser  =  await User.fetchUser("603517e4ef23520af406fc46");
+         currentConfig.currentUser.id = "603517e4ef23520af406fc46";
   }
+  
+
+
+  // static debuguserfetch() async {
+  //  final user  = await User.fetchUser("603517e4ef23520af406fc46");
+  //  print(user);
+  // }
 }
+ // TODO
