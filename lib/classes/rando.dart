@@ -83,7 +83,7 @@ class Rando {
 
     List<Rando> randos = [];
     final randosJson =
-        await fetchRequestMultiple('iutannecy-deptinfo.fr:3000', 'randonnees');
+        await fetchRequestMultiple('pathpartoutapi.herokuapp.com', 'randonnees');
     print(randosJson);
     randosJson.forEach((element) => randos.add(Rando.fromJson(element)));
     return randos;
@@ -92,7 +92,7 @@ class Rando {
   static Future<Rando> fetchRando(int id) async {
     List<Rando> randos = [];
     final randosJson = await fetchRequestMultiple(
-        'iutannecy-deptinfo.fr:3000', 'randonnee/' + id.toString());
+        'pathpartoutapi.herokuapp.com', 'randonnee/' + id.toString());
     print(randosJson);
     randosJson.forEach((element) => randos.add(Rando.fromJson(element)));
     return randos[0];

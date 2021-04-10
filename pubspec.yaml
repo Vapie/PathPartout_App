@@ -27,7 +27,9 @@ dependencies:
   geojson: ^0.10.0
   flutter_secure_storage: ^3.3.5
   flutter_map_marker_popup: ^0.2.0
+  flutter_local_notifications: ^1.4.4+2
   pedometer: ^2.1.0
+  workmanager: ^0.2.3
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
@@ -35,7 +37,7 @@ dependencies:
   http: 0.12.2
   # used for mvvm
   stacked: ^1.2.4
-
+  rxdart: ^0.23.1
   cached_network_image: ^2.5.0
   flutter_cache_manager: ^2.1.1
 
@@ -51,7 +53,7 @@ dependencies:
   get_it: ^4.0.1
   injectable: ^0.3.0
 
-  # navigation
+  # navigation"
   get:
 
 dev_dependencies:

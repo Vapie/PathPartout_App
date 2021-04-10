@@ -37,18 +37,17 @@ class User {
     );
   }
 
-
-
   static Future<User> fetchUser(String id) async {
     List<User> users = [];
     final usersJson = await fetchRequestParameters(
-        'iutannecy-deptinfo.fr:3000', 'user/get',{
+        'pathpartoutapi.herokuapp.com', 'user/get',{
           'token': new Token().getToken(),
-           'userId': id
+          'userId': id
     });
     usersJson.forEach((element) => users.add(User.fromJson(element)));
     return users[0];
   }
+
   static debuguserfetch() async {
    final user  = await User.fetchUser("603517e4ef23520af406fc46");
    print(user);
