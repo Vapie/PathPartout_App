@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
+import 'package:mvvm_flutter_app/classes/user.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/view/login/LoginViewModel.dart';
 import 'package:mvvm_flutter_app/widget/media/gradient-button.dart';
@@ -133,10 +134,9 @@ class _LoginState extends State<LoginView> {
                                 fontSize: 25),
                           ),
                           onPressed: () async {
-                            await model.authenticate(
+                            await User.authenticate(
                                 emailController.text, passwordController.text);
                             await getRandos();
-                            print("yo");
                             Navigator.pushNamed(context, core, arguments: {
                               "selectedIndex": 0,
                               "randosCollection": futureRandos
@@ -183,7 +183,7 @@ class _LoginState extends State<LoginView> {
                             ],
                           ),
                           onPressed: () async {
-                            final futureRandos = await Rando.fetchRandos();
+                            await getRandos();
                             Navigator.pushNamed(context, core, arguments: {
                               "selectedIndex": 0,
                               "randosCollection": futureRandos

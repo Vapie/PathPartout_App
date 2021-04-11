@@ -136,15 +136,15 @@ class _SurveyViewState extends State<SurveyView> {
                                       onPressed: () {
                                         model.changeQuestions();
                                         // if status 4 appelle storeAnswers() avec un navigation a la fin
-                                        setState(() {
+                                        setState(() async {
                                           _quizz = null;
                                           status++;
                                           if(status >= 3) {
                                             model.storeAnswers(answers);
-                                            getRandos();
+                                            await getRandos();
                                             Navigator.pushNamed(context, core,
                                                 arguments: {
-                                                  "selectedIndex": 1,
+                                                  "selectedIndex": 0,
                                                   "randosCollection": futureRandos
                                                 });
                                           }
@@ -161,13 +161,12 @@ class _SurveyViewState extends State<SurveyView> {
                                       ),
                                     ),
 
-                                      /*OutlineButton(
+                                      OutlineButton(
                                       onPressed: () async {
-                                        final futureRandos = await Rando
-                                            .fetchRandos();
+                                        await getRandos();
                                         Navigator.pushNamed(context, core,
                                             arguments: {
-                                              "selectedIndex": 1,
+                                              "selectedIndex": 0,
                                               "randosCollection": futureRandos
                                             });
                                       },
@@ -180,7 +179,7 @@ class _SurveyViewState extends State<SurveyView> {
                                       borderSide: BorderSide(
                                         color: Colors.white,
                                       ),
-                                    )*/
+                                    )
                                   ]
                               )
                           ),

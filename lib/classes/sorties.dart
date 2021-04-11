@@ -4,7 +4,6 @@ import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/classes/user.dart';
 
 import 'package:mvvm_flutter_app/network/api-connect.dart';
-import 'package:mvvm_flutter_app/network/token.dart';
 import '../main.dart';
 class Sortie {
   final String id;
@@ -50,7 +49,7 @@ class Sortie {
   static void createSortie(String performances) async {
     final rep =
     await fetchRequestParameters('pathpartoutapi.herokuapp.com', 'sortie/create', {
-      'token': new Token().token,
+      'token': currentConfig.currentToken,
       'randonneeId': currentConfig.currentRando.id.toString(),
       //TODO Dynamic id user on login
       'userId': "603517e4ef23520af406fc46"  ,

@@ -1,16 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mvvm_flutter_app/classes/rando.dart';
-import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/view/share/ShareViewModel.dart';
-import 'package:mvvm_flutter_app/widget/podometer/Podometre.dart';
 import 'package:stacked/stacked.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'dart:math';
 import 'dart:typed_data';
 import 'package:screenshot/screenshot.dart';
-import 'package:share/share.dart';
 import 'package:easy_gradient_text/easy_gradient_text.dart';
 
 int quizz;

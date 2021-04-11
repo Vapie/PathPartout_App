@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:mvvm_flutter_app/main.dart';
 
 import 'package:mvvm_flutter_app/network/api-connect.dart';
-import 'package:mvvm_flutter_app/network/token.dart';
+
 
 class User {
   String id;
@@ -42,23 +42,27 @@ class User {
     List<User> users = [];
     final usersJson = await fetchRequestParameters(
         'pathpartoutapi.herokuapp.com', 'user/get',{
-          'token': new Token().getToken(),
+          'token': currentConfig.currentToken,
           'userId': id
     });
     usersJson.forEach((element) => users.add(User.fromJson(element)));
     return users[0];
   }
 
-   static Future<User> login(String id) async {
-         currentConfig.currentUser  =  await User.fetchUser("603517e4ef23520af406fc46");
-         currentConfig.currentUser.id = "603517e4ef23520af406fc46";
+  static Future<User> authenticate(String email, String password) async {
+    final login = await fetchRequestParameters(
+        'pathpartoutapi.herokuapp.com', 'user/login', {
+      'token': currentConfig.currentToken,
+      'email': email,
+      'password': password
+    });
+    print(login);
+    var user =  await User.fetchUser(login["userId"]);
+    user.id = login["userId"];
+    print(user.id);
+    currentConfig.currentUser = user;
+    currentConfig.currentToken = login["token"];
+
   }
-  
-
-
-  // static debuguserfetch() async {
-  //  final user  = await User.fetchUser("603517e4ef23520af406fc46");
-  //  print(user);
-  // }
 }
  // TODO

@@ -7,7 +7,6 @@ import 'package:stacked/stacked.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SplashViewModel>.reactive(
@@ -37,6 +36,7 @@ class SplashView extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,
                         fontSize: 25
+
                     )
                 ),
               ]
@@ -47,7 +47,6 @@ class SplashView extends StatelessWidget {
       viewModelBuilder: () => SplashViewModel(),
       onModelReady: (model) => Future.delayed(const Duration(milliseconds: 3000), () {
           Navigator.pushNamed(context, survey);
-        print("yo");
       }),
     );
   }
