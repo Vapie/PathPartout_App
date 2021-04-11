@@ -84,7 +84,7 @@ class _LoginState extends State<LoginView> {
                       ),
                     ),
 
-                    FlatButton(
+                    TextButton(
                       onPressed: () {
                         // TODO
                       },
@@ -143,7 +143,7 @@ class _LoginState extends State<LoginView> {
                           },
                         )),
 
-                    FlatButton(
+                    TextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, register);
                       },
