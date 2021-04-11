@@ -10,6 +10,9 @@
         android:label="Path Partout"
         android:usesCleartextTraffic="true"
         android:icon="@mipmap/launcher_icon">
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
