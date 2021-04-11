@@ -163,7 +163,7 @@ class _SurveyViewState extends State<SurveyView> {
 
                                       OutlineButton(
                                       onPressed: () async {
-                                        getRandos();
+                                        await getRandos();
                                         Navigator.pushNamed(context, core,
                                             arguments: {
                                               "selectedIndex": 0,

@@ -13,7 +13,7 @@ Future<dynamic> fetchRequestSingle(String address, String params) async {
     var token = new Token().getToken();
     print(address + "/" + params);
     final response = await http.post(
-      Uri.http(address, params),
+      Uri.https(address, params),
       headers: <String, String>{
         "Content-Type": "application/x-www-form-urlencoded",
       },
@@ -42,7 +42,7 @@ Future<dynamic> fetchRequestParameters(String address, String params,Map<String,
   } else {
     print(address + "/" + params);
     final response = await http.post(
-      Uri.http(address, params),
+      Uri.https(address, params),
       headers: <String, String>{
         "Content-Type": "application/x-www-form-urlencoded",
       },
@@ -69,7 +69,7 @@ Future<dynamic> fetchRequestMultiple(String address, String params) async {
     print(address + "/" + params);
     var token = new Token().getToken();
     final response = await http.post(
-      Uri.http(address, params),
+      Uri.https(address, params),
       headers: <String, String>{
         "Content-Type": "application/x-www-form-urlencoded",
       },
