@@ -64,8 +64,8 @@ class BarChartState extends State<ShareView> {
       animate: true,
       vertical: true,
       domainAxis: charts.OrdinalAxisSpec(
-          // renderSpec: charts.NoneRenderSpec(),
-          renderSpec: charts.SmallTickRendererSpec()),
+          renderSpec: charts.SmallTickRendererSpec()
+      ),
       primaryMeasureAxis: charts.NumericAxisSpec(
           renderSpec: charts.SmallTickRendererSpec(),
           tickProviderSpec: charts.BasicNumericTickProviderSpec(
@@ -295,10 +295,7 @@ class BarChartState extends State<ShareView> {
                                         print('test');
                                         _toggle();
                                         screenshotController.capture(delay: Duration(milliseconds: 20)).then((Uint8List image) async {
-                                          setState(() {
-                                            Share.file('esys image', 'esys.png', image, 'image/png');
-                                          });
-                                          final result = await Share.file('esys image', 'esys.png', image, 'image/png');
+                                          final result = await Share.file('Path Partout', 'path_partout.png', image, 'image/png');
                                           _toggle();
                                         }).catchError((onError) {
                                           print(onError);
