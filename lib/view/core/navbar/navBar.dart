@@ -25,25 +25,27 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
   List<Widget> _options;
 
   _MyNavigationBarState(Map data) {
-    _selectedIndex = data["selectedIndex"];
-    if (data.containsKey("randosCollection")) {
-      randos = data["randosCollection"];
-    } else {
-      //TODO remove final
-      print("Il faut ajouter randosCollection sur la nav vers core ");
+    if(data!=null) {
+      _selectedIndex = data["selectedIndex"];
+      if (data.containsKey("randosCollection")) {
+        randos = data["randosCollection"];
+      } else {
+        //TODO remove final
+        print("Il faut ajouter randosCollection sur la nav vers core ");
+      }
     }
 
     _options = <Widget>[
       RandosView(randos),
       PlanMultipleView(),
-      LoginView(),
+      ProfileView(),
     ];
   }
   void _onItemTap(int index) {
     _options = <Widget>[
       RandosView(randos),
       PlanMultipleView(),
-      LoginView(),
+      ProfileView(),
     ];
     setState(() {
       _selectedIndex = index;

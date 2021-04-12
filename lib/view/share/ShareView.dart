@@ -19,7 +19,7 @@ class ShareView extends StatefulWidget {
   State<StatefulWidget> createState() => BarChartState();
 }
 
-class BarChartState extends State<ShareView>{
+class BarChartState extends State<ShareView> {
   List<charts.Series> seriesList;
   ScreenshotController screenshotController = ScreenshotController();
 
@@ -38,9 +38,8 @@ class BarChartState extends State<ShareView>{
       Dist('Jan.', 27),
       Dist('Fev.', 15),
     ];
-    
-    const col = Color(0XFFFFFFFF);
 
+    const col = Color(0XFFFFFFFF);
 
     return [
       charts.Series<Dist, String>(
@@ -54,27 +53,23 @@ class BarChartState extends State<ShareView>{
   }
 
   @override
-  void initState(){
+  void initState() {
     super.initState();
     seriesList = _createData();
   }
 
-  barChart(){
+  barChart() {
     return charts.BarChart(
       seriesList,
       animate: true,
       vertical: true,
       domainAxis: charts.OrdinalAxisSpec(
-        // renderSpec: charts.NoneRenderSpec(),
-        renderSpec: charts.SmallTickRendererSpec()
-      ),
+          // renderSpec: charts.NoneRenderSpec(),
+          renderSpec: charts.SmallTickRendererSpec()),
       primaryMeasureAxis: charts.NumericAxisSpec(
-        renderSpec: charts.SmallTickRendererSpec(),
-        tickProviderSpec: charts.BasicNumericTickProviderSpec(
-          dataIsInWholeNumbers: true,
-          desiredTickCount: 5
-        )
-      ),
+          renderSpec: charts.SmallTickRendererSpec(),
+          tickProviderSpec: charts.BasicNumericTickProviderSpec(
+              dataIsInWholeNumbers: true, desiredTickCount: 5)),
       defaultRenderer: new charts.BarRendererConfig(
         cornerStrategy: const charts.ConstCornerStrategy(8),
       ),
@@ -85,6 +80,7 @@ class BarChartState extends State<ShareView>{
   Widget build(BuildContext context) {
     return ViewModelBuilder<ShareViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
+<<<<<<< HEAD
           body: Screenshot(
             controller: screenshotController,
             child: Container(
@@ -336,7 +332,7 @@ class BarChartState extends State<ShareView>{
           // body: Container()
       ),
       viewModelBuilder: () => ShareViewModel(),
-      onModelReady: (model) => model.debug(),
+      //onModelReady: (model) => model.debug(),
     );
   }
 }

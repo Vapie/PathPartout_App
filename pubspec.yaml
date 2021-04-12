@@ -41,6 +41,9 @@ dependencies:
   cached_network_image: ^2.5.0
   flutter_cache_manager: ^2.1.1
 
+  # Notation
+  smooth_star_rating: 1.1.1
+
   # Permet de changer l'icône de l'application
   flutter_launcher_icons: ^0.8.1
 

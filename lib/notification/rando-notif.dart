@@ -2,13 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:mvvm_flutter_app/MainConfig.dart';
+import 'package:mvvm_flutter_app/classes/rando.dart';
+import 'package:mvvm_flutter_app/classes/sorties.dart';
+import 'package:mvvm_flutter_app/classes/user.dart';
 import 'package:mvvm_flutter_app/widget/podometer/Podometre.dart';
-
+import '../main.dart';
 
 class RandoNotif extends StatefulWidget {
-  dynamic currentRandoData = {0,"00:00"};
-
-  RandoNotif( {Key key}) : super(key: key) {}
+  List<dynamic> currentRandoData = ["0","00:00"];
+  RandoNotif({Key key}) : super(key: key) {}
 
   Podometre mypodometre = new Podometre();
   Timer mytimer = new Timer( Duration(seconds:1000),(){});
@@ -66,20 +69,20 @@ class RandoNotif extends StatefulWidget {
     new FlutterLocalNotificationsPlugin().cancel(randoNotifChannel);
   }
 
-
-
   Timer launchRando() {
     this.mypodometre.steps = 0;
 
     const oneSec = const Duration(seconds:1);
     String str;
-
+    currentRandoData = ["0","00:00"];
     var timer = new Timer.periodic(oneSec, (Timer t) => {
       str = Duration(seconds: t.tick).toString(),
-      currentRandoData = {this.mypodometre.steps,str.substring(0, str.length - 7)},
+      currentRandoData = [this.mypodometre.steps,str.substring(0, str.length - 7)],
       pushRandoNotif("RANDO TEST",this.mypodometre.steps,str.substring(0, str.length - 7))
+
     });
     this.mytimer = timer;
+
   }
 
   void randoStop(){
@@ -90,25 +93,57 @@ class RandoNotif extends StatefulWidget {
     deleteRandoNotif();
   }
 
-
-
-
 }
 
 
 /// This is the private State class that goes with MyStatefulWidget.
 class _RandoNotifState extends State<RandoNotif> {
+  int _currentindex = 0;
+  Timer _currentTimer;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        FlatButton(onPressed: (){ print("a");/*widget.launchRando()*/}, child: Text(widget.currentRandoData.toString()))
+        //etat rando
+        if (_currentindex == 0)FlatButton(onPressed: (){
+          widget.launchRando();
+        const oneSec = const Duration(seconds:1);
+          _currentindex = 1;
+
+
+          Sortie.fetchSorties();
+
+          _currentTimer = new Timer.periodic(oneSec, (Timer t) => {
+            setState(() {}),
+
+          });
+        },
+        child: Text("démarer la rando")
+        ),
+        // etat randdo en cours
+        if (_currentindex == 1)FlatButton(onPressed: (){
+          // on arrète la rando
+            enregistrerando();
+            _currentTimer.cancel();
+            widget.randoStop();
+
+            _currentindex = 2;
+
+            },
+            child: Text("stop rando")
+
+        ),
+        if (_currentindex == 2) Text("Rando terminée"),
+        if (_currentindex == 1)Text("Nombre de pas:" + widget.currentRandoData.first.toString() + " Temps : " + widget.currentRandoData.last.toString()),
       ],
     );
+
   }
 
+  void  enregistrerando() {
+    print("onenregistre");
+        Sortie.createSortie(widget.currentRandoData.toString());
+    print("cfaita");
+
+  }
 }
-/*
-
-
-*/
