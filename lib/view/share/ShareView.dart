@@ -7,6 +7,7 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'dart:typed_data';
 import 'package:screenshot/screenshot.dart';
 import 'package:easy_gradient_text/easy_gradient_text.dart';
+import 'package:esys_flutter_share/esys_flutter_share.dart';
 
 int quizz;
 
@@ -19,6 +20,7 @@ class ShareView extends StatefulWidget {
 
 class BarChartState extends State<ShareView>{
   List<charts.Series> seriesList;
+  ScreenshotController screenshotController = ScreenshotController();
 
   static List<charts.Series<Dist, String>> _createData() {
     final testData = [
@@ -76,235 +78,251 @@ class BarChartState extends State<ShareView>{
   Widget build(BuildContext context) {
     return ViewModelBuilder<ShareViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-          body: Container(
-            decoration: BoxDecoration(
-                gradient: RadialGradient(
-                    colors: [Color(0xFF2AB7F6), Color(0xFF5EC8F8), Color(0xFFCAE67B)],
-                    stops: [0, 0.2, 1],
-                    center: Alignment(1, 2),
-                    focal: Alignment.bottomRight,
-                    focalRadius: 2
-                )
-            ),
-            child: Center(
-                child: Column(
-                    children: [
-                      Container(
-                          margin: EdgeInsets.only(left: 40, right: 40, top: 60, bottom: 40),
-                          child: Column(
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(right: 100),
-                                  child: Text(
-                                      model.header,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 28,
-                                          color: Colors.white
-                                      )
+          body: Screenshot(
+            controller: screenshotController,
+            child: Container(
+              decoration: BoxDecoration(
+                  gradient: RadialGradient(
+                      colors: [Color(0xFF2AB7F6), Color(0xFF5EC8F8), Color(0xFFCAE67B)],
+                      stops: [0, 0.2, 1],
+                      center: Alignment(1, 2),
+                      focal: Alignment.bottomRight,
+                      focalRadius: 2
+                  )
+              ),
+              child: Center(
+                  child: Column(
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(left: 40, right: 40, top: 60, bottom: 40),
+                            child: Column(
+                                children: [
+                                  Container(
+                                    margin: EdgeInsets.only(right: 100),
+                                    child: Text(
+                                        model.header,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            fontSize: 28,
+                                            color: Colors.white
+                                        )
+                                    ),
                                   ),
-                                ),
-                                SizedBox(height: 20),
-                                Row(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(12.0),
-                                          color: Color(0xFFF29696),
+                                  SizedBox(height: 20),
+                                  Row(
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(12.0),
+                                            color: Color(0xFFF29696),
+                                          ),
+                                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                                          child: Text(
+                                              model.role,
+                                              style: TextStyle(
+                                                  color: Colors.white,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w500
+                                              )
+                                          ),
                                         ),
-                                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                                        child: Text(
-                                            model.role,
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500
+                                        SizedBox(width: 15),
+                                        Container(
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.only(topLeft: Radius.circular(14), bottomLeft: Radius.circular(14)),
+                                              color: Color(0xFFF29696)
+                                          ),
+                                          height: 6,
+                                          width: 52,
+                                        ),
+                                        CircleAvatar(
+                                          radius: 40,
+                                          backgroundImage: AssetImage('assets/picture/portrait.jpg'),
+                                        )
+                                      ]
+                                  ),
+                                  SizedBox(height: 20),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        model.stats,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold ,
+                                          fontSize: 25,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 25),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          // width: 135,
+                                            padding: EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                color: Colors.white
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  width: 120,
+                                                  alignment: Alignment.topLeft,
+                                                  child: Text(
+                                                    model.dist,
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 18
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  alignment: Alignment.bottomRight,
+                                                  margin: EdgeInsets.only(top: 10),
+                                                  child: GradientText(
+                                                    text: '15 km',
+                                                    colors: <Color>[
+                                                      Color(0xFF2AB7F6),
+                                                      Color(0xFF5EC8F8),
+                                                      Color(0xFFCAE67B)
+                                                    ],
+                                                    gradientDirection: GradientDirection.rtl,
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 25
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
                                             )
                                         ),
                                       ),
-                                      SizedBox(width: 15),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.only(topLeft: Radius.circular(14), bottomLeft: Radius.circular(14)),
-                                            color: Color(0xFFF29696)
-                                        ),
-                                        height: 6,
-                                        width: 52,
-                                      ),
-                                      CircleAvatar(
-                                        radius: 40,
-                                        backgroundImage: AssetImage('assets/picture/portrait.jpg'),
-                                      )
-                                    ]
-                                ),
-                                SizedBox(height: 20),
-                                Row(
-                                  children: [
-                                    Text(
-                                      model.stats,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold ,
-                                        fontSize: 25,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 25),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        // width: 135,
-                                          padding: EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                                              color: Colors.white
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: 120,
-                                                alignment: Alignment.topLeft,
-                                                child: Text(
-                                                  model.dist,
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 18
+                                      SizedBox(width: 10),
+                                      Expanded(
+                                        child: Container(
+                                          // width: 135,
+                                            padding: EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(Radius.circular(10)),
+                                                color: Colors.white
+                                            ),
+                                            child: Column(
+                                              children: [
+                                                Container(
+                                                  width: 120,
+                                                  alignment: Alignment.topLeft,
+                                                  child: Text(
+                                                    model.temps,
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 18
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                              Container(
-                                                alignment: Alignment.bottomRight,
-                                                margin: EdgeInsets.only(top: 10),
-                                                child: GradientText(
-                                                  text: '15 km',
-                                                  colors: <Color>[
-                                                    Color(0xFF2AB7F6),
-                                                    Color(0xFF5EC8F8),
-                                                    Color(0xFFCAE67B)
-                                                  ],
-                                                  gradientDirection: GradientDirection.rtl,
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 25
+                                                Container(
+                                                  alignment: Alignment.bottomRight,
+                                                  margin: EdgeInsets.only(top: 10),
+                                                  child: GradientText(
+                                                    text: '5 h 12',
+                                                    colors: <Color>[
+                                                      Color(0xFF2AB7F6),
+                                                      Color(0xFF5EC8F8),
+                                                      Color(0xFFCAE67B)
+                                                    ],
+                                                    gradientDirection: GradientDirection.rtl,
+                                                    style: TextStyle(
+                                                        color: Colors.black,
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 25
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
-                                          )
-                                      ),
-                                    ),
-                                    SizedBox(width: 10),
-                                    Expanded(
-                                      child: Container(
-                                        // width: 135,
-                                          padding: EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                                              color: Colors.white
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                width: 120,
-                                                alignment: Alignment.topLeft,
-                                                child: Text(
-                                                  model.temps,
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 18
-                                                  ),
-                                                ),
-                                              ),
-                                              Container(
-                                                alignment: Alignment.bottomRight,
-                                                margin: EdgeInsets.only(top: 10),
-                                                child: GradientText(
-                                                  text: '5 h 12',
-                                                  colors: <Color>[
-                                                    Color(0xFF2AB7F6),
-                                                    Color(0xFF5EC8F8),
-                                                    Color(0xFFCAE67B)
-                                                  ],
-                                                  gradientDirection: GradientDirection.rtl,
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 25
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          )
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(height: 10),
-                                Container(
-                                  padding: EdgeInsets.all(15),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(12.0),
-                                    color: Colors.white
-                                  ),
-                                  alignment: Alignment.topLeft,
-                                  child: Column(
-                                    children: [
-                                      Text(
-                                        'Kilomètres mensuels',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 18
+                                              ],
+                                            )
                                         ),
                                       ),
-                                      Container(
-                                        height: 175,
-                                        child: barChart(),
-                                      )
-                                    ]
+                                    ],
                                   ),
-                                ),
-                                SizedBox(height: 10),
-                                // barChart(),
-
-
-
-
-
-
-
-
-
-
-
-                                OutlineButton(
-                                  onPressed: () async {
-                                    ScreenshotController sc = ScreenshotController();
-                                    sc
-                                    .capture(delay: Duration(milliseconds: 10))
-                                    .then((Uint8List image) async {
-
-                                    });
-                                  },
-                                  child: Text('Partager', style: TextStyle(color: Colors.white)),
-                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-                                  borderSide: BorderSide(
-                                    color: Colors.white,
+                                  SizedBox(height: 10),
+                                  Container(
+                                    padding: EdgeInsets.all(15),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(12.0),
+                                        color: Colors.white
+                                    ),
+                                    alignment: Alignment.topLeft,
+                                    child: Column(
+                                        children: [
+                                          Text(
+                                            'Kilomètres mensuels',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18
+                                            ),
+                                          ),
+                                          Container(
+                                            height: 175,
+                                            child: barChart(),
+                                          )
+                                        ]
+                                    ),
                                   ),
-                                )
-                              ]
-                          )
-                      ),
-                    ]
-                )
+                                  SizedBox(height: 10),
+                                  // barChart(),
+
+
+
+
+
+
+
+
+
+
+
+                                  OutlineButton(
+                                    onPressed: () async {
+                                      print('test');
+                                      screenshotController.capture(delay: Duration(milliseconds: 20)).then((Uint8List image) async {
+                                        setState(() {
+                                          Share.file('esys image', 'esys.png', image, 'image/png');
+                                        });
+                                        final result = await Share.file('esys image', 'esys.png', image, 'image/png');
+                                      }).catchError((onError) {
+                                        print(onError);
+                                      });
+                                      // ScreenshotController sc = ScreenshotController();
+                                      // sc
+                                      //     .capture(delay: Duration(milliseconds: 10))
+                                      //     .then((Uint8List image) async {
+                                      //   print('test');
+                                      //   print(image);
+                                      //   await Share.file('esys image', 'esys.png', image, 'image/png');
+                                      // });
+                                    },
+                                    child: Text('Partager', style: TextStyle(color: Colors.white)),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+                                    borderSide: BorderSide(
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ]
+                            )
+                        ),
+                      ]
+                  )
+              ),
+
             ),
           )
+          // body: Container()
       ),
       viewModelBuilder: () => ShareViewModel(),
       onModelReady: (model) => model.debug(),
