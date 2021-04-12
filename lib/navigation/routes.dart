@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/view/core/CoreView.dart';
 import 'package:mvvm_flutter_app/view/login/LoginView.dart';
 import 'package:mvvm_flutter_app/view/plan/PlanView.dart';
+import 'package:mvvm_flutter_app/view/rando/RandoView.dart';
 import 'package:mvvm_flutter_app/view/register/RegisterView.dart';
 import 'package:mvvm_flutter_app/view/review/ReviewView.dart';
 import 'package:mvvm_flutter_app/view/survey/SurveyView.dart';
 import 'package:mvvm_flutter_app/view/splash/SplashView.dart';
 import 'package:mvvm_flutter_app/view/share/ShareView.dart';
 import 'package:mvvm_flutter_app/view/test/TestPlaygroundView.dart';
-import 'package:mvvm_flutter_app/widget/rando/rando-detail.dart';
 
 import '../main.dart';
 
@@ -33,7 +33,7 @@ class Router {
         return MaterialPageRoute(builder: (_) => CoreView(data: data));
       case detailRando:
         var data = settings.arguments as int;
-        return MaterialPageRoute(builder: (_) => RandoDetail(randoId: data));
+        return MaterialPageRoute(builder: (_) => RandoView(randoId: data));
       case mapRando:
         var data = settings.arguments as int;
         return MaterialPageRoute(builder: (_) => PlanView(currentConfig: currentConfig, randoId : data));
