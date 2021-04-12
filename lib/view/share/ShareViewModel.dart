@@ -13,7 +13,5 @@ class ShareViewModel extends BaseViewModel {
   String temps = 'Temps passé en montagne';
   String share = 'Partager';
 
-  debug() {
-    User.debuguserfetch();
-  }
+
 }

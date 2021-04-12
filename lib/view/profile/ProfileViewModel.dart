@@ -1,3 +1,5 @@
 import 'package:stacked/stacked.dart';
 
-class ProfileViewModel extends BaseViewModel {}
+class ProfileViewModel extends BaseViewModel {
+
+}

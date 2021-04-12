@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/classes/user.dart';
+import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:stacked/stacked.dart';
 
 class SurveyViewModel extends BaseViewModel {
@@ -63,14 +65,24 @@ class SurveyViewModel extends BaseViewModel {
     }
   }
 
-  storeAnswers(answers) {
-    print('store Answers');
-    print(answers);
+  saveProfile(data) {
+    //level: from 0 to 6 0 = débutant , 6 = master of montagne
+    //preferedTime en minute
+    //tags , un tagbleau de tags
+
+    Map<String,dynamic> mapOfUserData = {"level": 3, "preferedTime": 180, "tags":["le","tableau","de","tags","est","insane"] };
+    print(mapOfUserData.toString());
+
+    if (data != null) {
 
 
+    }
+    else {
+      //on push les données par défaut
+    }
   }
 
-  debug() {
-    User.debuguserfetch();
+  navigate(context) async {
+    Navigator.pushNamed(context, core, arguments: { "selectedIndex": 0,"randosCollection": await Rando.fetchRandos()});
   }
 }

@@ -1,17 +1,18 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mvvm_flutter_app/main.dart';
 
 import 'package:mvvm_flutter_app/network/api-connect.dart';
-import 'package:mvvm_flutter_app/network/token.dart';
+
 
 class User {
-  final String id;
-  final String firstname;
-  final String lastname;
-  final String mail;
-  final String photoUrl;
-  final int privilegeLevel;
-  final List<dynamic> avatar;
-  final List<dynamic> userData;
+  String id;
+  String firstname;
+  String lastname;
+  String mail;
+  String photoUrl;
+  int privilegeLevel;
+  List<dynamic> avatar;
+  List<dynamic> userData;
 
   User(
       {this.id,
@@ -41,15 +42,53 @@ class User {
     List<User> users = [];
     final usersJson = await fetchRequestParameters(
         'pathpartoutapi.herokuapp.com', 'user/get',{
-          'token': new Token().getToken(),
+          'token': currentConfig.currentToken,
           'userId': id
     });
     usersJson.forEach((element) => users.add(User.fromJson(element)));
     return users[0];
   }
 
-  static debuguserfetch() async {
-   final user  = await User.fetchUser("603517e4ef23520af406fc46");
-   print(user);
+  static Future<User> authenticate(String email, String password) async {
+    final login = await fetchRequestParameters(
+        'pathpartoutapi.herokuapp.com', 'user/login', {
+      'token': currentConfig.currentToken,
+      'email': email,
+      'password': password
+    });
+    var user =  await User.fetchUser(login["userId"]);
+    user.id = login["userId"];
+    print(user.userData.toString());
+    currentConfig.currentUser = user;
+    currentConfig.currentToken = login["token"];
+
+  }
+
+  static createUser(String email, String password) async {
+    final newUserJson = await fetchRequestParameters(
+        'pathpartoutapi.herokuapp.com', 'user/create', {
+      'token': currentConfig.currentToken,
+      'email': email,
+      'password': password
+    });
+    User.authenticate(email, password);
+
+  }
+
+  static modifyCurrentUser(String key, String value) async {
+    await fetchRequestParameters(
+        'pathpartoutapi.herokuapp.com', 'user/update', {
+      'token': currentConfig.currentToken,
+      key: value
+    });
+  }
+
+  static modify(String key, String value) async {
+    await fetchRequestParameters(
+        'pathpartoutapi.herokuapp.com', 'user/update', {
+      'token': currentConfig.currentToken,
+      key: value
+    });
   }
 }
+ // TODO
