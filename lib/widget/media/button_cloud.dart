@@ -45,10 +45,13 @@ class _ButtonCloudState extends State<ButtonCloud> {
                 backgroundColor: hasBeenAdded[i] ? Colors.white : Colors.transparent,
               ),
               onPressed: () {
-                selectedTags.add(tags[i + 1]);
-                print(selectedTags);
                 setState(() {
                   hasBeenAdded[i] = !hasBeenAdded[i];
+                  if(hasBeenAdded[i]){
+                    selectedTags.add(tags[i + 1]);
+                  } else {
+                    selectedTags.remove(tags[i + 1]);
+                  }
                 });
               },
             ),
