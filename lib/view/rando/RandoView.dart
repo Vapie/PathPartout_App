@@ -34,8 +34,7 @@ class _RandoViewState extends State<RandoView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: myAppBar(),
-      endDrawer:AppDrawer(),
-
+      endDrawer: AppDrawer(),
       body: Center(
         child: FutureBuilder<Rando>(
           future: futureRando,
@@ -63,16 +62,24 @@ class _RandoViewState extends State<RandoView> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20.0),
-                    child:TextButton(
-                      onPressed: null,
+                  Positioned(
+                    top: 10,
+                    right: 10,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, review, arguments: {});
+                      },
+                      style: TextButton.styleFrom(
+                        primary: Colors.white,
+                        backgroundColor: getColor(snapshot.data.difficulty),
+                        onSurface: Colors.grey,
+                      ),
                       child: Text(
-                        "Présentation",
+                        "Ajouter un avis",
                         style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.white,
                             fontWeight: FontWeight.bold,
-                            fontSize: 17),
+                            fontSize: 15),
                       ),
                     ),
                   ),
@@ -105,7 +112,9 @@ class _RandoViewState extends State<RandoView> {
                   Container(
                     foregroundDecoration: BoxDecoration(
                         border: Border(
-                            bottom: BorderSide(width: 10, color: getColor(snapshot.data.difficulty)))),
+                            bottom: BorderSide(
+                                width: 10,
+                                color: getColor(snapshot.data.difficulty)))),
                   ),
                   Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -156,164 +165,165 @@ class _RandoViewState extends State<RandoView> {
                       color: Colors.grey[200],
                       child: Expanded(
                           child: Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
+                        padding: EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                Column(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.only(
+                                          left: 10.0, top: 10.0, bottom: 5.0),
+                                      width: MediaQuery.of(context).size.width *
+                                          0.65,
+                                      child: new Column(
+                                        children: <Widget>[
+                                          new Text(snapshot.data.name,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 25,
+                                                  fontWeight: FontWeight.bold))
+                                        ],
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Column(
+                                  children: [
+                                    TextButton(
+                                        onPressed: () => {
+                                              Navigator.pushNamed(
+                                                  context, mapRando,
+                                                  arguments: snapshot.data.id)
+                                            },
+                                        child: Text(
+                                          "Let's Go",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        style: TextButton.styleFrom(
+                                          backgroundColor: Colors.teal,
+                                        ))
+                                  ],
+                                )
+                              ],
+                            ),
+                            // Difficulté
+                            Padding(
+                                padding: EdgeInsets.only(top: 5.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Column(
                                       children: [
-                                        Container(
-                                          padding: const EdgeInsets.only(
-                                              left: 10.0, top: 10.0, bottom: 5.0),
-                                          width: MediaQuery.of(context)
-                                              .size
-                                              .width *
-                                              0.65,
-                                          child: new Column(
-                                            children: <Widget>[
-                                              new  Text(snapshot.data.name,
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontSize: 25,
-                                                      fontWeight: FontWeight.bold))
-                                            ],
-                                          ),
+                                        Padding(
+                                          padding: EdgeInsets.only(right: 10.0),
+                                          child: Icon(Icons.layers),
                                         )
-
                                       ],
                                     ),
                                     Column(
                                       children: [
-                                        TextButton(
-                                            onPressed: ()=> {Navigator.pushNamed(context, mapRando, arguments: snapshot.data.id)} ,
-                                            child: Text(
-                                              "Let's Go",
-                                              style: TextStyle(color: Colors.white),
-                                            ),
-                                            style: TextButton.styleFrom(
-                                              backgroundColor: Colors.teal,
-                                            ))
+                                        Padding(
+                                          padding: EdgeInsets.only(right: 10.0),
+                                          child: Text("Difficulté",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 17)),
+                                        )
                                       ],
-                                    )
+                                    ),
+                                    Column(
+                                      children: [
+                                        Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 10.0),
+                                            child: getDifficulty(
+                                                snapshot.data.difficulty))
+                                      ],
+                                    ),
                                   ],
-                                ),
-                                // Difficulté
-                                Padding(
-                                    padding: EdgeInsets.only(top: 5.0),
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                )),
+                            // Distance
+                            Padding(
+                                padding: EdgeInsets.only(top: 5.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Column(
                                       children: [
-                                        Column(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.only(right: 10.0),
-                                              child: Icon(Icons.layers),
-                                            )
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.only(right: 10.0),
-                                              child: Text("Difficulté",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 17)),
-                                            )
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Padding(
-                                                padding:
-                                                EdgeInsets.only(right: 10.0),
-                                                child: getDifficulty(
-                                                    snapshot.data.difficulty))
-                                          ],
-                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(right: 10.0),
+                                          child: Icon(Icons.directions),
+                                        )
                                       ],
-                                    )),
-                                // Distance
-                                Padding(
-                                    padding: EdgeInsets.only(top: 5.0),
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                    ),
+                                    Column(
                                       children: [
-                                        Column(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.only(right: 10.0),
-                                              child: Icon(Icons.directions),
-                                            )
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.only(right: 10.0),
-                                              child: Text("Distance",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 17)),
-                                            )
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Padding(
-                                                padding:
-                                                EdgeInsets.only(right: 10.0),
-                                                child: Text('14 km'))
-                                          ],
-                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(right: 10.0),
+                                          child: Text("Distance",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 17)),
+                                        )
                                       ],
-                                    )),
-                                // Durée
-                                Padding(
-                                    padding: EdgeInsets.only(top: 5.0),
-                                    child: Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                    ),
+                                    Column(
                                       children: [
-                                        Column(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.only(right: 10.0),
-                                              child: Icon(Icons.timer),
-                                            )
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.only(right: 10.0),
-                                              child: Text("Durée",
-                                                  style: TextStyle(
-                                                      color: Colors.black,
-                                                      fontWeight: FontWeight.bold,
-                                                      fontSize: 17)),
-                                            )
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Padding(
-                                                padding:
+                                        Padding(
+                                            padding:
                                                 EdgeInsets.only(right: 10.0),
-                                                child: Text(snapshot.data.duration
+                                            child: Text('14 km'))
+                                      ],
+                                    ),
+                                  ],
+                                )),
+                            // Durée
+                            Padding(
+                                padding: EdgeInsets.only(top: 5.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(right: 10.0),
+                                          child: Icon(Icons.timer),
+                                        )
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(right: 10.0),
+                                          child: Text("Durée",
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 17)),
+                                        )
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 10.0),
+                                            child: Text(snapshot.data.duration
                                                     .toString() +
-                                                    " min"))
-                                          ],
-                                        ),
+                                                " min"))
                                       ],
-                                    ))
-                              ],
-                            ),
-                          )),
+                                    ),
+                                  ],
+                                ))
+                          ],
+                        ),
+                      )),
                     ),
                     Column(children: [
                       // Photos
@@ -436,7 +446,7 @@ class _RandoViewState extends State<RandoView> {
                                                     textAlign: TextAlign.left,
                                                     style: TextStyle(
                                                         fontWeight:
-                                                        FontWeight.bold)))
+                                                            FontWeight.bold)))
                                           ],
                                         ),
                                         Column(children: [
@@ -461,7 +471,10 @@ class _RandoViewState extends State<RandoView> {
                                         Container(
                                           padding: const EdgeInsets.only(
                                               left: 20.0, top: 10.0),
-                                          width: MediaQuery.of(context).size.width * 0.75,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.75,
                                           child: new Column(
                                             children: <Widget>[
                                               new Text(
@@ -500,14 +513,14 @@ Text getDifficulty(int level) {
     case 1:
       return Text("Facile",
           style:
-          TextStyle(color: getColor(level), fontWeight: FontWeight.bold));
+              TextStyle(color: getColor(level), fontWeight: FontWeight.bold));
     case 2:
       return Text("Intermédiaire",
           style:
-          TextStyle(color: getColor(level), fontWeight: FontWeight.bold));
+              TextStyle(color: getColor(level), fontWeight: FontWeight.bold));
     default:
       return Text("Avancée",
           style:
-          TextStyle(color: getColor(level), fontWeight: FontWeight.bold));
+              TextStyle(color: getColor(level), fontWeight: FontWeight.bold));
   }
 }
