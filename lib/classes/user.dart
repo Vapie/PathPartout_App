@@ -58,9 +58,11 @@ class User {
     });
     var user =  await User.fetchUser(login["userId"]);
     user.id = login["userId"];
+    currentConfig.currentToken = login["token"];
     print(user.userData.toString());
     currentConfig.currentUser = user;
-    currentConfig.currentToken = login["token"];
+    print(login["token"]);
+
 
   }
 
@@ -89,7 +91,8 @@ class User {
   }
 
   static List<dynamic> recoveruserData(String str) {
-
-     return str.substring(1, str.length - 1).split(",");
+      if (str != null)
+          return str.substring(1, str.length - 1).split(",");
+      return [];
   }
 }
