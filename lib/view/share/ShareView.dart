@@ -9,6 +9,7 @@ import 'package:screenshot/screenshot.dart';
 import 'package:easy_gradient_text/easy_gradient_text.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 
+bool _visible = true;
 int quizz;
 
 class ShareView extends StatefulWidget {
@@ -21,6 +22,12 @@ class ShareView extends StatefulWidget {
 class BarChartState extends State<ShareView>{
   List<charts.Series> seriesList;
   ScreenshotController screenshotController = ScreenshotController();
+
+  void _toggle() {
+    setState(() {
+      _visible = !_visible;
+    });
+  }
 
   static List<charts.Series<Dist, String>> _createData() {
     final testData = [
@@ -286,32 +293,36 @@ class BarChartState extends State<ShareView>{
 
 
 
-
-                                  OutlineButton(
-                                    onPressed: () async {
-                                      print('test');
-                                      screenshotController.capture(delay: Duration(milliseconds: 20)).then((Uint8List image) async {
-                                        setState(() {
-                                          Share.file('esys image', 'esys.png', image, 'image/png');
+                                  Visibility(
+                                    visible: _visible,
+                                    child: OutlineButton(
+                                      onPressed: () async {
+                                        print('test');
+                                        _toggle();
+                                        screenshotController.capture(delay: Duration(milliseconds: 20)).then((Uint8List image) async {
+                                          setState(() {
+                                            Share.file('esys image', 'esys.png', image, 'image/png');
+                                          });
+                                          final result = await Share.file('esys image', 'esys.png', image, 'image/png');
+                                          _toggle();
+                                        }).catchError((onError) {
+                                          print(onError);
                                         });
-                                        final result = await Share.file('esys image', 'esys.png', image, 'image/png');
-                                      }).catchError((onError) {
-                                        print(onError);
-                                      });
-                                      // ScreenshotController sc = ScreenshotController();
-                                      // sc
-                                      //     .capture(delay: Duration(milliseconds: 10))
-                                      //     .then((Uint8List image) async {
-                                      //   print('test');
-                                      //   print(image);
-                                      //   await Share.file('esys image', 'esys.png', image, 'image/png');
-                                      // });
-                                    },
-                                    child: Text('Partager', style: TextStyle(color: Colors.white)),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
-                                    borderSide: BorderSide(
-                                      color: Colors.white,
-                                    ),
+                                        // ScreenshotController sc = ScreenshotController();
+                                        // sc
+                                        //     .capture(delay: Duration(milliseconds: 10))
+                                        //     .then((Uint8List image) async {
+                                        //   print('test');
+                                        //   print(image);
+                                        //   await Share.file('esys image', 'esys.png', image, 'image/png');
+                                        // });
+                                      },
+                                      child: Text('Partager', style: TextStyle(color: Colors.white)),
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+                                      borderSide: BorderSide(
+                                        color: Colors.white,
+                                      ),
+                                    )
                                   )
                                 ]
                             )
