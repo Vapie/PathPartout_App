@@ -80,7 +80,6 @@ class BarChartState extends State<ShareView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ShareViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-<<<<<<< HEAD
           body: Screenshot(
             controller: screenshotController,
             child: Container(
