@@ -34,7 +34,7 @@ class User {
         photoUrl: json['photoUrl'],
         privilegeLevel: json['privilegeLevel'],
         avatar: json['avatar'],
-        userData: json['userData']
+        userData: User.recoveruserData(json['userData'])
     );
   }
 
@@ -76,19 +76,20 @@ class User {
   }
 
   static modifyCurrentUser(String key, String value) async {
-    await fetchRequestParameters(
+    return(await fetchRequestParametersPut(
         'pathpartoutapi.herokuapp.com', 'user/update', {
       'token': currentConfig.currentToken,
+      'id':currentConfig.currentUser.id,
       key: value
-    });
+    }));
   }
 
-  static modify(String key, String value) async {
-    await fetchRequestParameters(
-        'pathpartoutapi.herokuapp.com', 'user/update', {
-      'token': currentConfig.currentToken,
-      key: value
-    });
+  static modifyCurrentUserData(String userData) async {
+    print(await modifyCurrentUser("userData",userData));
+  }
+
+  static List<dynamic> recoveruserData(String str) {
+
+     return str.substring(1, str.length - 1).split(",");
   }
 }
- // TODO
