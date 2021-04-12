@@ -1,8 +1,4 @@
 
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'dart:async';
-import 'package:pedometer/pedometer.dart';
 import 'classes/rando.dart';
 import 'classes/user.dart';
 import 'notification/rando-notif.dart';
