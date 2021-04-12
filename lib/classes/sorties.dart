@@ -40,9 +40,25 @@ class Sortie {
     final sortiesJson =
         await fetchRequestMultiple('pathpartoutapi.herokuapp.com', 'sortie/all');
     print(sortiesJson);
+
     sortiesJson.forEach((element) => sorties.add(Sortie.fromJson(element)));
-    print(sorties.length.toString());
     return sorties;
+  }
+
+  static Future<List<Sortie>> getUserSorties() async {
+
+    List<Sortie> sorties = [];
+    final sortiesJson =
+    await fetchRequestMultiple('pathpartoutapi.herokuapp.com', 'sortie/all');
+
+    for(Map<String, dynamic> element in sortiesJson){
+      Sortie sortie = Sortie.fromJson(element);
+      if (sortie.userId.toString() == currentConfig.currentUser.id.toString()){
+        sorties.add(sortie);
+      }
+    }
+    return sorties;
+
   }
 
 
