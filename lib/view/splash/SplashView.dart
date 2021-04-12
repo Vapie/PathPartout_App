@@ -46,7 +46,7 @@ class SplashView extends StatelessWidget {
       ),
       viewModelBuilder: () => SplashViewModel(),
       onModelReady: (model) => Future.delayed(const Duration(milliseconds: 3000), () {
-          Navigator.pushNamed(context, survey);
+          Navigator.pushNamed(context, login);
       }),
     );
   }

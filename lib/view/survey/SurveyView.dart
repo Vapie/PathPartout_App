@@ -11,9 +11,8 @@ Map<String, String> answers = {};
 int status = 0;
 List<Rando> futureRandos;
 
-getRandos() async {
-  futureRandos = await Rando.fetchRandos();
-}
+
+
 
 
 class SurveyView extends StatefulWidget {
@@ -135,20 +134,17 @@ class _SurveyViewState extends State<SurveyView> {
                                     if(_quizz != null) OutlineButton(
                                       onPressed: () {
                                         model.changeQuestions();
+                                        setState(() {});
                                         // if status 4 appelle storeAnswers() avec un navigation a la fin
-                                        setState(() async {
+
                                           _quizz = null;
                                           status++;
                                           if(status >= 3) {
-                                            model.storeAnswers(answers);
-                                            await getRandos();
-                                            Navigator.pushNamed(context, core,
-                                                arguments: {
-                                                  "selectedIndex": 0,
-                                                  "randosCollection": futureRandos
-                                                });
-                                          }
-                                        });
+                                            model.saveProfile(answers);
+                                            model.navigate(context);
+
+                                            }
+
                                       },
                                       child: Text('Continuer',
                                           style: TextStyle(
@@ -163,13 +159,9 @@ class _SurveyViewState extends State<SurveyView> {
 
                                       OutlineButton(
                                       onPressed: () async {
-                                        await getRandos();
-                                        Navigator.pushNamed(context, core,
-                                            arguments: {
-                                              "selectedIndex": 0,
-                                              "randosCollection": futureRandos
-                                            });
-                                      },
+                                        model.saveProfile(null);
+                                        model.navigate(context);
+                                        },
                                       child: Text('Passer cette étape',
                                           style: TextStyle(
                                               color: Colors.white)),
@@ -190,7 +182,6 @@ class _SurveyViewState extends State<SurveyView> {
           ),
       viewModelBuilder: () => SurveyViewModel(),
       onModelReady: (model) => {
-        model.debug(),
         model.init()
       }
     );

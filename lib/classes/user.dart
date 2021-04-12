@@ -56,13 +56,39 @@ class User {
       'email': email,
       'password': password
     });
-    print(login);
     var user =  await User.fetchUser(login["userId"]);
     user.id = login["userId"];
-    print(user.id);
+    print(user.userData.toString());
     currentConfig.currentUser = user;
     currentConfig.currentToken = login["token"];
 
+  }
+
+  static createUser(String email, String password) async {
+    final newUserJson = await fetchRequestParameters(
+        'pathpartoutapi.herokuapp.com', 'user/create', {
+      'token': currentConfig.currentToken,
+      'email': email,
+      'password': password
+    });
+    User.authenticate(email, password);
+
+  }
+
+  static modifyCurrentUser(String key, String value) async {
+    await fetchRequestParameters(
+        'pathpartoutapi.herokuapp.com', 'user/update', {
+      'token': currentConfig.currentToken,
+      key: value
+    });
+  }
+
+  static modify(String key, String value) async {
+    await fetchRequestParameters(
+        'pathpartoutapi.herokuapp.com', 'user/update', {
+      'token': currentConfig.currentToken,
+      key: value
+    });
   }
 }
  // TODO

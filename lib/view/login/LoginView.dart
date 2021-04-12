@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/classes/user.dart';
+import 'package:mvvm_flutter_app/main.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/view/login/LoginViewModel.dart';
 import 'package:mvvm_flutter_app/widget/media/gradient-button.dart';
@@ -137,10 +138,10 @@ class _LoginState extends State<LoginView> {
                             await User.authenticate(
                                 emailController.text, passwordController.text);
                             await getRandos();
-                            Navigator.pushNamed(context, core, arguments: {
-                              "selectedIndex": 0,
-                              "randosCollection": futureRandos
-                            });
+                            if ((currentConfig.currentUser.userData != null) & (currentConfig.currentUser.userData.toString() != "[]"))
+                              Navigator.pushNamed(context, core, arguments: { "selectedIndex": 0, "randosCollection": futureRandos });
+                            if ((currentConfig.currentUser.userData == null)|| (currentConfig.currentUser.userData.toString() == "[]"))
+                              Navigator.pushNamed(context, survey);
                           },
                         )),
 
@@ -184,10 +185,10 @@ class _LoginState extends State<LoginView> {
                           ),
                           onPressed: () async {
                             await getRandos();
-                            Navigator.pushNamed(context, core, arguments: {
-                              "selectedIndex": 0,
-                              "randosCollection": futureRandos
-                            });
+                            if ((currentConfig.currentUser.userData != null) & (currentConfig.currentUser.userData.toString() != "[]"))
+                              Navigator.pushNamed(context, core, arguments: { "selectedIndex": 0, "randosCollection": futureRandos });
+                            if ((currentConfig.currentUser.userData == null)|| (currentConfig.currentUser.userData.toString() == "[]"))
+                              Navigator.pushNamed(context, survey);
                           },
                         )),
                   ],

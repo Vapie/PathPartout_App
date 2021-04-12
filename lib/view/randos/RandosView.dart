@@ -23,8 +23,11 @@ class RandosView extends StatelessWidget {
           body: Scaffold(
             body: Center(
                 child: ((() {
-              print(randos);
-              if (randos.length == 0) {
+              if (randos == null){
+                return Text("Aucune randonnée disponible :(");
+
+              }
+              else if (randos.length == 0) {
                 return Text("Aucune randonnée disponible :(");
               }
 

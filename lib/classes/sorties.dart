@@ -51,8 +51,7 @@ class Sortie {
     await fetchRequestParameters('pathpartoutapi.herokuapp.com', 'sortie/create', {
       'token': currentConfig.currentToken,
       'randonneeId': currentConfig.currentRando.id.toString(),
-      //TODO Dynamic id user on login
-      'userId': "603517e4ef23520af406fc46"  ,
+      'userId': currentConfig.currentUser.id,
       'performances': performances
     });
   }
