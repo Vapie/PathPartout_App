@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:stacked/stacked.dart';
 
 import 'ReviewViewModel.dart';
@@ -12,7 +12,7 @@ class ReviewView extends StatefulWidget {
 }
 
 class _ReviewViewState extends State<ReviewView> {
-  int rating = 2;
+  double rating = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +60,7 @@ class _ReviewViewState extends State<ReviewView> {
                                       ),
                                       SizedBox(height: 50),
                                       Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Column(
                                             children: [
@@ -76,13 +77,37 @@ class _ReviewViewState extends State<ReviewView> {
                                           ),
                                           Column(
                                             children: [
-                                              SmoothStarRating()
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                      rating.toString() + "/5"
+                                                  ),
+                                                  RatingBar.builder(
+                                                    initialRating: rating,
+                                                    minRating: 1,
+                                                    direction: Axis.horizontal,
+                                                    allowHalfRating: true,
+                                                    itemCount: 5,
+                                                    itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                                                    itemBuilder: (context, _) => Icon(
+                                                      Icons.brightness_1_rounded,
+                                                      color: Colors.lightGreenAccent,
+                                                    ),
+                                                    onRatingUpdate: (currentRating) {
+                                                      setState(() {
+                                                        rating = currentRating;
+                                                      });
+                                                    },
+                                                    itemSize: 20.0,
+                                                  )
+                                                ],
+                                              )
                                             ],
                                           )
 
                                         ],
                                       ),
-
+                                      SizedBox(height: 30),
                                       Row(
                                         children: [
                                           Text(

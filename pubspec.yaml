@@ -42,7 +42,7 @@ dependencies:
   flutter_cache_manager: ^2.1.1
 
   # Notation
-  smooth_star_rating: 1.1.1
+  flutter_rating_bar: ^4.0.0
 
   # Permet de changer l'icône de l'application
   flutter_launcher_icons: ^0.8.1
