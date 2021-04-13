@@ -100,14 +100,26 @@ class BarChartState extends State<ShareView> {
                             child: Column(
                                 children: [
                                   Container(
-                                    margin: EdgeInsets.only(right: 100),
-                                    child: Text(
-                                        model.header,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 28,
-                                            color: Colors.white
+                                    // margin: EdgeInsets.only(right: 100),
+                                    child: Row(
+                                      children: [
+                                        Image.asset(
+                                            'assets/picture/logo.png',
+                                          height: 50,
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(left: 25),
+                                          width: 200,
+                                          child: Text(
+                                            model.header,
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 28,
+                                                color: Colors.white
+                                            )
+                                          ),
                                         )
+                                      ],
                                     ),
                                   ),
                                   SizedBox(height: 20),
@@ -295,7 +307,7 @@ class BarChartState extends State<ShareView> {
                                         print('test');
                                         _toggle();
                                         screenshotController.capture(delay: Duration(milliseconds: 20)).then((Uint8List image) async {
-                                          final result = await Share.file('Path Partout', 'path_partout.png', image, 'image/png');
+                                          final result = await Share.file('Path Partout', 'path_partout.png', image, 'image/png', text: 'Suivez-moi sur Path-Partout !');
                                           _toggle();
                                         }).catchError((onError) {
                                           print(onError);
