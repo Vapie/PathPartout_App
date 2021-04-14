@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  badges: ^1.2.0
   flutter:
     sdk: flutter
   flutter_map: any
@@ -35,6 +36,7 @@ dependencies:
   stacked: ^1.2.4
   cached_network_image: ^2.5.0
   flutter_cache_manager: ^2.1.1
+
 
   # Permet de changer l'icône de l'application
   flutter_launcher_icons: ^0.8.1

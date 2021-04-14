@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/view/login/LoginViewModel.dart';
-import 'package:mvvm_flutter_app/view/splash/SplashView.dart';
 import 'package:mvvm_flutter_app/widget/media/gradient-button.dart';
 import 'package:stacked/stacked.dart';
 import '../../widget/rando/rando-detail.dart';
@@ -29,7 +28,7 @@ class _LoginDemoState extends State<LoginView> {
       // appBar: AppBar(
       //   title: Text("Login Page"),
       // ),
-      body: SingleChildScrollView( // Background ok avec container sinon pixel overflowed bottom
+      body: SingleChildScrollView(
         // decoration: BoxDecoration(
         //     gradient: RadialGradient(
         //         colors: [Color(0xFF2AB7F6), Color(0xFF5EC8F8), Color(0xFFCAE67B)],
