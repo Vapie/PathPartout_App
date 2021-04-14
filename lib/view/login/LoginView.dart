@@ -121,7 +121,6 @@ class _LoginState extends State<LoginView> {
                             await User.authenticate(
                                 emailController.text, passwordController.text);
                             List<Sortie> sorties = await Sortie.getUserSorties();
-                            print(sorties.length);
                             await getRandos();
                             if ((currentConfig.currentUser.userData != null) & (currentConfig.currentUser.userData.toString() != "[]"))
                               Navigator.pushNamed(context, core, arguments: { "selectedIndex": 0, "randosCollection": futureRandos });

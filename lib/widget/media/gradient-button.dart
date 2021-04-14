@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'dart:math' as math;
 
 class GradientButton extends StatelessWidget {
   final Widget child;
@@ -21,7 +22,7 @@ class GradientButton extends StatelessWidget {
       width: width,
       height: 50.0,
       decoration: BoxDecoration(
-        gradient:  LinearGradient(colors: [Colors.lightBlue, Colors.lightGreenAccent[100]]),
+        gradient:  LinearGradient(colors: [Colors.lightBlue, Colors.lightGreenAccent[100]], transform: GradientRotation(-math.pi / 6)),
         borderRadius: BorderRadius.circular(10.0)),
       child: Material(
         color: Colors.transparent,

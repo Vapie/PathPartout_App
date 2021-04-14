@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/review.dart';
+import 'package:mvvm_flutter_app/main.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/widget/appbar/appBar.dart';
 import 'package:mvvm_flutter_app/widget/appbar/drawer/drawer.dart';
@@ -23,15 +24,23 @@ class RandoView extends StatefulWidget {
 }
 
 class _RandoViewState extends State<RandoView> {
+
+  List<Review> _reviews;
   Future<Rando> futureRando;
-  Future<List<Review>> _reviews;
-  List reviews;
 
   @override
   void initState() {
     super.initState();
     futureRando = Rando.fetchRando(widget.randoId);
-    _reviews = Review.fetchReviewsByRando(widget.randoId);
+    startAsyncInit();
+  }
+
+  Future startAsyncInit() async {
+    print('hello');
+    setState(() async {
+      _reviews = await Review.fetchReviewsByRando(currentConfig.currentRando.id);
+      print(_reviews);
+    });
   }
 
   @override
@@ -72,7 +81,7 @@ class _RandoViewState extends State<RandoView> {
                     child: TextButton(
                       onPressed: () {
                         print(widget.randoId);
-                        Navigator.pushNamed(context, review );
+                        Navigator.pushNamed(context, review);
                       },
                       style: TextButton.styleFrom(
                         primary: Colors.white,
@@ -425,6 +434,8 @@ class _RandoViewState extends State<RandoView> {
                         ],
                       ),
                       // Avis - Utilisateurs
+                      //for (var review in _reviews)
+                      for (var i = 0; i < 2; i++)
                       Container(
                           child: Padding(
                             padding: EdgeInsets.all(20.0),
@@ -437,59 +448,72 @@ class _RandoViewState extends State<RandoView> {
                                   ),
                                 ]),
                                 // Avis - Description
+
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    for(var i = 0; i < 2; i++) Row(
-                                      children: [
-                                        Column(
+                                      Padding(
+                                        padding: EdgeInsets.only(left: 10),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            Padding(
-                                                padding: EdgeInsets.only(
-                                                    left: 20.0, right: 10.0),
-                                                child: Text("Lauren",
-                                                    textAlign: TextAlign.left,
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                        FontWeight.bold)))
+                                            Row(
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    Padding(
+                                                        padding: EdgeInsets.only(
+                                                            left: 0,
+                                                            right: 10.0),
+                                                        child: Text("Lauren",
+                                                            textAlign:
+                                                            TextAlign.left,
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .bold)))
+                                                  ],
+                                                ),
+                                                Column(children: [
+                                                  Container(
+                                                    padding: EdgeInsets.all(5.0),
+                                                    child: Text(
+                                                      "Curieuse aguerrie",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius
+                                                            .all(const Radius
+                                                            .circular(15.0)),
+                                                        color: Colors.red[300]),
+                                                  ),
+                                                ])
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Container(
+                                                  padding: const EdgeInsets.only(top: 10.0),
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                      0.75,
+                                                  child: Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: <Widget>[
+                                                      new Text(
+                                                          "A remplacer par les vrais avis",
+                                                          textAlign:
+                                                          TextAlign.left)
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
                                           ],
                                         ),
-                                        Column(children: [
-                                          Container(
-                                            padding: EdgeInsets.all(5.0),
-                                            child: Text(
-                                              "Curieuse aguerrie",
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            ),
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    const Radius.circular(
-                                                        15.0)),
-                                                color: Colors.red[300]),
-                                          ),
-                                        ])
-                                      ],
-                                    ),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          padding: const EdgeInsets.only(
-                                              left: 20.0, top: 10.0),
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.75,
-                                          child: new Column(
-                                            children: <Widget>[
-                                              new Text(
-                                                  "Super randonnée, je l’ai faite avec mes enfants, ils ont adoré ! Difficulté correcte pour des gens un peu sportifs.",
-                                                  textAlign: TextAlign.left)
-                                            ],
-                                          ),
-                                        )
-                                      ],
-                                    ),
+                                      )
                                   ],
                                 )
                               ],

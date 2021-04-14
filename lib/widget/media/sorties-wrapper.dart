@@ -22,7 +22,6 @@ class SortiesWrapper extends StatelessWidget {
 
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   Container(
                         decoration: BoxDecoration(
                           color: Color(0xFFEEEEEE),
