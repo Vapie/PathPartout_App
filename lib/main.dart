@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       onGenerateRoute: navRoute.Router.generateRoute,
-      initialRoute: navRoute.profile,
+      initialRoute: navRoute.splash,
     ));
   }
 //Navigator.pushNamed(context, secondScreenRoute, arguments: 'Data from home');

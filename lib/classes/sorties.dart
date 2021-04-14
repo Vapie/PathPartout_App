@@ -12,6 +12,7 @@ class Sortie {
   final DateTime date;
   final Rando randonnee;
   final User user;
+  final List<String> performances;
 
   Sortie(
       {this.id,
@@ -19,18 +20,34 @@ class Sortie {
       this.userId,
       this.date,
       this.randonnee,
-      this.user
+      this.user,
+      this.performances
       });
 
   factory Sortie.fromJson(Map<String, dynamic> json) {
+    if (json["performances"] != null){
+
     return Sortie(
         id: json['_id'],
         randonneeId: json['randonneeId'],
         userId: json['userId'],
         date: DateTime.parse(json['date']),
         randonnee: Rando.fromJson(json['randonnee'][0]),
-        user: User.fromJson(json['user'][0]));
+        user: User.fromJson(json['user'][0]),
+        performances: Sortie.getPerfFromString(json["performances"]));
+  }else{
+      return Sortie(
+          id: json['_id'],
+          randonneeId: json['randonneeId'],
+          userId: json['userId'],
+          date: DateTime.parse(json['date']),
+          randonnee: Rando.fromJson(json['randonnee'][0]),
+          user: User.fromJson(json['user'][0]));
+
+
+    }
   }
+
 
 
   static Future<List<Sortie>> fetchSorties() async {
@@ -63,6 +80,10 @@ class Sortie {
       'userId': currentConfig.currentUser.id,
       'performances': performances
     });
+  }
+
+   static List<String> getPerfFromString(String myStr) {
+        return myStr.replaceAll("[", "").replaceAll("]", "").split(",");
   }
 
 

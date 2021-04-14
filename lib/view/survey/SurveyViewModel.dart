@@ -66,7 +66,7 @@ class SurveyViewModel extends BaseViewModel {
     //preferedTime en minute
     //tags , un tagbleau de tags
 
-    List<dynamic> mapOfUserData = [3,180,["le","tableau","de","tags","est","insane"]];
+    List<dynamic> mapOfUserData = [3,180,["dénivlé","vue"]];
 
 
     if (data != null) {
@@ -81,9 +81,9 @@ class SurveyViewModel extends BaseViewModel {
 
       if  (data[question2] == answer1_2)
         duration = 120;
-      else if  (data[question1] == answer2_2)
+      else if  (data[question2] == answer2_2)
         duration = 240;
-      else if  (data[question1] == answer3_2)
+      else if  (data[question2] == answer3_2)
         duration = 300;
 
       dynamic tags =  data[question0];

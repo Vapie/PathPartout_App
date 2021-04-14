@@ -8,8 +8,6 @@ class SortiesWrapper extends StatelessWidget {
   List<Sortie> sorties;
   SortiesWrapper() {}
   Future<List<Sortie>> getSorties() async {
-    //TODO remove this
-    await User.authenticate("v@v.fr", "v@v.v");
     sorties = await Sortie.getUserSorties();
     return sorties;
   }
@@ -21,17 +19,14 @@ class SortiesWrapper extends StatelessWidget {
         builder: (context, AsyncSnapshot<List<Sortie>> snapshot) {
           if (snapshot.hasData) {
             return Column(
+
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 40, right: 40, top: 60),
-                    child: Text("Mes dernières randos",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.bold)),
-                  ),
+
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 20.0),
+                        decoration: BoxDecoration(
+                          color: Color(0xFFEEEEEE),
+                        ),
                     height: 170.0,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
