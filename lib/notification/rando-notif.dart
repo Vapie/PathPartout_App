@@ -123,17 +123,16 @@ class _RandoNotifState extends State<RandoNotif> {
         // etat randdo en cours
         if (_currentindex == 1)FlatButton(onPressed: (){
           // on arrète la rando
+            _currentindex = 2;
             enregistrerando();
             _currentTimer.cancel();
             widget.randoStop();
-
-            _currentindex = 2;
-
             },
             child: Text("stop rando")
 
         ),
-        if (_currentindex == 2) Text("Rando terminée"),
+        if (_currentindex == 2)Text("Rando terminée"),
+
         if (_currentindex == 1)Text("Nombre de pas:" + widget.currentRandoData.first.toString() + " Temps : " + widget.currentRandoData.last.toString()),
       ],
     );
@@ -142,7 +141,7 @@ class _RandoNotifState extends State<RandoNotif> {
 
   void  enregistrerando() {
     print("onenregistre");
-        Sortie.createSortie(widget.currentRandoData.toString());
+    Sortie.createSortie(widget.currentRandoData.toString());
     print("cfaita");
 
   }
