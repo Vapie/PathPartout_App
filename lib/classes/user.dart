@@ -14,8 +14,7 @@ class User {
   List<dynamic> avatar;
   List<dynamic> userData;
 
-  User(
-      {this.id,
+  User({this.id,
         this.firstname,
         this.lastname,
         this.mail,
@@ -64,8 +63,6 @@ class User {
     print(user.userData.toString());
     currentConfig.currentUser = user;
     print(login["token"]);
-
-
   }
 
   static createUser(String email, String password) async {
@@ -99,6 +96,5 @@ class User {
       }
       List<dynamic> l = [];
       return l;
-
   }
 }

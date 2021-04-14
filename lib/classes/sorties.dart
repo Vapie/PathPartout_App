@@ -14,14 +14,16 @@ class Sortie {
   final User user;
   final List<String> performances;
 
-  Sortie(
-      {this.id,
+  Sortie({
+
+      this.id,
       this.randonneeId,
       this.userId,
       this.date,
       this.randonnee,
       this.user,
       this.performances
+
       });
 
   factory Sortie.fromJson(Map<String, dynamic> json) {
@@ -48,8 +50,6 @@ class Sortie {
     }
   }
 
-
-
   static Future<List<Sortie>> fetchSorties() async {
 
     List<Sortie> sorties = [];
@@ -58,6 +58,7 @@ class Sortie {
     sortiesJson.forEach((element) => sorties.add(Sortie.fromJson(element)));
     return sorties;
   }
+
 
   static Future<List<Sortie>> getUserSorties() async {
     List<Sortie> sorties = [];

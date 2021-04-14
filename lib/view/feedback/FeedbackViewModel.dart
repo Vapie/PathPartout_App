@@ -70,9 +70,9 @@ class FeedbackViewModel extends BaseViewModel {
 
 
     if (data != null) {
-      int level = currentUserData[0];
-      int duration = currentUserData[1];
-      List<String> currentTags =currentUserData[2];
+      int level = int.parse(currentUserData[0]);
+      int duration = int.parse(currentUserData[1]);
+      List<String> currentTags =currentUserData[2].substring(1, currentUserData[2].length - 1).split(",");
       if  (data[question2] == answer2_2)
         level = (currentConfig.currentRando.difficulty+1);
       else if  (data[question2] == answer3_2)
@@ -83,7 +83,7 @@ class FeedbackViewModel extends BaseViewModel {
       else if  (data[question3] == answer3_3)
      duration = currentConfig.currentRando.duration + 30;
 
-      dynamic tags =  data[question1];
+      List<String> tags =  data[question1].substring(1, currentUserData[2].length - 1).split(",");
 
       for (String tag in tags){
         if (!currentTags.contains(tag)) {

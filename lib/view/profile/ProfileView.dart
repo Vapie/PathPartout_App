@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mvvm_flutter_app/classes/sorties.dart';
+import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/widget/media/sorties-wrapper.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:easy_gradient_text/easy_gradient_text.dart';
@@ -26,7 +27,7 @@ class ProfileViewState extends State<ProfileView> {
 
     double nbKm = 0;
     double min = 0;
-    double sec = 0;
+
     double heure = 0;
     int NbPas = 0;
     int tempsTot;
@@ -153,6 +154,7 @@ class ProfileViewState extends State<ProfileView> {
                                     ],
                                   ),
 
+
                                   Row(
                                     children: [
                                       FlatButton(
@@ -181,6 +183,34 @@ class ProfileViewState extends State<ProfileView> {
                                     ],
 
                                   ),
+                                  // Row(
+                                  //   children: [
+                                  //     FlatButton(
+                                  //       child: Row(
+                                  //         children: [
+                                  //           Text("Mon nom"),
+                                  //           Icon(Icons.accessibility),
+                                  //         ],
+                                  //       ),
+                                  //     ),
+                                  //     // icon: Icon(Icons.volume_up),
+                                  //     // tooltip: 'Increase volume by 10',
+                                  //     // color: Colors.green,
+                                  //
+                                  //     new DropdownButton<String>(
+                                  //       hint: Text('Mon age'
+                                  //       ),
+                                  //       items: <String>['32 ans', '33ans', '34 ans', '35 ans'].map((String value) {
+                                  //         return new DropdownMenuItem<String>(
+                                  //           value: value,
+                                  //           child: new Text(value),
+                                  //         );
+                                  //       }).toList(),
+                                  //       onChanged: (_) {},
+                                  //     )
+                                  //   ],
+                                  //
+                                  // ),
 
                                   SizedBox(height: 20),
                                   Row(
@@ -193,7 +223,12 @@ class ProfileViewState extends State<ProfileView> {
                                           color: Colors.black87,
                                         ),
                                       ),
-                                      Icon(Icons.accessibility),
+                                      GestureDetector(
+                                        child: Icon(Icons.share),
+                                        onTap: () => {
+                                          Navigator.pushNamed(context, share)
+                                        },
+                                      ),
                                     ],
                                   ),
                                   SizedBox(height: 25),
