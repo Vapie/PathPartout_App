@@ -4,6 +4,7 @@ import 'package:mvvm_flutter_app/view/core/CoreView.dart';
 import 'package:mvvm_flutter_app/view/feedback/FeedbackView.dart';
 import 'package:mvvm_flutter_app/view/login/LoginView.dart';
 import 'package:mvvm_flutter_app/view/plan/PlanView.dart';
+import 'package:mvvm_flutter_app/view/profile/ProfileView.dart';
 import 'package:mvvm_flutter_app/view/rando/RandoView.dart';
 import 'package:mvvm_flutter_app/view/register/RegisterView.dart';
 import 'package:mvvm_flutter_app/view/feedback/FeedbackView.dart';
@@ -21,6 +22,8 @@ const String survey = '/Survey';
 const String login = '/Login';
 const String detailRando = '/DetailRando';
 const String splash = '/splash';
+const String profile = '/profile';
+
 const String share = '/share';
 const String register = '/Register';
 const String testPlayground = '/TestPlayground';
@@ -52,6 +55,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => RegisterView());
       case splash:
         return MaterialPageRoute(builder: (_) => SplashView());
+      case profile:
+        return MaterialPageRoute(builder: (_) => ProfileView());
       case share:
         return MaterialPageRoute(builder: (_) => ShareView());
       case feedBack:
