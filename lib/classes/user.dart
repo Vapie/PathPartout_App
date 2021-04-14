@@ -34,7 +34,7 @@ class User {
         photoUrl: json['photoUrl'],
         privilegeLevel: json['privilegeLevel'],
         avatar: json['avatar'],
-        userData: User.recoveruserData(json['userData'])
+        userData: User.recoveruserData(json['userData'].toString())
     );
 
 
@@ -97,7 +97,8 @@ class User {
         String str = obj as String;
         return str.substring(1, str.length - 1).split(",");
       }
-      return [];
+      List<dynamic> l = [];
+      return l;
 
   }
 }
