@@ -1,16 +1,13 @@
-# mvvm_flutter_app
+# Pathy Partout 
 
-Test MVVM pour PathPartout
+App du groupe PathPartout, 
+Notre application à pour d’inciter les gens à sortir, à s’aérer, à pratiquer une activité sportive tout en s’amusant. Le but est de redonner envie de découvrir la nature, de profiter d’un moment de détente en compagnie de nos proches ou non.
 
-## Getting Started
+## Lien vers l'api:
+  http://iutannecy-deptinfo.fr:3000/
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Vidéo de démonstration
+  https://www.youtube.com/watch?v=yvp_ZwhjF8g
+  
+## Lien vers la maquette interactive 
+https://xd.adobe.com/view/53d1434f-0710-473b-8a33-b50dc72f972b-0682/

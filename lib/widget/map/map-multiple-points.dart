@@ -4,8 +4,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map/plugin_api.dart';
 import "package:latlong/latlong.dart";
 import 'package:mvvm_flutter_app/navigation/routes.dart';
-import 'package:mvvm_flutter_app/network/token.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
+
+import '../../main.dart';
 
 class MyMapMultiMarkers extends StatefulWidget {
   MyMapMultiMarkers({Key key}) : super(key: key);
@@ -42,7 +43,7 @@ class _MyMapMultiMarkersState extends State<MyMapMultiMarkers> {
                     urlTemplate: "https://api.tiles.mapbox.com/v4/"
                         "{id}/{z}/{x}/{y}@2x.png?access_token={accessToken}",
                     additionalOptions: {
-                      'accessToken': new Token().getMapToken(),
+                      'accessToken': currentConfig.mapToken,
                       'id': 'mapbox.satellite',
                     },
                   ),

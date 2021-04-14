@@ -9,9 +9,9 @@ import 'package:stacked/stacked.dart';
 
 class SplashView extends StatelessWidget {
   const SplashView({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     return Scaffold(
       body: Column(
         children: <Widget>[
@@ -152,6 +152,24 @@ class SplashView extends StatelessWidget {
                         ),
                       )
                     ],
+=======
+    return ViewModelBuilder<SplashViewModel>.reactive(
+      builder: (context, model, child) => Scaffold(
+
+
+          body: GestureDetector(
+            onTap: (){Navigator.pushNamed(context, survey);},
+            child:  Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                FractionallySizedBox(
+
+                  widthFactor: 0.3,
+                  child: Image.asset(
+                    'assets/picture/logo.png',
+>>>>>>> 5ba4c35b5ccbd7667730befeff49a828ec74f9b1
                   ),
                 ),
 
@@ -165,6 +183,7 @@ class SplashView extends StatelessWidget {
                   Text(
                     "Bio:",
                     style: TextStyle(
+<<<<<<< HEAD
                         color: Colors.lightBlueAccent,
                         fontStyle: FontStyle.normal,
                         fontSize: 28.0
@@ -219,6 +238,23 @@ class SplashView extends StatelessWidget {
             ),
         ],
       ),
+=======
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                        fontSize: 25
+
+                    )
+                ),
+              ]
+            )
+          ),
+          ),
+      ),
+      viewModelBuilder: () => SplashViewModel(),
+      onModelReady: (model) => Future.delayed(const Duration(milliseconds: 3000), () {
+          Navigator.pushNamed(context, login);
+      }),
+>>>>>>> 5ba4c35b5ccbd7667730befeff49a828ec74f9b1
     );
   }
 }

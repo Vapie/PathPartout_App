@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:mvvm_flutter_app/network/api-connect.dart';
-
+import '../main.dart';
 class Rando {
   final int id;
   final String name;
@@ -33,6 +33,7 @@ class Rando {
       this.distance});
 
   factory Rando.fromJson(Map<String, dynamic> json) {
+    if (json['distance'] ==  null){
     return Rando(
         id: json['id'],
         name: json['name'],
@@ -45,8 +46,24 @@ class Rando {
         tags: json['tags'],
         summit: json['summit'],
         gpx: getGpxStringAsArray(json["gpx"].toString()),
-        images: json['images'],
-        distance: double.parse(json['distance'].toString()));
+        images: json['images']);
+
+  }
+    else
+      return Rando(
+          id: json['id'],
+          name: json['name'],
+          difficulty: json['difficulty'],
+          duration: json['duration'],
+          posElevation: json['pos_elevation'],
+          negElevation: json['neg_elevation'],
+          startPoint: json['start_point'],
+          endPoint: json['end_point'],
+          tags: json['tags'],
+          summit: json['summit'],
+          gpx: getGpxStringAsArray(json["gpx"].toString()),
+          images: json['images'],
+          distance: double.parse(json['distance'].toString()));
   }
 
   static List<List<double>> getGpxStringAsArray(String str) {
@@ -83,7 +100,7 @@ class Rando {
 
     List<Rando> randos = [];
     final randosJson =
-        await fetchRequestMultiple('iutannecy-deptinfo.fr:3000', 'randonnees');
+        await fetchRequestMultiple('pathpartoutapi.herokuapp.com', 'randonnees');
     print(randosJson);
     randosJson.forEach((element) => randos.add(Rando.fromJson(element)));
     return randos;
@@ -92,9 +109,10 @@ class Rando {
   static Future<Rando> fetchRando(int id) async {
     List<Rando> randos = [];
     final randosJson = await fetchRequestMultiple(
-        'iutannecy-deptinfo.fr:3000', 'randonnee/' + id.toString());
+        'pathpartoutapi.herokuapp.com', 'randonnee/' + id.toString());
     print(randosJson);
     randosJson.forEach((element) => randos.add(Rando.fromJson(element)));
+    currentConfig.currentRando = randos[0];
     return randos[0];
   }
 
