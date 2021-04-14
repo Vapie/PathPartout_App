@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_flutter_app/classes/review.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/widget/appbar/appBar.dart';
 import 'package:mvvm_flutter_app/widget/appbar/drawer/drawer.dart';
@@ -11,7 +12,7 @@ import 'package:mvvm_flutter_app/widget/rando/rando-tile.dart';
 
 // ignore: must_be_immutable
 class RandoView extends StatefulWidget {
-  var randoId;
+  int randoId;
 
   RandoView({Key key, int randoId}) : super(key: key) {
     this.randoId = randoId;
@@ -23,11 +24,14 @@ class RandoView extends StatefulWidget {
 
 class _RandoViewState extends State<RandoView> {
   Future<Rando> futureRando;
+  Future<List<Review>> _reviews;
+  List reviews;
 
   @override
   void initState() {
     super.initState();
     futureRando = Rando.fetchRando(widget.randoId);
+    _reviews = Review.fetchReviewsByRando(widget.randoId);
   }
 
   @override
@@ -67,7 +71,8 @@ class _RandoViewState extends State<RandoView> {
                     right: 10,
                     child: TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, review, arguments: {});
+                        print(widget.randoId);
+                        Navigator.pushNamed(context, review );
                       },
                       style: TextButton.styleFrom(
                         primary: Colors.white,
@@ -435,7 +440,7 @@ class _RandoViewState extends State<RandoView> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Row(
+                                    for(var i = 0; i < 2; i++) Row(
                                       children: [
                                         Column(
                                           children: [
@@ -446,7 +451,7 @@ class _RandoViewState extends State<RandoView> {
                                                     textAlign: TextAlign.left,
                                                     style: TextStyle(
                                                         fontWeight:
-                                                            FontWeight.bold)))
+                                                        FontWeight.bold)))
                                           ],
                                         ),
                                         Column(children: [

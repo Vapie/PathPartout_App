@@ -2,20 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:mvvm_flutter_app/classes/rando.dart';
+import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:stacked/stacked.dart';
+import 'package:mvvm_flutter_app/main.dart';
 
 import 'ReviewViewModel.dart';
 
 class ReviewView extends StatefulWidget {
+
   @override
   _ReviewViewState createState() => _ReviewViewState();
 }
 
 class _ReviewViewState extends State<ReviewView> {
   double rating = 2;
+  Map review = {};
+  final reviewController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+
     return ViewModelBuilder<ReviewViewModel>.reactive(
         builder: (context, model, child) =>
             Scaffold(
@@ -79,8 +86,16 @@ class _ReviewViewState extends State<ReviewView> {
                                             children: [
                                               Row(
                                                 children: [
-                                                  Text(
-                                                      rating.toString() + "/5"
+                                                  Padding(
+                                                    padding: EdgeInsets.only(right: 10.0),
+                                                    child: Text(
+                                                      "${rating.toString()}/5",
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight: FontWeight.bold,
+                                                          fontSize: 17.0
+                                                      ),
+                                                    ),
                                                   ),
                                                   RatingBar.builder(
                                                     initialRating: rating,
@@ -91,8 +106,9 @@ class _ReviewViewState extends State<ReviewView> {
                                                     itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
                                                     itemBuilder: (context, _) => Icon(
                                                       Icons.brightness_1_rounded,
-                                                      color: Colors.lightGreenAccent,
+                                                      color: Colors.white,
                                                     ),
+                                                    updateOnDrag: true,
                                                     onRatingUpdate: (currentRating) {
                                                       setState(() {
                                                         rating = currentRating;
@@ -124,7 +140,8 @@ class _ReviewViewState extends State<ReviewView> {
 
                                       SizedBox(height: 10),
                                       TextField(
-                                        maxLines: 8,
+                                        controller: reviewController,
+                                        maxLines: 5,
                                         decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Colors.white,
@@ -143,6 +160,9 @@ class _ReviewViewState extends State<ReviewView> {
                                               BorderRadius.all(Radius.circular(10))),
                                         ),
                                         onPressed: () {
+                                          review.addAll({'avis': reviewController.text, 'note': rating});
+                                          model.store(review);
+                                          Navigator.pushNamed(context, detailRando, arguments: currentConfig.currentRando.id);
                                         },
                                       ),
 
@@ -159,6 +179,7 @@ class _ReviewViewState extends State<ReviewView> {
                                           )
                                         ),
                                         onPressed: () {
+                                          Navigator.pushNamed(context, detailRando, arguments: currentConfig.currentRando.id);
                                         },
                                       ),
                                     ]
