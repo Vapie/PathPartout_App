@@ -90,6 +90,8 @@ class User {
   }
 
   static List<dynamic> recoveruserData(dynamic obj) {
+    print(obj);
+    print(obj);
       if (obj != null) {
         String str = obj as String;
         return str.substring(1, str.length - 1).split(",");

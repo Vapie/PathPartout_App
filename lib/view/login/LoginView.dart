@@ -100,24 +100,6 @@ class _LoginState extends State<LoginView> {
                       ),
                     ),
 
-                    // Container(
-                    //   height: 50,
-                    //   width: 250,
-                    //   margin: const EdgeInsets.only(bottom: 10.0),
-                    //   decoration: BoxDecoration(
-                    //       color: Colors.blue, borderRadius: BorderRadius.circular(20)),
-                    //   child: FlatButton(
-                    //     onPressed: () {
-                    //       Navigator.push(
-                    //           context, MaterialPageRoute(builder: (_) => SplashView()));
-                    //     },
-                    //     child: Text(
-                    //       'Se connecter',
-                    //       style: TextStyle(color: Colors.white, fontSize: 25),
-                    //     ),
-                    //   ),
-                    // ),
-
                     // Bouton de connexion
                     Container(
                         height: 50,
@@ -139,7 +121,6 @@ class _LoginState extends State<LoginView> {
                             await User.authenticate(
                                 emailController.text, passwordController.text);
                             List<Sortie> sorties = await Sortie.getUserSorties();
-                            print(sorties.length);
                             await getRandos();
                             if ((currentConfig.currentUser.userData != null) & (currentConfig.currentUser.userData.toString() != "[]"))
                               Navigator.pushNamed(context, core, arguments: { "selectedIndex": 0, "randosCollection": futureRandos });

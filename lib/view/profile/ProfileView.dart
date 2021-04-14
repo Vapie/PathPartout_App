@@ -160,7 +160,7 @@ class ProfileViewState extends State<ProfileView> {
                                       FlatButton(
                                         child: Row(
                                           children: [
-                                            Text("Mon nom"),
+                                         Text("Mon nom"),
                                             Icon(Icons.accessibility),
                                           ],
                                         ),
