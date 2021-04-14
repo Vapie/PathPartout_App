@@ -11,7 +11,6 @@ import 'package:mvvm_flutter_app/widget/media/slide-loadimages.dart';
 class AddRandoTile extends StatelessWidget {
 
 
-
   AddRandoTile( {Key key}) : super(key: key);
 
   @override
