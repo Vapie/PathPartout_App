@@ -36,6 +36,8 @@ class User {
         avatar: json['avatar'],
         userData: User.recoveruserData(json['userData'])
     );
+
+
   }
 
   static Future<User> fetchUser(String id) async {
@@ -90,9 +92,12 @@ class User {
     print(await modifyCurrentUser("userData",userData));
   }
 
-  static List<dynamic> recoveruserData(String str) {
-      if (str != null)
-          return str.substring(1, str.length - 1).split(",");
+  static List<dynamic> recoveruserData(dynamic obj) {
+      if (obj != null) {
+        String str = obj as String;
+        return str.substring(1, str.length - 1).split(",");
+      }
       return [];
+
   }
 }
