@@ -58,7 +58,7 @@ class FeedbackViewModel extends BaseViewModel {
   }
 
   storeAnswers(answers){
-    print(answers);
+
   }
 }
 

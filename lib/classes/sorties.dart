@@ -33,7 +33,6 @@ class Sortie {
   }
 
 
-
   static Future<List<Sortie>> fetchSorties() async {
 
     List<Sortie> sorties = [];

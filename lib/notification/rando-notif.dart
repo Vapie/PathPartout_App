@@ -6,6 +6,7 @@ import 'package:mvvm_flutter_app/MainConfig.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/classes/sorties.dart';
 import 'package:mvvm_flutter_app/classes/user.dart';
+import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/widget/podometer/Podometre.dart';
 import '../main.dart';
 
@@ -86,6 +87,7 @@ class RandoNotif extends StatefulWidget {
   }
 
   void randoStop(){
+
     String str;
     str = Duration(seconds: this.mytimer.tick).toString();
     print(str.substring(0, str.length - 7) + this.mypodometre.steps.toString());
@@ -123,10 +125,12 @@ class _RandoNotifState extends State<RandoNotif> {
         // etat randdo en cours
         if (_currentindex == 1)FlatButton(onPressed: (){
           // on arrète la rando
+
             _currentindex = 2;
             enregistrerando();
             _currentTimer.cancel();
             widget.randoStop();
+            Navigator.pushNamed(context, feedBack);
             },
             child: Text("stop rando")
 
