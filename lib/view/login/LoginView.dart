@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
+import 'package:mvvm_flutter_app/classes/sorties.dart';
 import 'package:mvvm_flutter_app/classes/user.dart';
 import 'package:mvvm_flutter_app/main.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
@@ -119,6 +120,8 @@ class _LoginState extends State<LoginView> {
                           onPressed: () async {
                             await User.authenticate(
                                 emailController.text, passwordController.text);
+                            List<Sortie> sorties = await Sortie.getUserSorties();
+                            print(sorties.length);
                             await getRandos();
                             if ((currentConfig.currentUser.userData != null) & (currentConfig.currentUser.userData.toString() != "[]"))
                               Navigator.pushNamed(context, core, arguments: { "selectedIndex": 0, "randosCollection": futureRandos });
@@ -141,38 +144,38 @@ class _LoginState extends State<LoginView> {
                     ),
 
                     // Bouton invité
-                    Container(
-                        height: 50,
-                        width: 250,
-                        alignment: Alignment.bottomRight,
-                        decoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(20)),
-                        child: OutlinedGradientButton(
-                          children: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text("Mode invité",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 25,
-                                      color: Colors.grey)),
-                              Padding(
-                                  padding: EdgeInsets.only(left: 20.0),
-                                  child: Icon(
-                                    Icons.wb_sunny,
-                                    color: Colors.grey,
-                                  ))
-                            ],
-                          ),
-                          onPressed: () async {
-                            await getRandos();
-                            if ((currentConfig.currentUser.userData != null) & (currentConfig.currentUser.userData.toString() != "[]"))
-                              Navigator.pushNamed(context, core, arguments: { "selectedIndex": 0, "randosCollection": futureRandos });
-                            if ((currentConfig.currentUser.userData == null)|| (currentConfig.currentUser.userData.toString() == "[]"))
-                              Navigator.pushNamed(context, survey);
-                          },
-                        )),
+                    // Container(
+                    //     height: 50,
+                    //     width: 250,
+                    //     alignment: Alignment.bottomRight,
+                    //     decoration: BoxDecoration(
+                    //         color: Colors.blue,
+                    //         borderRadius: BorderRadius.circular(20)),
+                    //     child: OutlinedGradientButton(
+                    //       children: Row(
+                    //         mainAxisAlignment: MainAxisAlignment.center,
+                    //         children: [
+                    //           Text("Mode invité",
+                    //               style: TextStyle(
+                    //                   fontWeight: FontWeight.bold,
+                    //                   fontSize: 25,
+                    //                   color: Colors.grey)),
+                    //           Padding(
+                    //               padding: EdgeInsets.only(left: 20.0),
+                    //               child: Icon(
+                    //                 Icons.wb_sunny,
+                    //                 color: Colors.grey,
+                    //               ))
+                    //         ],
+                    //       ),
+                    //       onPressed: () async {
+                    //         await getRandos();
+                    //         if ((currentConfig.currentUser.userData != null) & (currentConfig.currentUser.userData.toString() != "[]"))
+                    //           Navigator.pushNamed(context, core, arguments: { "selectedIndex": 0, "randosCollection": futureRandos });
+                    //         if ((currentConfig.currentUser.userData == null)|| (currentConfig.currentUser.userData.toString() == "[]"))
+                    //           Navigator.pushNamed(context, survey);
+                    //       },
+                    //     )),
                   ],
                 ),
               ),

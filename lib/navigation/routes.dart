@@ -4,10 +4,12 @@ import 'package:mvvm_flutter_app/view/core/CoreView.dart';
 import 'package:mvvm_flutter_app/view/feedback/FeedbackView.dart';
 import 'package:mvvm_flutter_app/view/login/LoginView.dart';
 import 'package:mvvm_flutter_app/view/plan/PlanView.dart';
+import 'package:mvvm_flutter_app/view/profile/ProfileView.dart';
 import 'package:mvvm_flutter_app/view/rando/RandoView.dart';
 import 'package:mvvm_flutter_app/view/register/RegisterView.dart';
 import 'package:mvvm_flutter_app/view/feedback/FeedbackView.dart';
 import 'package:mvvm_flutter_app/view/review/ReviewView.dart';
+import 'package:mvvm_flutter_app/view/sorties/SortiesView.dart';
 import 'package:mvvm_flutter_app/view/survey/SurveyView.dart';
 import 'package:mvvm_flutter_app/view/splash/SplashView.dart';
 import 'package:mvvm_flutter_app/view/share/ShareView.dart';
@@ -20,12 +22,15 @@ const String survey = '/Survey';
 const String login = '/Login';
 const String detailRando = '/DetailRando';
 const String splash = '/splash';
+const String profile = '/profile';
+
 const String share = '/share';
 const String register = '/Register';
 const String testPlayground = '/TestPlayground';
 const String mapRando = '/MapRando';
 const String feedBack = '/FeedBack';
 const String review = '/Review';
+const String sorties = '/Sorties';
 
 // from https://medium.com/flutter-community/clean-navigation-in-flutter-using-generated-routes-891bd6e000df
 class Router {
@@ -50,12 +55,16 @@ class Router {
         return MaterialPageRoute(builder: (_) => RegisterView());
       case splash:
         return MaterialPageRoute(builder: (_) => SplashView());
+      case profile:
+        return MaterialPageRoute(builder: (_) => ProfileView());
       case share:
         return MaterialPageRoute(builder: (_) => ShareView());
       case feedBack:
         return MaterialPageRoute(builder: (_) => FeedbackView());
       case review:
         return MaterialPageRoute(builder: (_) => ReviewView());
+      case sorties:
+        return MaterialPageRoute(builder: (_) => SortiesView());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

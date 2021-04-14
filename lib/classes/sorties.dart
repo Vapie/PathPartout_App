@@ -12,6 +12,7 @@ class Sortie {
   final DateTime date;
   final Rando randonnee;
   final User user;
+  final List<String> performances;
 
   Sortie(
       {this.id,
@@ -19,17 +20,32 @@ class Sortie {
       this.userId,
       this.date,
       this.randonnee,
-      this.user
+      this.user,
+      this.performances
       });
 
   factory Sortie.fromJson(Map<String, dynamic> json) {
+    if (json["performances"] != null){
+
     return Sortie(
         id: json['_id'],
         randonneeId: json['randonneeId'],
         userId: json['userId'],
         date: DateTime.parse(json['date']),
         randonnee: Rando.fromJson(json['randonnee'][0]),
-        user: User.fromJson(json['user'][0]));
+        user: User.fromJson(json['user'][0]),
+        performances: Sortie.getPerfFromString(json["performances"]));
+  }else{
+      return Sortie(
+          id: json['_id'],
+          randonneeId: json['randonneeId'],
+          userId: json['userId'],
+          date: DateTime.parse(json['date']),
+          randonnee: Rando.fromJson(json['randonnee'][0]),
+          user: User.fromJson(json['user'][0]));
+
+
+    }
   }
 
 
@@ -39,12 +55,22 @@ class Sortie {
     List<Sortie> sorties = [];
     final sortiesJson =
         await fetchRequestMultiple('pathpartoutapi.herokuapp.com', 'sortie/all');
-    print(sortiesJson);
     sortiesJson.forEach((element) => sorties.add(Sortie.fromJson(element)));
-    print(sorties.length.toString());
     return sorties;
   }
 
+  static Future<List<Sortie>> getUserSorties() async {
+    List<Sortie> sorties = [];
+    final sortiesJson =
+    await fetchRequestMultiple('pathpartoutapi.herokuapp.com', 'sortie/all');
+    for(Map<String, dynamic> element in sortiesJson){
+      Sortie sortie = Sortie.fromJson(element);
+      if (sortie.userId.toString() == currentConfig.currentUser.id.toString()){
+        sorties.add(sortie);
+      }
+    }
+    return sorties;
+  }
 
   static void createSortie(String performances) async {
     final rep =
@@ -54,6 +80,10 @@ class Sortie {
       'userId': currentConfig.currentUser.id,
       'performances': performances
     });
+  }
+
+   static List<String> getPerfFromString(String myStr) {
+        return myStr.replaceAll("[", "").replaceAll("]", "").split(",");
   }
 
 
