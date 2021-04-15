@@ -17,7 +17,7 @@ Path Partout permet de moderniser la pratique de la randonnée : en ajoutant un 
   https://www.youtube.com/watch?v=yvp_ZwhjF8g
 
 ## Vidéo de démonstration - Prototype 2 🕹
-   //TODO
+   https://youtu.be/Gwigj93QvcM
 
 ## Maquette interactive ✨
 https://xd.adobe.com/view/53d1434f-0710-473b-8a33-b50dc72f972b-0682/
