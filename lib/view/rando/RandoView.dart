@@ -31,17 +31,19 @@ class _RandoViewState extends State<RandoView> {
   @override
   void initState() {
     super.initState();
-    futureRando = Rando.fetchRando(widget.randoId);
+    futureRando =
     startAsyncInit();
   }
 
-  Future startAsyncInit() async {
-    print('hello');
-    setState(() async {
+  Future<Rando> startAsyncInit() async {
+
       _reviews = await Review.fetchReviewsByRando(currentConfig.currentRando.id);
       print(_reviews);
-    });
+      futureRando = Rando.fetchRando(widget.randoId);
+      return await futureRando;
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class _RandoViewState extends State<RandoView> {
       endDrawer: AppDrawer(),
       body: Center(
         child: FutureBuilder<Rando>(
-          future: futureRando,
+          future: startAsyncInit(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return ListView(children: [
@@ -434,8 +436,9 @@ class _RandoViewState extends State<RandoView> {
                         ],
                       ),
                       // Avis - Utilisateurs
-                      //for (var review in _reviews)
-                      for (var i = 0; i < 2; i++)
+                      if(_reviews != null)
+                      for (var review in _reviews)
+                      //for (var i = 0; i < 2; i++)
                       Container(
                           child: Padding(
                             padding: EdgeInsets.all(20.0),
@@ -445,6 +448,7 @@ class _RandoViewState extends State<RandoView> {
                                 Column(children: [
                                   CircleAvatar(
                                     backgroundColor: Colors.grey,
+                                    backgroundImage: AssetImage("assets/picture/portrait.jpg") ,
                                   ),
                                 ]),
                                 // Avis - Description
@@ -465,7 +469,7 @@ class _RandoViewState extends State<RandoView> {
                                                         padding: EdgeInsets.only(
                                                             left: 0,
                                                             right: 10.0),
-                                                        child: Text("Lauren",
+                                                        child: Text("utilisateur anonyme",
                                                             textAlign:
                                                             TextAlign.left,
                                                             style: TextStyle(
@@ -503,7 +507,7 @@ class _RandoViewState extends State<RandoView> {
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: <Widget>[
                                                       new Text(
-                                                          "A remplacer par les vrais avis",
+                                                          review.avis,
                                                           textAlign:
                                                           TextAlign.left)
                                                     ],
@@ -534,6 +538,8 @@ class _RandoViewState extends State<RandoView> {
       ),
     );
   }
+
+
 }
 
 //Return text based on difficulty of the hike

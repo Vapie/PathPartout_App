@@ -36,6 +36,9 @@ class Review {
       'token': currentConfig.currentToken,
       'randonneeId': randonneeId.toString()
     });
+    if (reviewsJson=="Cette randonnee n'a pas encore d'avis."){
+          return null;
+    }
     reviewsJson.forEach((element) => reviews.add(Review.fromJson(element)));
     return reviews;
   }
