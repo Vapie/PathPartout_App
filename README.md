@@ -6,7 +6,7 @@ Path Partout permet de moderniser la pratique de la randonnée : en ajoutant un 
 
 ☀️ Allez profiter d'un moment convivial et de détente en pleine nature, que ce soit entre amis ou en famille, nos propositions de randonnées s'adapteront à vos envies ! 👪
 
-## Documentation API 💾
+## Documentation API 📀
   https://pathpartoutapi.herokuapp.com/
 
 ## Vidéo de démonstration - Prototype 1 👾
