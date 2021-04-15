@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mvvm_flutter_app/classes/sorties.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
+import 'package:mvvm_flutter_app/widget/appbar/appBar.dart';
+import 'package:mvvm_flutter_app/widget/appbar/drawer/drawer.dart';
 import 'package:mvvm_flutter_app/widget/media/gradient-button.dart';
 import 'package:mvvm_flutter_app/widget/media/sorties-wrapper.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
@@ -72,11 +74,15 @@ class ProfileViewState extends State<ProfileView> {
 
   @override
   Widget build(context) {
-    return FutureBuilder<dynamic>(
+    return Scaffold(
+        appBar: myAppBar(),
+        endDrawer: AppDrawer(),
+        body: FutureBuilder<dynamic>(
         future: getSortiesData(),
     builder: (context, AsyncSnapshot<dynamic> snapshot) {
     if (snapshot.hasData) {
     return  ListView(
+
            children:[ Container(
               decoration: BoxDecoration(
                 color: Color(0xFFEEEEEE),
@@ -85,7 +91,7 @@ class ProfileViewState extends State<ProfileView> {
                   child: Column(
                       children: [
                         Container(
-                            margin: EdgeInsets.only(left: 40, right: 40, top: 60, bottom: 10),
+                            margin: EdgeInsets.only(left: 40, right: 40, top: 30, bottom: 10),
                             child: Column(
                                 children: [
                                   Container(
@@ -378,7 +384,7 @@ class ProfileViewState extends State<ProfileView> {
     } else {
       return CircularProgressIndicator();
     }
-    });
+    }));
   }
 }
 
