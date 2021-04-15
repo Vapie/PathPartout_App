@@ -19,27 +19,25 @@ class Review {
         this.note
       });
 
-
-
   factory Review.fromJson(Map<String, dynamic> json) {
     return Review(
         id: json['_id'],
         avis: json['avis'],
-        randonneeId: json['randonneeId'],
+        randonneeId: int.parse(json['randonneeId']),
         userId: json['userId'],
-        note: json['note'],
+        note: double.parse(json['note']),
     );
   }
 
-  static Future<Review> fetchReview(String id) async {
-    List<Review> users = [];
-    final usersJson = await fetchRequestParameters(
-        'pathpartoutapi.herokuapp.com', 'user/get',{
+  static Future<List<Review>> fetchReviewsByRando(int randonneeId) async {
+    List<Review> reviews = [];
+    final reviewsJson = await fetchRequestParameters(
+        'pathpartoutapi.herokuapp.com', 'avis/get/randonnee', {
       'token': currentConfig.currentToken,
-      'userId': id
+      'randonneeId': randonneeId.toString()
     });
-    usersJson.forEach((element) => users.add(Review.fromJson(element)));
-    return users[0];
+    reviewsJson.forEach((element) => reviews.add(Review.fromJson(element)));
+    return reviews;
   }
 
   static createReview(String avis, int randonneeId, String userId, double note) async {
@@ -47,9 +45,9 @@ class Review {
         'pathpartoutapi.herokuapp.com', 'avis/create', {
       'token': currentConfig.currentToken,
       'avis': avis,
-      'randonneeId': randonneeId,
+      'randonneeId': randonneeId.toString(),
       'userId': userId,
-      'note': note,
+      'note': note.toString(),
     });
   }
 }

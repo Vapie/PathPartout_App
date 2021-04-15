@@ -13,7 +13,7 @@ class PlanView extends StatelessWidget {
 
   MainConfig currentConfig;
 
-  PlanView( {int randoId,MainConfig currentConfig,Key key}) : super(key: key){
+  PlanView({int randoId, MainConfig currentConfig, Key key}) : super(key: key) {
     this.randoId = randoId;
     this.currentConfig = currentConfig;
   }
@@ -22,33 +22,17 @@ class PlanView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<PlanViewModel>.reactive(
       builder: (context, model, child) => Scaffold(
-
-        body: Center(child: Stack(children : [
-          MyMap(this.randoId),
-         Positioned(
-           width:1000000000000,
-             bottom:0,
-             child: Container(
-            height: 25,
-            decoration: BoxDecoration(
-
-                  color: Colors.white,
-                ),
-            child: Row(
-              children: [
-                Text("Todso"),
-                currentConfig.myrandonotif
-              ],
-            )
-          )
-         )
-        ])),
-        appBar: myAppBar(),
-        endDrawer:AppDrawer()
-      ),
+          body: Center(
+              child: Stack(children: [
+            MyMap(this.randoId),
+            Positioned(
+                top: MediaQuery.of(context).size.height * 0.01,
+                child: currentConfig.myrandonotif)
+          ])),
+          appBar: myAppBar(),
+          endDrawer: AppDrawer()),
       viewModelBuilder: () => PlanViewModel(),
       //onModelReady: (model) => model.loadRandos(),
     );
   }
 }
-

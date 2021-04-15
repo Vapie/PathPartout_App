@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
+import 'package:mvvm_flutter_app/main.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/view/feedback/FeedbackViewModel.dart';
 import 'package:mvvm_flutter_app/widget/media/button_cloud.dart';
@@ -29,6 +30,7 @@ class _FeedbackViewState extends State<FeedbackView> {
       builder: (context, model, child) => Scaffold(
           body: ListView(children: <Widget>[
         Container(
+          height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
                 gradient: RadialGradient(
                     colors: [
@@ -148,20 +150,14 @@ class _FeedbackViewState extends State<FeedbackView> {
                               await model.storeAnswers(answers);
 
                               await getRandos();
-                              Navigator.pushNamed(context, core, arguments: {
-                                "selectedIndex": 0,
-                                "randosCollection": futureRandos
-                              });
+                              Navigator.pushNamed(context, detailRando, arguments: currentConfig.currentRando.id);
                             }
                           },
                         ),
                       OutlineButton(
                         onPressed: () async {
                           await getRandos();
-                          Navigator.pushNamed(context, core, arguments: {
-                            "selectedIndex": 0,
-                            "randosCollection": futureRandos
-                          });
+                          Navigator.pushNamed(context, detailRando, arguments: currentConfig.currentRando.id);
                         },
                         child: Text('Passer cette étape',
                             style: TextStyle(color: Colors.white)),
