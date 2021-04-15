@@ -15,7 +15,9 @@ class RandosList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(1, 200, 200, 200),
       body: Center(
+
           child: ((() {
         print(randos);
         if (randos.length == 0) {
@@ -23,18 +25,12 @@ class RandosList extends StatelessWidget {
         }
 
         return ListView(
+            children: [Column(
           children: [
-            Container(
-                height: MediaQuery.of(context).size.height * 0.5,
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Expanded(
-                          child: FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child: RandoTile(randos.elementAt(0)),
-                      ))
-                    ])),
+            RandoTile(randos.elementAt(0)),
+
+
+
             Row(
               children: [
                 Column(
@@ -54,7 +50,8 @@ class RandosList extends StatelessWidget {
               ],
             )
           ],
-        );
+        ),
+            ]);
       })())),
     );
   }

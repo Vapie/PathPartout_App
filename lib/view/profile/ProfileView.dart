@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mvvm_flutter_app/classes/sorties.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
+import 'package:mvvm_flutter_app/widget/media/gradient-button.dart';
 import 'package:mvvm_flutter_app/widget/media/sorties-wrapper.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:easy_gradient_text/easy_gradient_text.dart';
@@ -51,7 +52,7 @@ class ProfileViewState extends State<ProfileView> {
 
     //TODO dynamic
     List<Dist> tabpas = [Dist("Nov",820),Dist("Dec",450),Dist("Jan",850),Dist("Fev",930),Dist("Mars",1200),Dist("Avr",NbPas)];
-    varPoubelle = {"nbKm":nbKm.round(),"tempsTot":heure.round().toString() +" h "+ min.round().toString() + "min","LastPost":tabpas};
+    varPoubelle = {"nbKm":nbKm.round(),"tempsTot":(heure + min/60 ).round().toString() +" h "+ (min%60).round().toString() + "min","LastPost":tabpas};
     return varPoubelle;
   }
 
@@ -153,36 +154,12 @@ class ProfileViewState extends State<ProfileView> {
                                       ),
                                     ],
                                   ),
+                                  SizedBox(height: 12),
+                                  Container(child:GradientButton(child: Text("Modifier le profil",style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold),)),width: 200,alignment: AlignmentDirectional.topStart,),
+
+                                  SizedBox(height: 5),
 
 
-                                  Row(
-                                    children: [
-                                      FlatButton(
-                                        child: Row(
-                                          children: [
-                                         Text("Mon nom"),
-                                            Icon(Icons.accessibility),
-                                          ],
-                                        ),
-                                      ),
-                                      // icon: Icon(Icons.volume_up),
-                                      // tooltip: 'Increase volume by 10',
-                                      // color: Colors.green,
-
-                                      new DropdownButton<String>(
-                                        hint: Text('Mon age'
-                                        ),
-                                        items: <String>['32 ans', '33ans', '34 ans', '35 ans'].map((String value) {
-                                          return new DropdownMenuItem<String>(
-                                            value: value,
-                                            child: new Text(value),
-                                          );
-                                        }).toList(),
-                                        onChanged: (_) {},
-                                      )
-                                    ],
-
-                                  ),
                                   // Row(
                                   //   children: [
                                   //     FlatButton(
@@ -216,7 +193,7 @@ class ProfileViewState extends State<ProfileView> {
                                   Row(
                                     children: [
                                       Text(
-                                        "Mes statistiques",
+                                        "Mes statistiques   ",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold ,
                                           fontSize: 25,
