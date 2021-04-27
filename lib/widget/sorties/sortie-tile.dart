@@ -20,12 +20,11 @@ class SortieTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height * 0.4,
+        height: MediaQuery.of(context).size.height * 0.8,
         width: MediaQuery.of(context).size.width * 0.35,
         child: Expanded(
-          child: Padding(
-            padding: EdgeInsets.only(right: 5),
             child: Card(
+              color: getColor(sortieRando.difficulty),
                 clipBehavior: Clip.antiAliasWithSaveLayer,
                 semanticContainer: true,
                 shape: RoundedRectangleBorder(
@@ -50,8 +49,9 @@ class SortieTile extends StatelessWidget {
                                 )
                             ),
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.1,
                               width: MediaQuery.of(context).size.width,
+                              height: MediaQuery.of(context).size.height * 0.1,
+
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
                                   begin: Alignment.bottomCenter,
@@ -64,7 +64,7 @@ class SortieTile extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 35.0),
+                              padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
                               child:  Text(
                                 sortieRando.name,
                                 overflow: TextOverflow.ellipsis,
@@ -77,13 +77,7 @@ class SortieTile extends StatelessWidget {
                             Padding(padding: EdgeInsets.all(17.0))
                           ]),
                       Column(children: [
-                        Container(
-                          foregroundDecoration: BoxDecoration(
-                              border: Border(
-                                  bottom: BorderSide(width: 20, color: getColor(sortieRando.difficulty))
-                              )
-                          ),
-                        ),
+
                         /*Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Row(
@@ -104,7 +98,7 @@ class SortieTile extends StatelessWidget {
                   ),
                 )
             ),
-          )
+
         )
     );
   }

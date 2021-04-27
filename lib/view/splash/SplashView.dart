@@ -36,7 +36,7 @@ class SplashView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    "Bio:",
+                   "",
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.grey,
