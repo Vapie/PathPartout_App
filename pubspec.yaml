@@ -45,6 +45,9 @@ dependencies:
   # Notation
   flutter_rating_bar: ^4.0.0
 
+  # Back button override
+  back_button_interceptor: ^5.0.0
+
   # Permet de changer l'icône de l'application
   flutter_launcher_icons: ^0.8.1
 

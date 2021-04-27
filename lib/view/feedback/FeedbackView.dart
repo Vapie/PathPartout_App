@@ -148,7 +148,7 @@ class _FeedbackViewState extends State<FeedbackView> {
                             });
                             if (status >= 3) {
                               await model.storeAnswers(answers);
-
+                              print("fini");
                               await getRandos();
                               Navigator.pushNamed(context, detailRando, arguments: currentConfig.currentRando.id);
                             }

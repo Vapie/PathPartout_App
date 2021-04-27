@@ -122,11 +122,15 @@ class _RandoNotifState extends State<RandoNotif> {
                           children: [
                             Column(
                               children: [
-                                Text(
-                                  currentConfig.currentRando.name,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 22),
+                                Container(
+                                  width: MediaQuery.of(context).size.width * 0.4,
+                                  child: Text(
+                                      currentConfig.currentRando.name,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 22),
+                                      overflow: TextOverflow.ellipsis,
+                                  )
                                 )
                               ],
                             ),
@@ -300,10 +304,15 @@ class _RandoNotifState extends State<RandoNotif> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              currentConfig.currentRando.name,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 22),
+                            Container(
+                                width: MediaQuery.of(context).size.width * 0.4,
+                                child: Text(
+                                  currentConfig.currentRando.name,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 22),
+                                  overflow: TextOverflow.ellipsis,
+                                )
                             ),
                             Container(
                                 width: 110,

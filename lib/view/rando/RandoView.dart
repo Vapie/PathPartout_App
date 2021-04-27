@@ -1,4 +1,6 @@
+import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mvvm_flutter_app/classes/review.dart';
 import 'package:mvvm_flutter_app/main.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
@@ -24,26 +26,54 @@ class RandoView extends StatefulWidget {
 }
 
 class _RandoViewState extends State<RandoView> {
-
   List<Review> _reviews;
   Future<Rando> futureRando;
+  List<Rando> futureRandos;
+  final presentationKey = new GlobalKey();
+  final photoKey = new GlobalKey();
+  final reviewKey = new GlobalKey();
+  double rating = 2;
+
+  getRandos() async {
+    futureRandos = await Rando.fetchRandos();
+  }
+
+  @override
+  void dispose() {
+    BackButtonInterceptor.remove(myInterceptor);
+    super.dispose();
+  }
+
+  bool myInterceptor(bool stopDefaultButtonEvent, RouteInfo info) {
+    print("BACK BUTTON!"); // Do some stuff.
+    Navigator.pushNamed(context, core,
+        arguments: {"selectedIndex": 0, "randosCollection": futureRandos});
+    return true;
+  }
 
   @override
   void initState() {
     super.initState();
-    futureRando =
-    startAsyncInit();
+    futureRando = startAsyncInit();
+    BackButtonInterceptor.add(myInterceptor);
   }
 
   Future<Rando> startAsyncInit() async {
-
-      _reviews = await Review.fetchReviewsByRando(currentConfig.currentRando.id);
-      print(_reviews);
-      futureRando = Rando.fetchRando(widget.randoId);
-      return await futureRando;
+    _reviews = await Review.fetchReviewsByRando(currentConfig.currentRando.id);
+    futureRando = Rando.fetchRando(widget.randoId);
+    getRate();
+    return await futureRando;
   }
 
-
+  getRate() {
+    if(_reviews != null) {
+      rating =
+          _reviews.map((m) => m.note).reduce((a, b) => a + b) / _reviews.length;
+      return rating;
+    } else {
+      return 0;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +169,8 @@ class _RandoViewState extends State<RandoView> {
                         children: [
                           Column(children: [
                             TextButton(
-                              onPressed: null,
+                              onPressed: () => Scrollable.ensureVisible(
+                                  presentationKey.currentContext),
                               child: Text(
                                 "Présentation",
                                 style: TextStyle(
@@ -151,7 +182,8 @@ class _RandoViewState extends State<RandoView> {
                           ]),
                           Column(children: [
                             TextButton(
-                              onPressed: null,
+                              onPressed: () => Scrollable.ensureVisible(
+                                  photoKey.currentContext),
                               child: Text(
                                 "Photos",
                                 style: TextStyle(
@@ -163,7 +195,8 @@ class _RandoViewState extends State<RandoView> {
                           ]),
                           Column(children: [
                             TextButton(
-                              onPressed: null,
+                              onPressed: () => Scrollable.ensureVisible(
+                                  reviewKey.currentContext),
                               child: Text("Avis",
                                   style: TextStyle(
                                       color: Colors.black,
@@ -196,6 +229,7 @@ class _RandoViewState extends State<RandoView> {
                                       width: MediaQuery.of(context).size.width *
                                           0.65,
                                       child: new Column(
+                                        key: presentationKey,
                                         children: <Widget>[
                                           new Text(snapshot.data.name,
                                               style: TextStyle(
@@ -346,6 +380,7 @@ class _RandoViewState extends State<RandoView> {
                       Row(
                         children: [
                           Padding(
+                              key: photoKey,
                               padding: EdgeInsets.all(20.0),
                               child: Text("Photos",
                                   style: TextStyle(
@@ -377,6 +412,7 @@ class _RandoViewState extends State<RandoView> {
                           Column(
                             children: [
                               Padding(
+                                  key: reviewKey,
                                   padding: EdgeInsets.all(20.0),
                                   child: Text("Avis",
                                       style: TextStyle(
@@ -390,42 +426,26 @@ class _RandoViewState extends State<RandoView> {
                                   padding: EdgeInsets.all(20.0),
                                   child: Row(
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 5.0),
-                                        child: CircleAvatar(
-                                          backgroundColor: Colors.grey,
-                                          radius: 8.0,
+                                      RatingBar.builder(
+                                        initialRating: rating,
+                                        minRating: 1,
+                                        direction: Axis.horizontal,
+                                        allowHalfRating: true,
+                                        itemCount: 5,
+                                        itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                                        itemBuilder: (context, _) => Icon(
+                                          Icons.brightness_1_rounded,
+                                          color: Colors.lightBlueAccent,
                                         ),
+                                        updateOnDrag: false,
+                                        onRatingUpdate: (currentRating) {
+                                          setState(() {
+                                            rating = currentRating;
+                                          });
+                                        },
+                                        itemSize: 20.0,
                                       ),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 5.0),
-                                        child: CircleAvatar(
-                                          backgroundColor: Colors.grey,
-                                          radius: 8.0,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 5.0),
-                                        child: CircleAvatar(
-                                          backgroundColor: Colors.grey,
-                                          radius: 8.0,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 5.0),
-                                        child: CircleAvatar(
-                                          backgroundColor: Colors.grey,
-                                          radius: 8.0,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.only(right: 8.0),
-                                        child: CircleAvatar(
-                                          backgroundColor: Colors.grey,
-                                          radius: 8.0,
-                                        ),
-                                      ),
-                                      Text("5 / 5",
+                                      Text(" $rating / 5",
                                           style: TextStyle(
                                               fontSize: 17,
                                               fontWeight: FontWeight.bold))
@@ -436,94 +456,109 @@ class _RandoViewState extends State<RandoView> {
                         ],
                       ),
                       // Avis - Utilisateurs
-                      if(_reviews != null)
-                      for (var review in _reviews)
-                      //for (var i = 0; i < 2; i++)
-                      Container(
-                          child: Padding(
-                            padding: EdgeInsets.all(20.0),
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Column(children: [
-                                  CircleAvatar(
-                                    backgroundColor: Colors.grey,
-                                    backgroundImage: AssetImage("assets/picture/portrait.jpg") ,
-                                  ),
-                                ]),
-                                // Avis - Description
-
-                                Column(
+                      if (_reviews != null)
+                        for (var review in _reviews)
+                          //for (var i = 0; i < 2; i++)
+                          Container(
+                              child: Padding(
+                                padding: EdgeInsets.all(20.0),
+                                child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                      Padding(
-                                        padding: EdgeInsets.only(left: 10),
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Column(
-                                                  children: [
-                                                    Padding(
-                                                        padding: EdgeInsets.only(
-                                                            left: 0,
-                                                            right: 10.0),
-                                                        child: Text("utilisateur anonyme",
-                                                            textAlign:
-                                                            TextAlign.left,
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                FontWeight
-                                                                    .bold)))
-                                                  ],
-                                                ),
-                                                Column(children: [
-                                                  Container(
-                                                    padding: EdgeInsets.all(5.0),
-                                                    child: Text(
-                                                      "Curieuse aguerrie",
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                    ),
-                                                    decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius
-                                                            .all(const Radius
-                                                            .circular(15.0)),
-                                                        color: Colors.red[300]),
-                                                  ),
-                                                ])
-                                              ],
-                                            ),
-                                            Row(
-                                              children: [
-                                                Container(
-                                                  padding: const EdgeInsets.only(top: 10.0),
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                      0.75,
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: <Widget>[
-                                                      new Text(
-                                                          review.avis,
-                                                          textAlign:
-                                                          TextAlign.left)
+                                    Column(children: [
+                                      CircleAvatar(
+                                        backgroundColor: Colors.grey,
+                                        backgroundImage: AssetImage(
+                                            "assets/picture/portrait.jpg"),
+                                      ),
+                                    ]),
+                                    // Avis - Description
+
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.only(left: 10),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Column(
+                                                    children: [
+                                                      Padding(
+                                                          padding:
+                                                              EdgeInsets.only(
+                                                                  left: 0,
+                                                                  right: 10.0),
+                                                          child: Text(
+                                                              "utilisateur anonyme",
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
+                                                              style: TextStyle(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)))
                                                     ],
                                                   ),
-                                                )
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      )
+                                                  Column(children: [
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.all(5.0),
+                                                      child: Text(
+                                                        "Curieuse aguerrie",
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      ),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  const Radius
+                                                                          .circular(
+                                                                      15.0)),
+                                                          color:
+                                                              Colors.red[300]),
+                                                    ),
+                                                  ])
+                                                ],
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Container(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 10.0),
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.75,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: <Widget>[
+                                                        new Text(review.avis,
+                                                            textAlign:
+                                                                TextAlign.left)
+                                                      ],
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    )
                                   ],
-                                )
-                              ],
-                            ),
-                          ),
-                          color: Colors.grey[200])
+                                ),
+                              ),
+                              color: Colors.grey[200])
                     ])
                   ],
                 ),
@@ -538,8 +573,6 @@ class _RandoViewState extends State<RandoView> {
       ),
     );
   }
-
-
 }
 
 //Return text based on difficulty of the hike

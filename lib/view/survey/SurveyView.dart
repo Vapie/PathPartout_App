@@ -25,6 +25,7 @@ class _SurveyViewState extends State<SurveyView> {
       builder: (context, model, child) => Scaffold(
           body: ListView(children: <Widget>[
             Container(
+                height: MediaQuery.of(context).size.height,
                 decoration: BoxDecoration(
                     gradient: RadialGradient(
                         colors: [

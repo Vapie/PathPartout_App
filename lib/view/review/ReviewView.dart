@@ -20,6 +20,8 @@ class _ReviewViewState extends State<ReviewView> {
   Map review = {};
   final reviewController = TextEditingController();
 
+
+
   @override
   Widget build(BuildContext context) {
 
@@ -97,25 +99,6 @@ class _ReviewViewState extends State<ReviewView> {
                                                       ),
                                                     ),
                                                   ),
-                                                  RatingBar.builder(
-                                                    initialRating: rating,
-                                                    minRating: 1,
-                                                    direction: Axis.horizontal,
-                                                    allowHalfRating: true,
-                                                    itemCount: 5,
-                                                    itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                                                    itemBuilder: (context, _) => Icon(
-                                                      Icons.brightness_1_rounded,
-                                                      color: Colors.white,
-                                                    ),
-                                                    updateOnDrag: true,
-                                                    onRatingUpdate: (currentRating) {
-                                                      setState(() {
-                                                        rating = currentRating;
-                                                      });
-                                                    },
-                                                    itemSize: 20.0,
-                                                  )
                                                 ],
                                               )
                                             ],
