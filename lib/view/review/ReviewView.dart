@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
@@ -6,6 +9,8 @@ import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:stacked/stacked.dart';
 import 'package:mvvm_flutter_app/main.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
 
 import 'ReviewViewModel.dart';
 
@@ -19,7 +24,77 @@ class _ReviewViewState extends State<ReviewView> {
   double rating = 2;
   Map review = {};
   final reviewController = TextEditingController();
+  PickedFile _image;
+  String _imageUrl;
+  String clientId = '1365ab4c0da7d64';
 
+  _sendImage() async {
+    String url = 'api.imgur.com';
+    String path = '/3/image';
+    Map<String, String> headers = {
+      'Authorization': 'Bearer 80da9b4633dac2898df6a7b1b4f2c5ad1cc9aad9', //a choper le token automatiquement
+    };
+    http.Response res = await http.post(
+      Uri.https(url, path),
+      headers: headers,
+      body: {
+        'image': base64Encode(File(_image.path).readAsBytesSync()),
+        'album': '4El6b5p' //Id de l'album PathPartout
+      }
+    );
+
+    print(res.statusCode);
+    print(res.body);
+  }
+
+  _imgFromCamera() async {
+    PickedFile image = await ImagePicker().getImage(
+      source: ImageSource.camera
+    );
+    
+    setState(() {
+      _image = image;
+    });
+  }
+
+  _imgFromGallery() async {
+    PickedFile image = await ImagePicker().getImage(
+      source: ImageSource.gallery
+    );
+
+    setState(() {
+      _image = image;
+    });
+  }
+
+  void _showPicker(context){
+    showModalBottomSheet(context: context, builder: (BuildContext bc) {
+      return SafeArea(
+        child: Container(
+            child: Wrap(
+                children: [
+                  ListTile(
+                      leading: Icon(Icons.photo_library),
+                      title: Text('Depuis la ggallllerie'),
+                      onTap: (){
+                        _imgFromGallery();
+                        Navigator.of(context).pop();
+                      }
+                  ),
+                  ListTile(
+                      leading: Icon(Icons.photo_camera),
+                      title: Text('Depuis l\'appareil photo'),
+                      onTap: (){
+                        _imgFromCamera();
+                        Navigator.of(context).pop();
+                      }
+                  )
+                ]
+            )
+        ),
+      );
+    });
+  }
 
 
   @override
@@ -132,6 +207,12 @@ class _ReviewViewState extends State<ReviewView> {
                                         ),
                                       ),
 
+
+                                      OutlinedButton(
+                                        onPressed: () {_showPicker(context);},
+                                        child: Text('Envoyer une image'),
+                                      ),
+
                                       SizedBox(height: 50),
                                       OutlinedButton(
                                         child: Text('Continuer'),
@@ -143,9 +224,10 @@ class _ReviewViewState extends State<ReviewView> {
                                               BorderRadius.all(Radius.circular(10))),
                                         ),
                                         onPressed: () {
-                                          review.addAll({'avis': reviewController.text, 'note': rating});
-                                          model.store(review);
-                                          Navigator.pushNamed(context, detailRando, arguments: currentConfig.currentRando.id);
+                                          _sendImage();
+                                          // review.addAll({'avis': reviewController.text, 'note': rating});
+                                          // model.store(review);
+                                          // Navigator.pushNamed(context, detailRando, arguments: currentConfig.currentRando.id);
                                         },
                                       ),
 
