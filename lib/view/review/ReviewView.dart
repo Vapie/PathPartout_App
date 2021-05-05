@@ -28,11 +28,17 @@ class _ReviewViewState extends State<ReviewView> {
   String _imageUrl;
   String clientId = '1365ab4c0da7d64';
 
+  _getToken(){
+    String url = 'api.imgur.com';
+    String path = 'oauth2/authorize?client_id='+clientId+'&response_type=token';
+  }
+
   _sendImage() async {
+    // String token = _getToken();
     String url = 'api.imgur.com';
     String path = '/3/image';
     Map<String, String> headers = {
-      'Authorization': 'Bearer 80da9b4633dac2898df6a7b1b4f2c5ad1cc9aad9', //a choper le token automatiquement
+      'Authorization': 'Client-ID '+clientId, //a choper le token automatiquement
     };
     http.Response res = await http.post(
       Uri.https(url, path),
@@ -43,8 +49,24 @@ class _ReviewViewState extends State<ReviewView> {
       }
     );
 
+
     print(res.statusCode);
-    print(res.body);
+
+    if(res.statusCode == 200){
+      Map<String, dynamic> response = jsonDecode(res.body);
+      print(response);
+      String imgUrl = response['data']['link'];
+      print(response['data']['link']);
+    }else{
+      print('Erreur');
+      print(res.body);
+      //jsp
+    }
+    // print(res.body);
+    // recuperer donnees de rando
+    // recuperer tableau de URL image
+    // append l'URL recuperee avant via Imgur
+    // renvoyer infos
   }
 
   _imgFromCamera() async {
