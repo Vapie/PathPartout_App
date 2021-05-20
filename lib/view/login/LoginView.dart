@@ -12,7 +12,7 @@ import 'package:stacked/stacked.dart';
 List<Rando> futureRandos;
 
 getRandos() async {
-  futureRandos = await Rando.fetchRandos();
+  futureRandos = await Rando.fetchProfileSortedRando();
 }
 
 class LoginView extends StatefulWidget {

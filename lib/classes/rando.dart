@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:mvvm_flutter_app/network/api-connect.dart';
+import 'package:mvvm_flutter_app/view/feedback/FeedbackViewModel.dart';
 import '../main.dart';
 class Rando {
   final int id;
@@ -106,6 +107,29 @@ class Rando {
     return randos;
   }
 
+
+
+  static Future<List<Rando>> fetchProfileSortedRando() async {
+
+
+    final randos = await fetchRandos();
+    List<dynamic> currentUserData = currentConfig.currentUser.userData;
+    print(currentUserData);
+    if (currentUserData != null && randos != null) {
+
+      //on récupère les infos du profil.
+      double level = double.parse(currentUserData[0].toString());
+      double duration = double.parse(currentUserData[1].toString());
+      List<String> currentTags = currentUserData[2].toString().substring(
+          1, currentUserData[2].length - 1).split(",");
+
+      randos.sort((rando1,rando2) => compareRandoScore(rando1,rando2,level,duration,currentTags).toInt());
+      return randos;
+    }
+    return randos;
+
+  }
+
   static Future<Rando> fetchRando(int id) async {
     List<Rando> randos = [];
     final randosJson = await fetchRequestMultiple(
@@ -126,7 +150,7 @@ class Rando {
       double distancemin = null}) async {
     List<Rando> finalRandos = [];
     List<Rando> randos = [];
-    final tempRandos = await fetchRandos();
+    final tempRandos = await fetchProfileSortedRando();
     randos = tempRandos;
     if (name != null) {
       for (var rando in randos) {
@@ -211,3 +235,25 @@ class Rando {
     return randos;
   }
 }
+
+double compareRandoScore(Rando rando1, Rando rando2, double goalLevel, double goalDuration, List<String> goalCurrentTags) {
+
+  return getRandoScore(rando1,goalLevel,goalDuration,goalCurrentTags) - getRandoScore(rando2, goalLevel, goalDuration, goalCurrentTags);
+
+}
+
+double getRandoScore(Rando rando, double goalLevel, double goalDuration, List<String> goalCurrentTags) {
+  int numberOfCommonTags = 0;
+  double durationDelta = rando.duration - goalDuration;
+  double levelDelta = rando.difficulty - goalLevel;
+  if (rando.tags.length != 0){
+    numberOfCommonTags = rando.tags.where((e) => goalCurrentTags.contains(e)).length;
+  }
+
+  print(rando.name + (durationDelta*0.1 + levelDelta * 4 + numberOfCommonTags).toString() + " goal level : ");
+  return abs(durationDelta*0.1) + abs(levelDelta * 4) + numberOfCommonTags;
+
+
+
+}
+

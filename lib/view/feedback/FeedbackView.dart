@@ -17,8 +17,11 @@ getRandos() async {
 }
 
 class FeedbackView extends StatefulWidget {
+
   @override
   _FeedbackViewState createState() => _FeedbackViewState();
+
+
 }
 
 class _FeedbackViewState extends State<FeedbackView> {
@@ -135,6 +138,7 @@ class _FeedbackViewState extends State<FeedbackView> {
                                     BorderRadius.all(Radius.circular(10))),
                           ),
                           onPressed: () async {
+                            print(status);
                             model.changeQuestions();
                             // if status 4 appelle storeAnswers() avec un navigation a la fin
                             setState(() {
@@ -147,9 +151,12 @@ class _FeedbackViewState extends State<FeedbackView> {
                               status++;
                             });
                             if (status >= 3) {
+
                               await model.storeAnswers(answers);
                               print("fini");
                               await getRandos();
+                              status=0;
+                              value = 0;
                               Navigator.pushNamed(context, detailRando, arguments: currentConfig.currentRando.id);
                             }
                           },
@@ -157,6 +164,8 @@ class _FeedbackViewState extends State<FeedbackView> {
                       OutlineButton(
                         onPressed: () async {
                           await getRandos();
+                          status = 0;
+                          value = 0;
                           Navigator.pushNamed(context, detailRando, arguments: currentConfig.currentRando.id);
                         },
                         child: Text('Passer cette étape',

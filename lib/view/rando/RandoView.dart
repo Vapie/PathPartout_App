@@ -29,6 +29,7 @@ class _RandoViewState extends State<RandoView> {
   List<Review> _reviews;
   Future<Rando> futureRando;
   List<Rando> futureRandos;
+
   final presentationKey = new GlobalKey();
   final photoKey = new GlobalKey();
   final reviewKey = new GlobalKey();
@@ -55,11 +56,12 @@ class _RandoViewState extends State<RandoView> {
   void initState() {
     super.initState();
     futureRando = startAsyncInit();
+    getRandos();
     BackButtonInterceptor.add(myInterceptor);
   }
 
   Future<Rando> startAsyncInit() async {
-    _reviews = await Review.fetchReviewsByRando(currentConfig.currentRando.id);
+    _reviews = await Review.fetchReviewsByRando(widget.randoId);
     futureRando = Rando.fetchRando(widget.randoId);
     getRate();
     return await futureRando;
@@ -67,11 +69,9 @@ class _RandoViewState extends State<RandoView> {
 
   getRate() {
     if(_reviews != null) {
-      rating =
-          _reviews.map((m) => m.note).reduce((a, b) => a + b) / _reviews.length;
-      return rating;
+      rating = double.parse((_reviews.map((m) => m.note).reduce((a, b) => a + b) / _reviews.length).toStringAsFixed(1));
     } else {
-      return 0;
+      rating = 2.5;
     }
   }
 
@@ -426,9 +426,11 @@ class _RandoViewState extends State<RandoView> {
                                   padding: EdgeInsets.all(20.0),
                                   child: Row(
                                     children: [
+
                                       RatingBar.builder(
                                         initialRating: rating,
                                         minRating: 1,
+                                        ignoreGestures: true,
                                         direction: Axis.horizontal,
                                         allowHalfRating: true,
                                         itemCount: 5,
@@ -439,12 +441,13 @@ class _RandoViewState extends State<RandoView> {
                                         ),
                                         updateOnDrag: false,
                                         onRatingUpdate: (currentRating) {
-                                          setState(() {
-                                            rating = currentRating;
-                                          });
+                                          // setState(() {
+                                          //   rating = currentRating;
+                                          // });
                                         },
                                         itemSize: 20.0,
                                       ),
+
                                       Text(" $rating / 5",
                                           style: TextStyle(
                                               fontSize: 17,
@@ -458,6 +461,7 @@ class _RandoViewState extends State<RandoView> {
                       // Avis - Utilisateurs
                       if (_reviews != null)
                         for (var review in _reviews)
+                          if(review.avis.replaceAll(" ", "") != "")
                           //for (var i = 0; i < 2; i++)
                           Container(
                               child: Padding(
@@ -559,6 +563,7 @@ class _RandoViewState extends State<RandoView> {
                                 ),
                               ),
                               color: Colors.grey[200])
+
                     ])
                   ],
                 ),

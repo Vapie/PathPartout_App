@@ -90,13 +90,21 @@ class User {
   }
 
   static List<dynamic> recoveruserData(dynamic obj) {
-    print(obj);
-    print(obj);
-      if (obj != null) {
+
+    print("userData " + obj);
+      if (obj != null && obj != "null") {
         String str = obj as String;
-        return str.substring(1, str.length - 1).split(",");
+        List<String> userDataList =  str.substring(1, str.length - 1).split(",");
+        String taglist="";
+
+        for (var i = 2; i < userDataList.length; i++) {
+            taglist += userDataList[i].toString() +",";
+        }
+        print("mes user datas 103 user" +userDataList.toString());
+        return [userDataList[0],userDataList[1],taglist.substring(0, taglist.length - 1)];
+
       }
-      List<dynamic> l = [];
+      List<dynamic> l;
       return l;
   }
 }
