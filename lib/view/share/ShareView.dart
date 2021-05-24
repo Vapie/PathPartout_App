@@ -413,7 +413,7 @@ class BarChartState extends State<ShareView> {
               //onModelReady: (model) => model.debug(),
             );
           } else {
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           }
         });
   }
