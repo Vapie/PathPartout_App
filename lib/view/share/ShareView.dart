@@ -26,15 +26,16 @@ class BarChartState extends State<ShareView> {
   dynamic varPoubelle;
   ScreenshotController screenshotController = ScreenshotController();
   List<charts.Series> seriesList;
+  int currentmonth =  DateTime.now().month;
 
 
   Future<dynamic> getSortiesData() async {
     double nbKm = 0;
     double min = 0;
 
+
     double heure = 0;
-    int NbPas = 0;
-    int tempsTot;
+    List<int> NbPas = [0,0,0,0,0,0,0,0,0,0,0,0];
     List<Sortie> sorties = await Sortie.getUserSorties();
     for (Sortie sortie in sorties) {
       if (sortie.randonnee.distance != null) {
@@ -46,23 +47,25 @@ class BarChartState extends State<ShareView> {
         List<String> SplittedHeure = sortie.performances[1].split(":");
         heure += int.parse(SplittedHeure[0]) + int.parse(SplittedHeure[1]) / 60;
         min += int.parse(SplittedHeure[1]) + int.parse(SplittedHeure[2]) / 60;
-        NbPas += int.parse(sortie.performances[0]);
+        if (sortie.date.difference(DateTime.now())<Duration(days: 365)){
+
+          NbPas[sortie.date.month-1] += sortie.randonnee.distance.toInt();
+
+        }
       }
     }
 
     //TODO dynamic
-    List<Dist> tabpas = [
-      Dist("Nov", 820),
-      Dist("Dec", 450),
-      Dist("Jan", 850),
-      Dist("Fev", 930),
-      Dist("Mars", 1200),
-      Dist("Avr", NbPas)
-    ];
+    List<String> MonthLabel=["Jan","Fev","Mar","Avr","Mai","Jun","Jul","Aou","Sep","Oct","Nov","Dec"];
+    List<Dist> tabpas = [Dist(MonthLabel[(currentmonth-6)%12],NbPas[(currentmonth-6)%12]),
+      Dist(MonthLabel[(currentmonth-5)%12],NbPas[(currentmonth-5)%12]),
+      Dist(MonthLabel[(currentmonth-4)%12],NbPas[(currentmonth-4)%12]),
+      Dist(MonthLabel[(currentmonth-3)%12],NbPas[(currentmonth-3)%12]),
+      Dist(MonthLabel[(currentmonth-2)%12],NbPas[(currentmonth-2)%12]),
+      Dist(MonthLabel[(currentmonth-1)%12],NbPas[(currentmonth-1)%12])];
     varPoubelle = {
       "nbKm": nbKm.round(),
-      "tempsTot": heure.round().toString() + " h " + min.round().toString() +
-          "min",
+      "tempsTot": (heure + min/60 ).round().toString() +" h "+ (min%60).round().toString() + "min" ,
       "LastPost": tabpas
     };
     return varPoubelle;

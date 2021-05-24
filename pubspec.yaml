@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  qr_code_scanner: ^0.4.0
   badges: ^1.2.0
   flutter:
     sdk: flutter

@@ -5,6 +5,7 @@ import 'package:mvvm_flutter_app/view/feedback/FeedbackView.dart';
 import 'package:mvvm_flutter_app/view/login/LoginView.dart';
 import 'package:mvvm_flutter_app/view/plan/PlanView.dart';
 import 'package:mvvm_flutter_app/view/profile/ProfileView.dart';
+import 'package:mvvm_flutter_app/view/qrcode%20scanner/QrCodeScanView.dart';
 import 'package:mvvm_flutter_app/view/rando/RandoView.dart';
 import 'package:mvvm_flutter_app/view/register/RegisterView.dart';
 import 'package:mvvm_flutter_app/view/feedback/FeedbackView.dart';
@@ -23,6 +24,8 @@ const String login = '/Login';
 const String detailRando = '/DetailRando';
 const String splash = '/splash';
 const String profile = '/profile';
+const String qr = '/qr';
+
 
 const String share = '/share';
 const String register = '/Register';
@@ -39,6 +42,8 @@ class Router {
       case core:
         var data = settings.arguments as Map;
         return MaterialPageRoute(builder: (_) => CoreView(data: data));
+      case qr:
+        return MaterialPageRoute(builder: (_) => QRCodeScanView());
       case detailRando:
         var data = settings.arguments as int;
         return MaterialPageRoute(builder: (_) => RandoView(randoId: data));
