@@ -1,8 +1,13 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:mvvm_flutter_app/widget/appbar/appBar.dart';
 import 'package:mvvm_flutter_app/widget/appbar/drawer/drawer.dart';
+import 'package:mvvm_flutter_app/widget/dashboard-tile/dashboard-tile.dart';
+
+const double gutter = 10.0;
 
 class DashboardView extends StatefulWidget {
   const DashboardView({Key key}) : super(key: key);
@@ -22,107 +27,77 @@ class _DashboardViewState extends State<DashboardView> {
           children: [
             Row(
               children: [
-                    Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Container(
-                            height: MediaQuery.of(context).size.height * 0.4,
-                            padding: EdgeInsets.all(10.0),
-                            child: Text(
-                                "Achievements"
-                            ),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  topRight: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10)
-                              ),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: Offset(0, 3),
-                                ),
-                              ],
-                            ),
-                          ),
+                Expanded(
+                    child: Padding(
+                  padding: const EdgeInsets.all(gutter),
+                  child: DashboardTile("achievement", 0.4, "Achievements")
+                )),
+                Expanded(
+                    child: Padding(
+                  padding: const EdgeInsets.only(right: gutter),
+                  child: Container(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(bottom: gutter),
+                          child: Row(children: [
+                            Expanded(
+                                child: DashboardTile("rando", 0.195, "Rando conseillée pour vous")
+                            )
+                          ]),
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                                child: DashboardTile("qrcode", 0.195, "Scan QR Code")
+                            )
+                          ],
                         )
+                      ],
                     ),
-                    Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(right: 10.0),
-                          child: Container(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.only(bottom: 10.0),
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                          child: Container(
-                                            height: MediaQuery.of(context).size.height * 0.195,
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Text("Rando conseillée pour vous"),
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(10),
-                                                  topRight: Radius.circular(10),
-                                                  bottomLeft: Radius.circular(10),
-                                                  bottomRight: Radius.circular(10)
-                                              ),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey.withOpacity(0.5),
-                                                  spreadRadius: 5,
-                                                  blurRadius: 7,
-                                                  offset: Offset(0, 3),
-                                                ),
-                                              ],
-                                            ),
-                                          )
-                                      )
-                                    ]),
+                  ),
+                ))
+              ],
+            ),
 
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                        child: Container(
-                                          height: MediaQuery.of(context).size.height * 0.195,
-                                          padding: const EdgeInsets.all(10.0),
-                                          child: Text("Rando conseillée pour vous"),
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(10),
-                                                topRight: Radius.circular(10),
-                                                bottomLeft: Radius.circular(10),
-                                                bottomRight: Radius.circular(10)
-                                            ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.grey.withOpacity(0.5),
-                                                spreadRadius: 5,
-                                                blurRadius: 7,
-                                                offset: Offset(0, 3),
-                                              ),
-                                            ],
-                                          ),
-                                        )
-                                    )
-                                  ],
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                    )
+            // Performances
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: gutter, right: gutter, bottom: gutter),
+                      child: DashboardTile("performances", 0.195, "Performances")
+                  ),
+                ),
+              ],
+            ),
+
+            // Profil
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: gutter, right: gutter, bottom: gutter),
+                      child: DashboardTile("profil", 0.195, "Profil")
+                  ),
+                ),
+              ],
+            ),
+
+            // Publicité
+            Row(
+              children: [
+                Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: gutter, right: gutter, bottom: gutter),
+                      child: DashboardTile("pub", 0.195, "Publicité")
+                  ),
+                ),
               ],
             )
           ],
