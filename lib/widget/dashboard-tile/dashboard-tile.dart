@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm_flutter_app/main.dart';
+import 'package:mvvm_flutter_app/navigation/routes.dart';
+import 'package:mvvm_flutter_app/widget/media/loadimage.dart';
+import 'package:mvvm_flutter_app/widget/rando/rando-tile.dart';
 
 class DashboardTile extends StatelessWidget {
   var type;
@@ -39,25 +43,94 @@ class DashboardTile extends StatelessWidget {
 
     if(type == "rando") {
       return Container(
-        height: MediaQuery.of(context).size.height * height,
-        padding: const EdgeInsets.all(10.0),
-        child: Text(title),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 3),
+          height: MediaQuery.of(context).size.height * height,
+          clipBehavior: Clip.antiAliasWithSaveLayer,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 5,
+                blurRadius: 7,
+                offset: Offset(0, 3),
+              ),
+            ],
+          ),
+          child: new InkWell(
+            onTap: () {
+              print("tapped " + currentConfig.currentRandoList[0].name);
+              Navigator.pushNamed(context, detailRando, arguments: currentConfig.currentRandoList[0].id);
+            },
+            child: Column(
+              children: [
+                Stack(
+                    alignment: Alignment.bottomLeft,
+                    children: [
+                      if( currentConfig.currentRandoList[0].images != null) Container(
+                          height: MediaQuery.of(context).size.height * (height - 0.05),
+                          width: MediaQuery.of(context).size.width,
+                          child: LoadImage(currentConfig.currentRandoList[0].images[0])
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height * (height - 0.05),
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              const Color(0xCC000000),
+                              const Color(0x00000000),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child:  Text(
+                          currentConfig.currentRandoList[0].name,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          textScaleFactor: 1,
+                          strutStyle: StrutStyle(fontSize: 25),
+                          style: TextStyle(color: Colors.white, fontSize: 25),
+                        ),
+                      ),
+                      Padding(padding: EdgeInsets.all(12.0))
+                    ]),
+                Column(children: [
+                  Container(
+                    foregroundDecoration: BoxDecoration(
+                        border: Border(
+                            bottom:
+                            BorderSide(width: 10, color: getColor(currentConfig.currentRandoList[0].difficulty))
+                        )
+                    ),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          if(currentConfig.currentRandoList[0].distance != null) Text(
+                            currentConfig.currentRandoList[0].distance.round().toString() + 'km',
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          ),
+                          Text(
+                            '3h30',
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          ),
+                        ],
+                      ))
+                ]),
+              ],
             ),
-          ],
-        ),
+          )
       );
     }
 
@@ -65,9 +138,14 @@ class DashboardTile extends StatelessWidget {
       return Container(
         height: MediaQuery.of(context).size.height * height,
         padding: const EdgeInsets.all(10.0),
-        child: Text(title),
+        child: Text(
+            title,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white
+          ),
+        ),
         decoration: BoxDecoration(
-          color: Colors.white,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
@@ -81,6 +159,14 @@ class DashboardTile extends StatelessWidget {
               offset: Offset(0, 3),
             ),
           ],
+          gradient: LinearGradient(
+            begin: Alignment.bottomLeft,
+            end: Alignment.topRight,
+            colors: [
+              Colors.lightBlueAccent,
+              Colors.lightGreenAccent[200],
+            ],
+          ),
         ),
       );
     }
@@ -89,7 +175,9 @@ class DashboardTile extends StatelessWidget {
       return Container(
         height: MediaQuery.of(context).size.height * height,
         padding: const EdgeInsets.all(10.0),
-        child: Text(title),
+        child: Text(
+            title
+        ),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm_flutter_app/navigation/routes.dart';
 
 class myAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// you can add more fields that meet your needs
@@ -10,12 +11,17 @@ class myAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.white,
-      leading: FractionallySizedBox(
-        heightFactor: 0.7,
-      child : Image.asset(
-        'assets/picture/logo.png',
-        scale: 0.5,
-      )),
+      leading: GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, dashboard);
+        },
+        child: FractionallySizedBox(
+            heightFactor: 0.7,
+            child : Image.asset(
+              'assets/picture/logo.png',
+              scale: 0.5,
+            )),
+      ),
       actions: [
          IconButton(
           icon: new Icon(Icons.search, color: Colors.black87),
