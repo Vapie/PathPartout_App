@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/view/core/CoreView.dart';
+import 'package:mvvm_flutter_app/view/dashboard/DashboardView.dart';
 import 'package:mvvm_flutter_app/view/feedback/FeedbackView.dart';
 import 'package:mvvm_flutter_app/view/loading/LoadingView.dart';
 import 'package:mvvm_flutter_app/view/login/LoginView.dart';
@@ -36,6 +37,7 @@ const String mapRando = '/MapRando';
 const String feedBack = '/FeedBack';
 const String review = '/Review';
 const String sorties = '/Sorties';
+const String dashboard = '/Dashboard';
 
 // from https://medium.com/flutter-community/clean-navigation-in-flutter-using-generated-routes-891bd6e000df
 class Router {
@@ -75,6 +77,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => ReviewView());
       case sorties:
         return MaterialPageRoute(builder: (_) => SortiesView());
+      case dashboard:
+        return MaterialPageRoute(builder: (_) => DashboardView());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
