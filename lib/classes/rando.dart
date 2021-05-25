@@ -150,7 +150,7 @@ class Rando {
       double distancemin = null}) async {
     List<Rando> finalRandos = [];
     List<Rando> randos = [];
-    final tempRandos = await fetchProfileSortedRando();
+    final tempRandos = await currentConfig.getCurrentRandoList();
     randos = tempRandos;
     if (name != null) {
       for (var rando in randos) {

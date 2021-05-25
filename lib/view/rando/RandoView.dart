@@ -36,7 +36,7 @@ class _RandoViewState extends State<RandoView> {
   double rating = 2;
 
   getRandos() async {
-    futureRandos = await Rando.fetchRandos();
+    futureRandos = await currentConfig.getCurrentRandoList();
   }
 
   @override
@@ -572,7 +572,7 @@ class _RandoViewState extends State<RandoView> {
               return Text("${snapshot.error}");
             }
             // By default, show a loading spinner.
-            return CircularProgressIndicator();
+            return Center(child: CircularProgressIndicator());
           },
         ),
       ),

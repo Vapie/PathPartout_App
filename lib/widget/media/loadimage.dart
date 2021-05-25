@@ -16,7 +16,7 @@ class LoadImage extends StatelessWidget {
       // placeholder: (context, url) => CircularProgressIndicator(),
       imageUrl: this.url,
       progressIndicatorBuilder: (context, url, downloadProgress) =>
-          CircularProgressIndicator(value: downloadProgress.progress),
+          Center(child:CircularProgressIndicator(value: downloadProgress.progress)),
       errorWidget: (context, url, error) => Icon(Icons.error),
     );
   }

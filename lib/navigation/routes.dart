@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/view/core/CoreView.dart';
 import 'package:mvvm_flutter_app/view/dashboard/DashboardView.dart';
 import 'package:mvvm_flutter_app/view/feedback/FeedbackView.dart';
+import 'package:mvvm_flutter_app/view/loading/LoadingView.dart';
 import 'package:mvvm_flutter_app/view/login/LoginView.dart';
 import 'package:mvvm_flutter_app/view/plan/PlanView.dart';
 import 'package:mvvm_flutter_app/view/profile/ProfileView.dart';
@@ -26,6 +27,7 @@ const String detailRando = '/DetailRando';
 const String splash = '/splash';
 const String profile = '/profile';
 const String qr = '/qr';
+const String loading = '/qr';
 
 
 const String share = '/share';
@@ -44,6 +46,9 @@ class Router {
       case core:
         var data = settings.arguments as Map;
         return MaterialPageRoute(builder: (_) => CoreView(data: data));
+      case loading:
+        var data = settings.arguments as Map;
+        return MaterialPageRoute(builder: (_) => LoadingView(data : data));
       case qr:
         return MaterialPageRoute(builder: (_) => QRCodeScanView());
       case detailRando:

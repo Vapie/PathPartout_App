@@ -13,7 +13,7 @@ Map<String, String> answers = {};
 int status = 0;
 
 getRandos() async {
-  futureRandos = await Rando.fetchRandos();
+  futureRandos = await currentConfig.getCurrentRandoList();
 }
 
 class FeedbackView extends StatefulWidget {

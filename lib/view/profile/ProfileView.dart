@@ -401,7 +401,7 @@ class ProfileViewState extends State<ProfileView> {
              SortiesWrapper()]
     );
     } else {
-      return CircularProgressIndicator();
+      return Center(child: CircularProgressIndicator());
     }
     }));
   }

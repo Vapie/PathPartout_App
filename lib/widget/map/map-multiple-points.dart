@@ -16,24 +16,19 @@ class MyMapMultiMarkers extends StatefulWidget {
 }
 
 class _MyMapMultiMarkersState extends State<MyMapMultiMarkers> {
-  Future<List<Rando>> futureRandos;
+  List<Rando> randosList;
 
   @override
   void initState() {
     super.initState();
-    futureRandos = Rando.fetchRandos();
+    randosList = currentConfig.getCurrentRandoList();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: FutureBuilder<List<Rando>>(
-          future: futureRandos,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              print(snapshot.data);
-              return new FlutterMap(
+        child: FlutterMap(
                 options: new MapOptions(
                   center: new LatLng(45.839, 6.211),
                   zoom: 11.0,
@@ -49,7 +44,7 @@ class _MyMapMultiMarkersState extends State<MyMapMultiMarkers> {
                   ),
                   new MarkerLayerOptions(
                     markers: [
-                      for (var element in snapshot.data)
+                      for (var element in randosList)
                         if (element.startPoint != null)
                           new Marker(
                             width: 80.0,
@@ -73,15 +68,8 @@ class _MyMapMultiMarkersState extends State<MyMapMultiMarkers> {
                     ],
                   )
                 ],
-              );
-            } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            }
-            // By default, show a loading spinner.
-            return CircularProgressIndicator();
-          },
-        ),
-      ),
-    );
-  }
+              )
+        )
+     );
+   }
 }
