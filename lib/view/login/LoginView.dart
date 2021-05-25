@@ -12,7 +12,7 @@ import 'package:stacked/stacked.dart';
 List<Rando> futureRandos;
 
 getRandos() async {
-  futureRandos = await Rando.fetchProfileSortedRando();
+  futureRandos = await currentConfig.getCurrentRandoList();
 }
 
 class LoginView extends StatefulWidget {
@@ -118,14 +118,21 @@ class _LoginState extends State<LoginView> {
                                 fontSize: 25),
                           ),
                           onPressed: () async {
-                            await User.authenticate(
-                                emailController.text, passwordController.text);
-                            List<Sortie> sorties = await Sortie.getUserSorties();
-                            await getRandos();
-                            if ((currentConfig.currentUser.userData != null) & (currentConfig.currentUser.userData.toString() != "[]"))
-                              Navigator.pushNamed(context, core, arguments: { "selectedIndex": 0, "randosCollection": futureRandos });
-                            if ((currentConfig.currentUser.userData == null)|| (currentConfig.currentUser.userData.toString() == "[]"))
-                              Navigator.pushNamed(context, survey);
+
+                            //on créé une fonction asynchrone qui permet de l'envoyer dans la page de loading
+                            Future<void> asyncFunc() async {
+                              await User.authenticate(emailController.text, passwordController.text);
+                              await currentConfig.getRandoList();
+                              if ((currentConfig.currentUser.userData != null) & (currentConfig.currentUser.userData.toString() != "[]"))
+                                    Navigator.pushNamed(context, core, arguments: { "selectedIndex": 0, "randosCollection": currentConfig.getCurrentRandoList()});
+
+                              if ((currentConfig.currentUser.userData == null)|| (currentConfig.currentUser.userData.toString() == "[]"))
+                                    Navigator.pushNamed(context, survey);
+                            }
+                            // on part sur la page de loading avec la fonction embarquée
+                            Navigator.pushNamed(context, loading, arguments: { "asyncFunc": asyncFunc});
+
+
                           },
                         )),
 

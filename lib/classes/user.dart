@@ -57,12 +57,12 @@ class User {
       'email': email,
       'password': password
     });
+    //TODO add redirect to login page with alert if not logged in.
     var user =  await User.fetchUser(login["userId"]);
     user.id = login["userId"];
     currentConfig.currentToken = login["token"];
     print(user.userData.toString());
     currentConfig.currentUser = user;
-    print(login["token"]);
   }
 
   static createUser(String email, String password) async {
