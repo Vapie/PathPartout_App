@@ -7,13 +7,13 @@ import 'package:mvvm_flutter_app/view/feedback/FeedbackViewModel.dart';
 import 'package:mvvm_flutter_app/widget/media/button_cloud.dart';
 import 'package:stacked/stacked.dart';
 
-List<Rando> futureRandos;
+List<Rando> listRandos;
 int value = 0;
 Map<String, String> answers = {};
 int status = 0;
 
 getRandos() async {
-  futureRandos = await currentConfig.getCurrentRandoList();
+  listRandos = await currentConfig.getCurrentRandoList();
 }
 
 class FeedbackView extends StatefulWidget {

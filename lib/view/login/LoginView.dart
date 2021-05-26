@@ -10,7 +10,6 @@ import 'package:mvvm_flutter_app/widget/media/outlined-gradient-button.dart';
 import 'package:stacked/stacked.dart';
 
 List<Rando> futureRandos;
-
 getRandos() async {
   futureRandos = await currentConfig.getCurrentRandoList();
 }
@@ -33,16 +32,6 @@ class _LoginState extends State<LoginView> {
               //   title: Text("Login Page"),
               // ),
               body: SingleChildScrollView(
-                // Background ok avec container sinon pixel overflowed bottom
-                // decoration: BoxDecoration(
-                //     gradient: RadialGradient(
-                //         colors: [Color(0xFF2AB7F6), Color(0xFF5EC8F8), Color(0xFFCAE67B)],
-                //         stops: [0, 0.2, 1],
-                //         center: Alignment(1, 2),
-                //         focal: Alignment.bottomRight,
-                //         focalRadius: 2
-                //     )
-                // ),
                 child: Column(
                   children: <Widget>[
                     Padding(
