@@ -37,7 +37,6 @@ class ProfileViewState extends State<ProfileView> {
 
    int currentmonth =  DateTime.now().month;
 
-
     for(Sortie sortie in sorties) {
       if(sortie.randonnee.distance != null){
         nbKm = nbKm+ sortie.randonnee.distance;
@@ -50,18 +49,12 @@ class ProfileViewState extends State<ProfileView> {
         heure += int.parse(SplittedHeure[0]) + int.parse(SplittedHeure[1])/60;
         min += int.parse(SplittedHeure[1]) + int.parse(SplittedHeure[2])/60;
 
-
-
-
          if (sortie.date.difference(DateTime.now())<Duration(days: 365)){
 
            NbPas[sortie.date.month-1] += sortie.randonnee.distance.toInt();
 
          }
-
       }
-
-
     }
 
 
