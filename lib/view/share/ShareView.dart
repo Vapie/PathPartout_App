@@ -21,7 +21,7 @@ class ShareView extends StatefulWidget {
 
 
 }
-
+// get ça :  https://pub.dev/packages/social_share
 class BarChartState extends State<ShareView> {
   dynamic varPoubelle;
   ScreenshotController screenshotController = ScreenshotController();

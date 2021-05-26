@@ -96,6 +96,6 @@ class SurveyViewModel extends BaseViewModel {
   }
 
   navigate(context) async {
-    Navigator.pushNamed(context, core, arguments: { "selectedIndex": 0,"randosCollection": await await currentConfig.getCurrentRandoList()});
+    Navigator.pushNamed(context, core, arguments: { "selectedIndex": 0,"randosCollection": await currentConfig.getCurrentRandoList()});
   }
 }
