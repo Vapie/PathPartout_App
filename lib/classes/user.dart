@@ -13,6 +13,7 @@ class User {
   int privilegeLevel;
   List<dynamic> avatar;
   List<dynamic> userData;
+  List<int> favoris;
 
   User({this.id,
         this.firstname,
@@ -21,20 +22,27 @@ class User {
         this.photoUrl,
         this.privilegeLevel,
         this.avatar,
-        this.userData
+        this.userData,
+        this.favoris
       });
 
   factory User.fromJson(Map<String, dynamic> json) {
+    List<int> currentFav = [];
+    if (json.keys.contains("favoris"))
+      currentFav = User.parseFavoris(json["favoris"]);
+
     return User(
-        id: json['_id'],
-        firstname: json['firstname'],
-        lastname: json['lastname'],
-        mail: json['mail'],
-        photoUrl: json['photoUrl'],
-        privilegeLevel: json['privilegeLevel'],
-        avatar: json['avatar'],
-        userData: User.recoveruserData(json['userData'].toString())
-    );
+          id: json['_id'],
+          firstname: json['firstname'],
+          lastname: json['lastname'],
+          mail: json['mail'],
+          photoUrl: json['photoUrl'],
+          privilegeLevel: json['privilegeLevel'],
+          avatar: json['avatar'],
+          userData: User.recoveruserData(json['userData'].toString()),
+          favoris: currentFav
+      );
+
 
 
   }
@@ -61,7 +69,6 @@ class User {
     var user =  await User.fetchUser(login["userId"]);
     user.id = login["userId"];
     currentConfig.currentToken = login["token"];
-    print(user.userData.toString());
     currentConfig.currentUser = user;
   }
 
@@ -85,14 +92,24 @@ class User {
     }));
   }
 
+  static modifyUserFav(int randoId, bool isAddRando) async {
+    if (isAddRando && !currentConfig.currentUser.favoris.contains(randoId)) {
+      currentConfig.currentUser.favoris.add(randoId);
+    }
+
+    if (!isAddRando && currentConfig.currentUser.favoris.contains(randoId)) {
+      currentConfig.currentUser.favoris.remove(randoId);
+    }
+    await modifyCurrentUser("favoris",currentConfig.currentUser.favoris.toString());
+  }
+
   static modifyCurrentUserData(String userData) async {
-    print(await modifyCurrentUser("userData",userData));
+    await modifyCurrentUser("userData",userData);
   }
 
   static List<dynamic> recoveruserData(dynamic obj) {
 
-    print("userData " + obj);
-      if (obj != null && obj != "null") {
+      if (obj != null && obj != "null" && obj != [] && obj !="[]") {
         String str = obj as String;
         List<String> userDataList =  str.substring(1, str.length - 1).split(",");
         String taglist="";
@@ -100,11 +117,21 @@ class User {
         for (var i = 2; i < userDataList.length; i++) {
             taglist += userDataList[i].toString() +",";
         }
-        print("mes user datas 103 user" +userDataList.toString());
         return [userDataList[0],userDataList[1],taglist.substring(0, taglist.length - 1)];
 
       }
       List<dynamic> l;
       return l;
+  }
+
+  static List<int> parseFavoris(String str) {
+    List<int> currentFav = [];
+    List<String> splitedData =  str.substring(1, str.length - 1).split(",");
+
+
+    for (var i = 0; i < splitedData.length; i++) {
+      currentFav.add(int.parse(splitedData[i]));
+    }
+    return currentFav;
   }
 }
