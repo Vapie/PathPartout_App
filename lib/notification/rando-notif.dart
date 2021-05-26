@@ -77,7 +77,7 @@ class RandoNotif extends StatefulWidget {
                 this.mypodometre.steps,
                 str.substring(0, str.length - 7)
               ],
-              pushRandoNotif("RANDO TEST", this.mypodometre.steps,
+              pushRandoNotif("RANDONING", this.mypodometre.steps,
                   str.substring(0, str.length - 7))
             });
     this.mytimer = timer;

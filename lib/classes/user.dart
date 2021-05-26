@@ -27,7 +27,7 @@ class User {
       });
 
   factory User.fromJson(Map<String, dynamic> json) {
-    var currentFav = [];
+    List<int> currentFav = [];
     if (json.keys.contains("favoris"))
       currentFav = User.parseFavoris(json["favoris"]);
 
@@ -108,7 +108,8 @@ class User {
   }
 
   static List<dynamic> recoveruserData(dynamic obj) {
-      if (obj != null && obj != "null") {
+
+      if (obj != null && obj != "null" && obj != [] && obj !="[]") {
         String str = obj as String;
         List<String> userDataList =  str.substring(1, str.length - 1).split(",");
         String taglist="";

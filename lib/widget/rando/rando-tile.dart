@@ -113,7 +113,8 @@ class RandoTile extends StatelessWidget {
                                       color: Colors.black, fontSize: 25),
                                 ),
                               Text(
-                                '3h30',
+
+                                (rando.duration/60).toInt().toString()+"h"+(rando.duration%60).toInt().toString(),
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 25),
                               ),
@@ -129,12 +130,23 @@ class RandoTile extends StatelessWidget {
 
 //Return color based on difficulty of the hike
 Color getColor(int level) {
-  switch (level) {
-    case 1:
-      return Color(0xFF00E676);
-    case 2:
-      return Color(0xFFFFA000);
-    default:
-      return Color(0xFFFF8A65);
-  }
+
+  List<dynamic> currentUserData = currentConfig.currentUser.userData;
+  double userLevel = double.parse(currentUserData[0].toString());
+
+  double levelDelta =  userLevel - level;
+
+  if (levelDelta > 0.5)
+    return Color(0xFF00E676);
+  if (levelDelta < -0.5)
+    return Color(0xFFFF8A65);
+  return Color(0xFFFFA000);
+  // switch (levelDelta) {
+  //   case 1:
+  //     return Color(0xFF00E676);
+  //   case 2:
+  //     return Color(0xFFFFA000);
+  //   default:
+  //     return Color(0xFFFF8A65);
+  // }
 }

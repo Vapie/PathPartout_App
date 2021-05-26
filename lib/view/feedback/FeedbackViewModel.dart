@@ -69,14 +69,15 @@ class FeedbackViewModel extends BaseViewModel {
     //tags , un tagbleau de tags
     //{Quels mots caractérisent le mieux cette randonnée ?: [dénivelé, calme], Avez-vous trouvé la randonnée...: facile, adaptée à mon niveau, Au niveau de la durée...: trop court...}
     List<dynamic> currentUserData = currentConfig.currentUser.userData;
-    print(currentUserData.toString() + " length " + currentUserData.length.toString());
 
     if (data != null) {
 
       //ici on personalise le profil de l'utilisateur en fonction de son retour
 
       //on récupère les infos du profil.
+
       double level = double.parse(currentUserData[0].toString());
+
       double duration =double.parse(currentUserData[1].toString());
       print("currentTags   " + currentUserData[2].toString());
       List<String> currentTags=[];
