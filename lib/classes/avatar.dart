@@ -128,6 +128,7 @@ class Avatar {
           +"&topType="+this.top.libApi+"&clotheColor="+this.clothe.libApi;
     }
 
+
     void setAvataarParameters({top,accessories,hairColo,facialHair,clothe,clotheColo,eye,eyebrow,mouth,skinColo}){
       if(top!=null)
         this.top = top;
@@ -150,6 +151,15 @@ class Avatar {
       if(skinColo!=null)
         this.skinColo = skinColo;
     }
+
+  String getApiArray() {
+    return "[" + this.accessories.libApi
+        +"," + this.clothe.libApi
+        + ","+this.eye.libApi+","+this.eyebrow.libApi
+        +","+this.facialHair.libApi+","+this.hairColo.libApi
+        +"," +this.mouth.libApi+","+ this.skinColo.libApi
+        +","+this.top.libApi+","+this.clothe.libApi+"]";
+  }
 
 
 

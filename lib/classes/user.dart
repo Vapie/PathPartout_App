@@ -106,7 +106,9 @@ class User {
   static modifyCurrentUserData(String userData) async {
     await modifyCurrentUser("userData",userData);
   }
-
+  static modifyUserAvatar(String avatar) async {
+    await modifyCurrentUser("avatar",currentConfig.currentAvatar.getApiArray());
+  }
   static List<dynamic> recoveruserData(dynamic obj) {
 
       if (obj != null && obj != "null" && obj != [] && obj !="[]") {
