@@ -5,6 +5,7 @@ import 'package:flutter_map/plugin_api.dart';
 import "package:latlong/latlong.dart";
 
 import 'package:mvvm_flutter_app/classes/rando.dart';
+import 'package:mvvm_flutter_app/network/BaliseMqttConsumer.dart';
 
 import '../../main.dart';
 
@@ -76,6 +77,18 @@ class _MyMapState extends State<MyMap> {
                               size: 80.0, color: Colors.red),
                         ),
                       ),
+                      for (MqttBaliseMessage balise
+                          in currentConfig.currentBaliseList)
+                        new Marker(
+                          width: 60.0,
+                          height: 60.0,
+                          point: new LatLng(
+                             balise.Lat, balise.Lng),
+                          builder: (ctx) => new Container(
+                            child: Icon(Icons.api,
+                                size: 60.0, color: Colors.blue),
+                          ),
+                        ),
                     ],
                   )
                 ],
