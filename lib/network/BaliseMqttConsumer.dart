@@ -46,6 +46,7 @@ class MqttConsumer {
   } on Exception catch (e) {
   print('EXAMPLE::client exception - $e');
   client.disconnect();
+  exit(-1);
   }
 
   /// Check we are connected
