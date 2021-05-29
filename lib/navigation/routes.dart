@@ -17,6 +17,7 @@ import 'package:mvvm_flutter_app/view/survey/SurveyView.dart';
 import 'package:mvvm_flutter_app/view/splash/SplashView.dart';
 import 'package:mvvm_flutter_app/view/share/ShareView.dart';
 import 'package:mvvm_flutter_app/view/test/TestPlaygroundView.dart';
+import 'package:mvvm_flutter_app/view/editProfil/editProfilView.dart';
 
 import '../main.dart';
 
@@ -28,6 +29,7 @@ const String splash = '/splash';
 const String profile = '/profile';
 const String qr = '/qr';
 const String loading = '/qr';
+const String editionProfil = '/editProfil';
 
 
 const String share = '/share';
@@ -79,6 +81,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => SortiesView());
       case dashboard:
         return MaterialPageRoute(builder: (_) => DashboardView());
+      case editionProfil:
+        return MaterialPageRoute(builder: (_) => editProfilView());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
