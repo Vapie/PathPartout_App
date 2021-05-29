@@ -1,8 +1,6 @@
 import 'package:mvvm_flutter_app/main.dart';
 import 'package:mvvm_flutter_app/network/api-connect.dart';
 
-
-
 class Badge{
   String name ="Marcheur";
   String adj = "ordinaire";
@@ -20,7 +18,7 @@ List<NameTitle> name = [
 
 class NameTitle {
   String libName;
-  bool isUnlock;
+bool isUnlock;
 
   NameTitle(
     this.libName,
