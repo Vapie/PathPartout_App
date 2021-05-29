@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mvvm_flutter_app/classes/review.dart';
+import 'package:mvvm_flutter_app/classes/sorties.dart';
 import 'package:mvvm_flutter_app/main.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/widget/appbar/appBar.dart';
@@ -33,6 +34,8 @@ class _RandoViewState extends State<RandoView> {
   List<Review> _reviews;
   Future<Rando> futureRando;
   List<Rando> futureRandos;
+  List<Sortie> futureSorties;
+  bool isHidden;
 
   final presentationKey = new GlobalKey();
   final photoKey = new GlobalKey();
@@ -41,6 +44,37 @@ class _RandoViewState extends State<RandoView> {
 
   getRandos() async {
     futureRandos = await currentConfig.getCurrentRandoList();
+  }
+
+  canBeShown(List reviews){
+    var status = false;
+    if(reviews != null){
+      for(var review in reviews){
+        if(review.userId == currentConfig.currentUser.id){
+          status = true;
+        }
+      }
+    }
+
+    // var test = futur;
+    // print(futureSorties.toString());
+
+    print('#########');
+    if(futureSorties != null){
+      for(var sortie in futureSorties){
+        if(sortie.randonnee.id == currentConfig.currentRando.id) status = false;
+        // if(sortie == null)
+        // print(sortie);
+      }
+    }
+    print('@@@@@@');
+
+    // for(var sortie in futureSorties){
+    //   print(sortie.id);
+    //   print(currentConfig.currentRando.id);
+    // }
+
+    return status;
   }
 
   @override
@@ -67,7 +101,10 @@ class _RandoViewState extends State<RandoView> {
   Future<Rando> startAsyncInit() async {
     _reviews = await Review.fetchReviewsByRando(widget.randoId);
     futureRando = Rando.fetchRando(widget.randoId);
+    futureSorties = await Sortie.getUserSorties();
     getRate();
+    isHidden = canBeShown(_reviews);
+
     return await futureRando;
   }
 
@@ -114,6 +151,7 @@ class _RandoViewState extends State<RandoView> {
                       ),
                     ),
                   ),
+                  if(!isHidden)
                   Positioned(
                     top: 10,
                     right: 10,

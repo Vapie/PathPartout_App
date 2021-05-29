@@ -41,9 +41,6 @@ class _ReviewViewState extends State<ReviewView> {
       }
     );
 
-
-    print(res.statusCode);
-
     if(res.statusCode == 200){
       Map<String, dynamic> response = jsonDecode(res.body);
       print(response);
@@ -51,7 +48,7 @@ class _ReviewViewState extends State<ReviewView> {
 
       review.addAll({'avis': reviewController.text, 'note': rating, 'imageUrl': _imageUrl});
       model.store(review);
-      // Navigator.pushNamed(context, detailRando, arguments: currentConfig.currentRando.id);
+      Navigator.pushNamed(context, detailRando, arguments: currentConfig.currentRando.id);
     }else{
       print('Erreur');
       print(res.body);
