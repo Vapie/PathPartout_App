@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/avd.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mvvm_flutter_app/classes/avatar.dart';
+import 'package:mvvm_flutter_app/main.dart';
 
 /// Assets to test network access.
-const List<String> uriNames = <String>[
-  'https://avataaars.io/?avatarStyle=Circle',
-  'https://avataaars.io/?accessoriesType=Prescription01&avatarStyle=Circle&clotheType=Hoodie&eyeType=EyeRoll&eyebrowType=UnibrowNatural&facialHairType=BeardLight&hairColor=Black&mouthType=Eating&skinColor=Yellow&topType=LongHairShavedSides',
-];
+
 
 
 // class MyApp extends StatelessWidget {
@@ -32,34 +30,26 @@ class editProfilView extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<editProfilView> {
-  final List<Widget> _painters = <Widget>[];
-  double _dimension;
-  String selectedHat;
-  String selectedAccessories;
-  String selectedFacialHairType;
-  String selectedHairColor;
-  String selectedClothe;
-  String selectedClotheColor;
-  String selectedEye;
-  String selectedEyebrowType;
-  String selectedMouthType;
-  String selectedSkinColor;
+   double _dimension;
+  // String selectedHat;
+  // String selectedAccessories;
+  // String selectedFacialHairType;
+  // String selectedHairColor;
+  // String selectedClothe;
+  // String selectedClotheColor;
+  // String selectedEye;
+  // String selectedEyebrowType;
+  // String selectedMouthType;
+  // String selectedSkinColor;
 
   @override
   void initState() {
     super.initState();
     _dimension = 203.0;
 
-    for (String uriName in uriNames) {
-      _painters.add(
-        SvgPicture.network(
-          uriName,
-          placeholderBuilder: (BuildContext context) => Container(
-              padding: const EdgeInsets.all(30.0),
-              child: const CircularProgressIndicator()),
-        ),
-      );
-    }
+
+
+
 //     // Shows an example of an SVG image that will fetch a raster image from a URL.
 //     _painters.add(SvgPicture.string('''<svg viewBox="0 0 200 200"
 //   xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -75,13 +65,6 @@ class _MyHomePageState extends State<editProfilView> {
     }
     return Scaffold(
       body: Column(children: <Widget>[
-        Slider(
-            min: 5.0,
-            max: MediaQuery.of(context).size.width - 10.0,
-            value: _dimension,
-            onChanged: (double val) {
-              setState(() => _dimension = val);
-            }),
         Expanded(
           child: GridView.extent(
             shrinkWrap: true,
@@ -89,87 +72,94 @@ class _MyHomePageState extends State<editProfilView> {
             padding: const EdgeInsets.all(4.0),
             mainAxisSpacing: 4.0,
             crossAxisSpacing: 4.0,
-            children: _painters.toList(),
+            children: [
+              SvgPicture.network(
+                currentConfig.currentAvatar.getImageUrl(),
+                placeholderBuilder: (BuildContext context) => Container(
+                    padding: const EdgeInsets.all(30.0),
+                    child: const CircularProgressIndicator()),
+              )
+            ]
           ),
         ),
         new DropdownButton(
-            value: selectedHat,
+            value: currentConfig.currentAvatar.top.libApi,
             items: getListItem(topType),
             hint: new Text("select hat"),
             onChanged: (value) {
-              selectedHat = value;
+              currentConfig.currentAvatar.top = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: selectedAccessories,
+            value: currentConfig.currentAvatar.accessories.libApi,
             items: getListItem(accessoriesType),
             hint: new Text("select accessories"),
             onChanged: (value) {
-              selectedAccessories = value;
+              currentConfig.currentAvatar.accessories = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: selectedFacialHairType,
+            value: currentConfig.currentAvatar.facialHair.libApi,
             items: getListItem(facialHairType),
             hint: new Text("select facial hair"),
             onChanged: (value) {
-              selectedFacialHairType = value;
+              currentConfig.currentAvatar.facialHair = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: selectedHairColor,
+            value: currentConfig.currentAvatar.hairColo.libApi,
             items: getListItem(hairColor),
             hint: new Text("select hat"),
             onChanged: (value) {
-              selectedHairColor = value;
+              currentConfig.currentAvatar.hairColo = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: selectedClothe,
+            value: currentConfig.currentAvatar.clothe.libApi,
             items: getListItem(clotheType),
             hint: new Text("select clothes"),
             onChanged: (value) {
-              selectedClothe = value;
+              currentConfig.currentAvatar.clothe = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: selectedClotheColor,
+            value: currentConfig.currentAvatar.clotheColo.libApi,
             items: getListItem(clotheColor),
             hint: new Text("clothes color"),
             onChanged: (value) {
-              selectedClotheColor = value;
+              currentConfig.currentAvatar.clotheColo = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: selectedEye,
+            value: currentConfig.currentAvatar.eye.libApi,
             items: getListItem(eyeType),
             hint: new Text("select eyes"),
             onChanged: (value) {
-              selectedEye = value;
+              currentConfig.currentAvatar.eye = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: selectedEyebrowType,
+            value: currentConfig.currentAvatar.eyebrow.libApi,
             items: getListItem(eyebrowType),
             hint: new Text("select eyebrow"),
             onChanged: (value) {
-              selectedEyebrowType = value;
+              currentConfig.currentAvatar.eyebrow = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: selectedMouthType,
+            value: currentConfig.currentAvatar.mouth.libApi,
             items: getListItem(mouthType),
             hint: new Text("select mouth"),
             onChanged: (value) {
-              selectedMouthType = value;
+              currentConfig.currentAvatar.mouth = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: selectedSkinColor,
+            value: currentConfig.currentAvatar.skinColo.libApi,
             items: getListItem(skinColor),
             hint: new Text("select skin"),
             onChanged: (value) {
-              selectedSkinColor = value;
+              currentConfig.currentAvatar.skinColo = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),
@@ -177,7 +167,7 @@ class _MyHomePageState extends State<editProfilView> {
     );
   }
 
-  getListItem(List<SubAvatarItem> itemList) {
+  List<DropdownMenuItem<String>> getListItem(List<SubAvatarItem> itemList) {
     List<DropdownMenuItem<String>> allItemForDropdown = [];
       for (SubAvatarItem item in itemList){
         allItemForDropdown.add(new DropdownMenuItem(
@@ -187,4 +177,17 @@ class _MyHomePageState extends State<editProfilView> {
       }
     return allItemForDropdown;
   }
+
+  getAvatarItemFromValue(List<SubAvatarItem> itemList) {
+    List<DropdownMenuItem<String>> allItemForDropdown = [];
+    for (SubAvatarItem item in itemList){
+      allItemForDropdown.add(new DropdownMenuItem(
+        child: new Text(item.libUI),
+        value: item.libApi,
+      ));
+    }
+    return allItemForDropdown;
+  }
+
+
 }

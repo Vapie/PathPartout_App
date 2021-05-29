@@ -65,6 +65,32 @@ class SubAvatarItem {
     this.libUI,
     this.isUnlock
   );
+
+  static List<SubAvatarItem> getALLSubAvatarItem(){
+    List<SubAvatarItem> l =[];
+        l+=topType;
+        l+=accessoriesType;
+        l+=facialHairType;
+        l+=hairColor;
+        l+=clotheType;
+        l+=clotheColor;
+        l+=eyeType;
+        l+=eyebrowType;
+        l+=mouthType;
+        l+=skinColor;
+        return l;
+  }
+
+  static SubAvatarItem getSubAvatarItemFrom(String lib){
+    for (SubAvatarItem sub in SubAvatarItem.getALLSubAvatarItem()){
+      if(sub.libApi == lib){
+        return sub;
+      }
+
+    }
+  }
+
+
 }
 
 class Avatar {
@@ -72,24 +98,60 @@ class Avatar {
   SubAvatarItem accessories = accessoriesType[0];
   SubAvatarItem hairColo = hairColor[0];
   SubAvatarItem facialHair = facialHairType[0];
-    SubAvatarItem clothe = clotheType[0];
+  SubAvatarItem clothe = clotheType[0];
   SubAvatarItem clotheColo = clotheColor[0];
   SubAvatarItem eye = eyeType[0];
   SubAvatarItem eyebrow = eyebrowType[0];
   SubAvatarItem mouth = mouthType[0];
   SubAvatarItem skinColo = skinColor[0];
 
-  Avatar ({
-    this.top,
-    this.accessories,
-    this.hairColo,
-    this.facialHair,
-    this.clothe,
-    this.clotheColo,
-    this.eye,
-    this.eyebrow,
-    this.mouth,
-    this.skinColo
-  });
+  Avatar() {
+    this.top = topType[0];
+    this.accessories = accessoriesType[0];
+    this.hairColo = hairColor[0];
+    this.facialHair = facialHairType[0];
+    this.clothe = clotheType[0];
+    this.clotheColo = clotheColor[0];
+    this.eye = eyeType[0];
+    this.eyebrow = eyebrowType[0];
+    this.mouth = mouthType[0];
+    this.skinColo = skinColor[0];
+  }
+
+
+    String getImageUrl(){
+      return "https://avataaars.io/?accessoriesType=" + this.accessories.libApi
+          +"&avatarStyle=Circle&clotheType=" + this.clothe.libApi
+          + "&eyeType="+this.eye.libApi+"&eyebrowType="+this.eyebrow.libApi
+          +"&facialHairType="+this.facialHair.libApi+"&hairColor="+this.hairColo.libApi
+          +"&mouthType=" +this.mouth.libApi+"&skinColor="+ this.skinColo.libApi
+          +"&topType="+this.top.libApi+"&clotheColor="+this.clothe.libApi;
+    }
+
+    void setAvataarParameters({top,accessories,hairColo,facialHair,clothe,clotheColo,eye,eyebrow,mouth,skinColo}){
+      if(top!=null)
+        this.top = top;
+      if(accessories!=null)
+        this.accessories = accessories;
+      if(hairColo!=null)
+        this.hairColo = hairColo;
+      if(facialHair!=null)
+        this.facialHair = facialHair;
+      if(clothe!=null)
+        this.clothe = clothe;
+      if(clotheColo!=null)
+        this.clotheColo = clotheColo;
+      if(eye!=null)
+        this.eye = eye;
+      if(eyebrow!=null)
+        this.eyebrow = eyebrow;
+      if(mouth!=null)
+        this.mouth = mouth;
+      if(skinColo!=null)
+        this.skinColo = skinColo;
+    }
+
+
+
 }
 

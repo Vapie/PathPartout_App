@@ -2,6 +2,7 @@
 import 'package:mvvm_flutter_app/view/feedback/FeedbackView.dart';
 import 'package:mvvm_flutter_app/widget/rando/randos-list.dart';
 
+import 'classes/avatar.dart';
 import 'classes/rando.dart';
 import 'classes/user.dart';
 import 'network/BaliseMqttConsumer.dart';
@@ -17,14 +18,14 @@ class MainConfig {
   List<Rando> currentRandoList;
   MqttConsumer currentMqttConsumer;
   List<MqttBaliseMessage>  currentBaliseList=[];
-
+  Avatar currentAvatar;
 
   MainConfig(){
     currentUser = new User();
     myrandonotif = new RandoNotif();
     currentRando = new Rando();
     currentMqttConsumer =new MqttConsumer();
-
+    currentAvatar = new Avatar();
   }
 
    List<Rando> getCurrentRandoList(){
