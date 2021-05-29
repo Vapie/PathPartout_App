@@ -96,6 +96,7 @@ Future<dynamic> fetchRequestMultiple(String address, String params) async {
       body: {"token": token},
     );
 
+    print(response.statusCode);
     if (response.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.

@@ -16,6 +16,7 @@ import 'package:mvvm_flutter_app/view/sorties/SortiesView.dart';
 import 'package:mvvm_flutter_app/view/survey/SurveyView.dart';
 import 'package:mvvm_flutter_app/view/splash/SplashView.dart';
 import 'package:mvvm_flutter_app/view/share/ShareView.dart';
+import 'package:mvvm_flutter_app/view/achievements/AchievementsView.dart';
 import 'package:mvvm_flutter_app/view/test/TestPlaygroundView.dart';
 
 import '../main.dart';
@@ -38,6 +39,7 @@ const String feedBack = '/FeedBack';
 const String review = '/Review';
 const String sorties = '/Sorties';
 const String dashboard = '/Dashboard';
+const String achievements = '/Achievements';
 
 // from https://medium.com/flutter-community/clean-navigation-in-flutter-using-generated-routes-891bd6e000df
 class Router {
@@ -79,6 +81,8 @@ class Router {
         return MaterialPageRoute(builder: (_) => SortiesView());
       case dashboard:
         return MaterialPageRoute(builder: (_) => DashboardView());
+      case achievements:
+        return MaterialPageRoute(builder: (_) => AchievementsView());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

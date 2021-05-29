@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mvvm_flutter_app/classes/achievement.dart';
+import 'package:mvvm_flutter_app/classes/achievementUnlocked.dart';
+import 'package:mvvm_flutter_app/classes/user.dart';
 import 'package:mvvm_flutter_app/main.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/widget/media/loadimage.dart';
@@ -16,29 +19,75 @@ class DashboardTile extends StatelessWidget {
     this.title = title;
   }
 
+  List<Achievement> achievements;
+  List<Achievement> sortedAchievements = [];
+  Future<List<Achievement>> getAchievements() async {
+    achievements = await Achievement.getAchievements();
+    print(achievements);
+    await getAchievementsUnlocked();
+    return achievements;
+  }
+
+  List<String> achievementsUnlocked;
+  Future<List<String>> getAchievementsUnlocked() async {
+    achievementsUnlocked = await AchievementUnlocked.getUserAchievements();
+    return achievementsUnlocked;
+  }
+
   Widget build(BuildContext context) {
     if(type == "achievement") {
-      return Container(
-        height: MediaQuery.of(context).size.height * height,
-        padding: const EdgeInsets.all(10.0),
-        child: Text(title),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 3),
-            ),
-          ],
-        ),
-      );
+      return FutureBuilder<List<Achievement>>(
+          future: getAchievements(),
+          builder: (context, AsyncSnapshot<List<Achievement>> snapshot) {
+            return Container(
+              height: MediaQuery.of(context).size.height * height,
+              padding: const EdgeInsets.all(10.0),
+              alignment: Alignment.topLeft,
+              child: Column(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                        child:Row(
+                            children: [
+                              Text(
+                                  "Succès déverrouillés"
+                              ),
+                            ]
+                        ),
+                    ),
+                    Expanded(
+                      flex: 9,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                achievementsUnlocked.length.toString() + '/' + achievements.length.toString(),
+                                style: TextStyle(fontSize: 40),
+                                textAlign: TextAlign.center,
+                              ),
+                            ]
+                        )
+                    )
+                  ],
+              ),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+            );
+      });
     }
 
     if(type == "rando") {

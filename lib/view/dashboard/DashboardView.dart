@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/widget/appbar/appBar.dart';
 import 'package:mvvm_flutter_app/widget/appbar/drawer/drawer.dart';
 import 'package:mvvm_flutter_app/widget/dashboard-tile/dashboard-tile.dart';
@@ -28,10 +29,15 @@ class _DashboardViewState extends State<DashboardView> {
             Row(
               children: [
                 Expanded(
-                    child: Padding(
-                  padding: const EdgeInsets.all(gutter),
-                  child: DashboardTile("achievement", 0.4, "Achievements")
-                )),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(context, achievements);
+                      },
+                      child:Padding(
+                        padding: const EdgeInsets.all(gutter),
+                        child: DashboardTile("achievement", 0.4, "Achievements"),
+                      )),
+                ),
                 Expanded(
                     child: Padding(
                   padding: const EdgeInsets.only(right: gutter),
@@ -44,15 +50,15 @@ class _DashboardViewState extends State<DashboardView> {
                           padding: EdgeInsets.only(bottom: gutter),
                           child: Row(children: [
                             Expanded(
-                                child: DashboardTile("rando", 0.195, "Rando conseillée pour vous")
-                            )
+                                child: DashboardTile("rando", 0.195,
+                                    "Rando conseillée pour vous"))
                           ]),
                         ),
                         Row(
                           children: [
                             Expanded(
-                                child: DashboardTile("qrcode", 0.195, "Scan QR Code")
-                            )
+                                child: DashboardTile(
+                                    "qrcode", 0.195, "Scan QR Code"))
                           ],
                         )
                       ],
@@ -69,8 +75,8 @@ class _DashboardViewState extends State<DashboardView> {
                   child: Padding(
                       padding: const EdgeInsets.only(
                           left: gutter, right: gutter, bottom: gutter),
-                      child: DashboardTile("performances", 0.195, "Performances")
-                  ),
+                      child:
+                          DashboardTile("performances", 0.195, "Performances")),
                 ),
               ],
             ),
@@ -82,8 +88,7 @@ class _DashboardViewState extends State<DashboardView> {
                   child: Padding(
                       padding: const EdgeInsets.only(
                           left: gutter, right: gutter, bottom: gutter),
-                      child: DashboardTile("profil", 0.195, "Profil")
-                  ),
+                      child: DashboardTile("profil", 0.195, "Profil")),
                 ),
               ],
             ),
@@ -95,8 +100,7 @@ class _DashboardViewState extends State<DashboardView> {
                   child: Padding(
                       padding: const EdgeInsets.only(
                           left: gutter, right: gutter, bottom: gutter),
-                      child: DashboardTile("pub", 0.195, "Publicité")
-                  ),
+                      child: DashboardTile("pub", 0.195, "Publicité")),
                 ),
               ],
             )

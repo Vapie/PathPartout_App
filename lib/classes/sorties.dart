@@ -45,8 +45,6 @@ class Sortie {
           date: DateTime.parse(json['date']),
           randonnee: Rando.fromJson(json['randonnee'][0]),
           user: User.fromJson(json['user'][0]));
-
-
     }
   }
 

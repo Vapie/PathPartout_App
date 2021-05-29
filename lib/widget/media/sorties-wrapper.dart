@@ -12,6 +12,7 @@ class SortiesWrapper extends StatelessWidget {
     return sorties;
   }
 
+
   @override
   Widget build(context) {
     return FutureBuilder<List<Sortie>>(
