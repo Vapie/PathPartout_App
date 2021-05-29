@@ -2,6 +2,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mvvm_flutter_app/classes/sorties.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/widget/appbar/appBar.dart';
@@ -10,6 +11,8 @@ import 'package:mvvm_flutter_app/widget/media/gradient-button.dart';
 import 'package:mvvm_flutter_app/widget/media/sorties-wrapper.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:easy_gradient_text/easy_gradient_text.dart';
+
+import '../../main.dart';
 
 bool _visible = true;
 int quizz;
@@ -153,10 +156,14 @@ class ProfileViewState extends State<ProfileView> {
                                           height: 6,
                                           width: 52,
                                         ),
-                                        CircleAvatar(
-                                          radius: 40,
-                                          backgroundImage: AssetImage('assets/picture/portrait.jpg'),
-                                        )
+
+                                       SvgPicture.network(
+                                            currentConfig.currentUser.avatar.getImageUrl(),
+                                            placeholderBuilder: (BuildContext context) => Container(
+                                                padding: const EdgeInsets.all(30.0),
+                                                child: const CircularProgressIndicator()),
+                                          ),
+
                                       ]
                                   ),
                                   SizedBox(height: 20),

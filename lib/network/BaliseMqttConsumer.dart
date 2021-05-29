@@ -85,6 +85,6 @@ class MqttConsumer {
   /// The unsolicited disconnect callback
   void onDisconnected() {
     print("restarted Mqtt");
-    new Future.delayed(const Duration(milliseconds: 2000), mqttSubscribe());
+    //new Future.delayed(const Duration(milliseconds: 2000), mqttSubscribe());
   }
 }
