@@ -75,8 +75,8 @@ class _DashboardViewState extends State<DashboardView> {
                   child: Padding(
                       padding: const EdgeInsets.only(
                           left: gutter, right: gutter, bottom: gutter),
-                      child:
-                          DashboardTile("performances", 0.195, "Performances")),
+                      child: DashboardTile("performances", 0.195, "Mes performances")
+                  ),
                 ),
               ],
             ),
@@ -88,7 +88,9 @@ class _DashboardViewState extends State<DashboardView> {
                   child: Padding(
                       padding: const EdgeInsets.only(
                           left: gutter, right: gutter, bottom: gutter),
-                      child: DashboardTile("profil", 0.195, "Profil")),
+                      child: DashboardTile("profil", 0.195, "Mon profil")
+                  ),
+
                 ),
               ],
             ),

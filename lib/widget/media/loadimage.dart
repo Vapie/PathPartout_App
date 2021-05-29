@@ -18,7 +18,7 @@ class LoadImage extends StatelessWidget {
       progressIndicatorBuilder: (context, url, downloadProgress) =>
           Center(child:CircularProgressIndicator(value: downloadProgress.progress)),
       errorWidget: (context, url, error) => Icon(Icons.error),
-      fit: BoxFit.cover
+      fit: BoxFit.fill
     );
   }
 }

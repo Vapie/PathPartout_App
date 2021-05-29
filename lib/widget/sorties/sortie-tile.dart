@@ -76,24 +76,6 @@ class SortieTile extends StatelessWidget {
                             ),
                             Padding(padding: EdgeInsets.all(17.0))
                           ]),
-                      Column(children: [
-
-                        /*Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              if(sortieRando.distance != null) Text(
-                                sortieRando.distance.round().toString() + 'km',
-                                style: TextStyle(color: Colors.black, fontSize: 25),
-                              ),
-                              Text(
-                                '3h30',
-                                style: TextStyle(color: Colors.black, fontSize: 25),
-                              ),
-                            ],
-                          ))*/
-                      ]),
                     ],
                   ),
                 )

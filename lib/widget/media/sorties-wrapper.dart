@@ -20,7 +20,6 @@ class SortiesWrapper extends StatelessWidget {
         builder: (context, AsyncSnapshot<List<Sortie>> snapshot) {
           if (snapshot.hasData) {
             return Column(
-
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(

@@ -5,22 +5,21 @@ import 'package:flutter_map/plugin_api.dart';
 import "package:latlong/latlong.dart";
 
 import 'package:mvvm_flutter_app/classes/rando.dart';
-import 'package:mvvm_flutter_app/network/BaliseMqttConsumer.dart';
 
 import '../../main.dart';
 
-class MyMap extends StatefulWidget {
+class MapSmall extends StatefulWidget {
   var randoId;
 
-  MyMap(int randoId, {Key key}) : super(key: key) {
+  MapSmall(int randoId, {Key key}) : super(key: key) {
     this.randoId = randoId;
   }
 
   @override
-  _MyMapState createState() => _MyMapState();
+  _MapSmallState createState() => _MapSmallState();
 }
 
-class _MyMapState extends State<MyMap> {
+class _MapSmallState extends State<MapSmall> {
   Future<Rando> futureRando;
 
   @override
@@ -32,8 +31,7 @@ class _MyMapState extends State<MyMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: FutureBuilder<Rando>(
+      body: FutureBuilder<Rando>(
           future: futureRando,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
@@ -77,18 +75,6 @@ class _MyMapState extends State<MyMap> {
                               size: 80.0, color: Colors.red),
                         ),
                       ),
-                      for (MqttBaliseMessage balise
-                          in currentConfig.currentBaliseList)
-                        new Marker(
-                          width: 60.0,
-                          height: 60.0,
-                          point: new LatLng(
-                             balise.Lat, balise.Lng),
-                          builder: (ctx) => new Container(
-                            child: Icon(Icons.api,
-                                size: 60.0, color: Colors.blue),
-                          ),
-                        ),
                     ],
                   )
                 ],
@@ -97,10 +83,9 @@ class _MyMapState extends State<MyMap> {
               return Text("${snapshot.error}");
             }
             // By default, show a loading spinner.
-            return Center(child: CircularProgressIndicator());
+            return Text("yo");
           },
         ),
-      ),
     );
   }
 }

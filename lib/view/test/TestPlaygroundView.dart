@@ -28,9 +28,8 @@ class TestPlaygroundView extends StatelessWidget {
       body:Column(
         children: [
 
-          FlatButton(onPressed: (){this.currentConfig.myrandonotif.launchRando();}, child: Text("start rando")),
-          FlatButton(onPressed: (){this.currentConfig.myrandonotif.randoStop();}, child: Text("stop rando")),
-          FlatButton(onPressed: (){print(this.currentConfig.myrandonotif.currentRandoData);}, child: Text("what is current rando")),
+          FlatButton(onPressed: (){ currentConfig.currentMqttConsumer.mqttSubscribe();}, child: Text("mqtt")),
+
 
         ],
       )

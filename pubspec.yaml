@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  mqtt_client: ^7.2.1
   favorite_button: ^0.0.4
   qr_code_scanner: ^0.4.0
   badges: ^1.2.0
@@ -67,6 +68,7 @@ dependencies:
 
   # navigation"
   get:
+  flutter_svg: ^0.19.3
 
 dev_dependencies:
   flutter_test:
