@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/avd.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mvvm_flutter_app/classes/avatar.dart';
+import 'package:mvvm_flutter_app/classes/titre.dart';
 
 /// Assets to test network access.
 const List<String> uriNames = <String>[
   'https://avataaars.io/?avatarStyle=Circle',
   'https://avataaars.io/?accessoriesType=Prescription01&avatarStyle=Circle&clotheType=Hoodie&eyeType=EyeRoll&eyebrowType=UnibrowNatural&facialHairType=BeardLight&hairColor=Black&mouthType=Eating&skinColor=Yellow&topType=LongHairShavedSides',
 ];
-
 
 // class MyApp extends StatelessWidget {
   // @override
@@ -44,6 +44,8 @@ class _MyHomePageState extends State<editProfilView> {
   String selectedEyebrowType;
   String selectedMouthType;
   String selectedSkinColor;
+  String selectedName = "Marcheur";
+    String selectedAdjective = "ordinaire";
 
   @override
   void initState() {
@@ -75,6 +77,27 @@ class _MyHomePageState extends State<editProfilView> {
     }
     return Scaffold(
       body: Column(children: <Widget>[
+        Row(children: [
+          new DropdownButton(
+            value: selectedName,
+            items: getListName(name),
+            hint: new Text("select name"),
+          onChanged: (value) {
+    selectedName = value;
+      setState(() {
+      });
+      }),
+          new DropdownButton(
+              value: selectedAdjective,
+              items: getListAdjective(adjective),
+              hint: new Text("select name"),
+            onChanged: (value) {
+                selectedAdjective = value;
+                setState(() {
+                });
+            },
+          )
+      ],),
         Slider(
             min: 5.0,
             max: MediaQuery.of(context).size.width - 10.0,
@@ -96,11 +119,13 @@ class _MyHomePageState extends State<editProfilView> {
             value: selectedHat,
             items: getListItem(topType),
             hint: new Text("select hat"),
-            onChanged: (value) {
+          onChanged: (value) {
               selectedHat = value;
               setState(() {
               });
-            }),new DropdownButton(
+          },
+
+            ),new DropdownButton(
             value: selectedAccessories,
             items: getListItem(accessoriesType),
             hint: new Text("select accessories"),
@@ -182,9 +207,31 @@ class _MyHomePageState extends State<editProfilView> {
       for (SubAvatarItem item in itemList){
         allItemForDropdown.add(new DropdownMenuItem(
           child: new Text(item.libUI),
-              value: item.libApi,
+          value: item.libApi,
         ));
       }
     return allItemForDropdown;
+  }
+
+  getListName(List<NameTitle> nameList){
+    List<DropdownMenuItem<String>> allNameForTitre = [];
+      for (NameTitle name in nameList){
+        allNameForTitre.add(new DropdownMenuItem(
+          child: new Text(name.libName),
+          value: name.libName,
+        ));
+      }
+      return allNameForTitre;
+  }
+
+  getListAdjective(List<AdjectiveTitle> adjectiveList){
+    List<DropdownMenuItem<String>> allAdjectiveList = [];
+      for (AdjectiveTitle adjective in adjectiveList){
+        allAdjectiveList.add(new DropdownMenuItem(
+          child: new Text(adjective.libAdjective),
+          value: adjective.libAdjective,
+        ));
+      }
+      return allAdjectiveList;
   }
 }
