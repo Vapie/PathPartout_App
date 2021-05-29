@@ -11,6 +11,8 @@ class ReviewViewModel extends BaseViewModel {
     double note = review['note'];
     int randonneeId = currentConfig.currentRando.id;
     String userId = currentConfig.currentUser.id;
-    Review.createReview(avis, randonneeId, userId, note);
+    String imageUrl = review['imageUrl'];
+
+    Review.createReview(avis, randonneeId, userId, note, imageUrl: imageUrl);
   }
 }

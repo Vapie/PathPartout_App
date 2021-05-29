@@ -11,6 +11,7 @@ import 'package:stacked/stacked.dart';
 import 'package:mvvm_flutter_app/main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
+import 'package:mvvm_flutter_app/network/api-connect.dart';
 
 import 'ReviewViewModel.dart';
 
@@ -26,26 +27,17 @@ class _ReviewViewState extends State<ReviewView> {
   final reviewController = TextEditingController();
   PickedFile _image;
   String _imageUrl;
-  String clientId = '1365ab4c0da7d64';
+  String key = 'db1aab6984c441f66e92dbb18799853b';
 
-  _getToken(){
-    String url = 'api.imgur.com';
-    String path = 'oauth2/authorize?client_id='+clientId+'&response_type=token';
-  }
+  _sendImage(model) async {
+    String url = 'api.imgbb.com';
+    String path = '1/upload';
 
-  _sendImage() async {
-    // String token = _getToken();
-    String url = 'api.imgur.com';
-    String path = '/3/image';
-    Map<String, String> headers = {
-      'Authorization': 'Client-ID '+clientId, //a choper le token automatiquement
-    };
     http.Response res = await http.post(
       Uri.https(url, path),
-      headers: headers,
       body: {
         'image': base64Encode(File(_image.path).readAsBytesSync()),
-        'album': '4El6b5p' //Id de l'album PathPartout
+        'key': key,
       }
     );
 
@@ -55,18 +47,15 @@ class _ReviewViewState extends State<ReviewView> {
     if(res.statusCode == 200){
       Map<String, dynamic> response = jsonDecode(res.body);
       print(response);
-      String imgUrl = response['data']['link'];
-      print(response['data']['link']);
+      _imageUrl = response['data']['url'];
+
+      review.addAll({'avis': reviewController.text, 'note': rating, 'imageUrl': _imageUrl});
+      model.store(review);
+      // Navigator.pushNamed(context, detailRando, arguments: currentConfig.currentRando.id);
     }else{
       print('Erreur');
       print(res.body);
-      //jsp
     }
-    // print(res.body);
-    // recuperer donnees de rando
-    // recuperer tableau de URL image
-    // append l'URL recuperee avant via Imgur
-    // renvoyer infos
   }
 
   _imgFromCamera() async {
@@ -246,10 +235,7 @@ class _ReviewViewState extends State<ReviewView> {
                                               BorderRadius.all(Radius.circular(10))),
                                         ),
                                         onPressed: () {
-                                          _sendImage();
-                                          // review.addAll({'avis': reviewController.text, 'note': rating});
-                                          // model.store(review);
-                                          // Navigator.pushNamed(context, detailRando, arguments: currentConfig.currentRando.id);
+                                          _sendImage(model);
                                         },
                                       ),
 

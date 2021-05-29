@@ -110,6 +110,7 @@ class _LoginState extends State<LoginView> {
 
                             //on créé une fonction asynchrone qui permet de l'envoyer dans la page de loading
                             Future<void> asyncFunc() async {
+                              currentConfig.currentMqttConsumer.mqttSubscribe();
                               await User.authenticate(emailController.text, passwordController.text);
                               await currentConfig.getRandoList();
                               if ((currentConfig.currentUser.userData != null) & (currentConfig.currentUser.userData.toString() != "[]"))
