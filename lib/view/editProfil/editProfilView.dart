@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/avd.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mvvm_flutter_app/classes/avatar.dart';
+import 'package:mvvm_flutter_app/classes/user.dart';
 import 'package:mvvm_flutter_app/main.dart';
 import 'package:mvvm_flutter_app/classes/titre.dart';
 
@@ -33,18 +34,7 @@ class _MyHomePageState extends State<editProfilView> {
 
   final List<Widget> _painters = <Widget>[];
   double _dimension;
-  String selectedHat;
-  String selectedAccessories;
-  String selectedFacialHairType;
-  String selectedHairColor;
-  String selectedClothe;
-  String selectedClotheColor;
-  String selectedEye;
-  String selectedEyebrowType;
-  String selectedMouthType;
-  String selectedSkinColor;
-  String selectedName = "Marcheur";
-  String selectedAdjective = "ordinaire";
+
 
   @override
   void initState() {
@@ -72,20 +62,20 @@ class _MyHomePageState extends State<editProfilView> {
 
         Row(children: [
           new DropdownButton(
-            value: selectedName,
+            value: currentConfig.currentUser.badge.name,
             items: getListName(name),
             hint: new Text("select name"),
           onChanged: (value) {
-    selectedName = value;
+            currentConfig.currentUser.badge.name = value;
       setState(() {
       });
       }),
           new DropdownButton(
-              value: selectedAdjective,
+              value: currentConfig.currentUser.badge.adj,
               items: getListAdjective(adjective),
               hint: new Text("select adjective"),
             onChanged: (value) {
-                selectedAdjective = value;
+              currentConfig.currentUser.badge.adj = value;
                 setState(() {
                 });
             },
@@ -100,7 +90,7 @@ class _MyHomePageState extends State<editProfilView> {
             crossAxisSpacing: 4.0,
             children: [
               SvgPicture.network(
-                currentConfig.currentAvatar.getImageUrl(),
+                currentConfig.currentUser.avatar.getImageUrl(),
                 placeholderBuilder: (BuildContext context) => Container(
                     padding: const EdgeInsets.all(30.0),
                     child: const CircularProgressIndicator()),
@@ -109,87 +99,92 @@ class _MyHomePageState extends State<editProfilView> {
           ),
         ),
         new DropdownButton(
-            value: currentConfig.currentAvatar.top.libApi,
+            value: currentConfig.currentUser.avatar.top.libApi,
             items: getListItem(topType),
             hint: new Text("select hat"),
 
             onChanged: (value) {
-              currentConfig.currentAvatar.top = SubAvatarItem.getSubAvatarItemFrom(value);
+              currentConfig.currentUser.avatar.top = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: currentConfig.currentAvatar.accessories.libApi,
+            value: currentConfig.currentUser.avatar.accessories.libApi,
             items: getListItem(accessoriesType),
             hint: new Text("select accessories"),
             onChanged: (value) {
-              currentConfig.currentAvatar.accessories = SubAvatarItem.getSubAvatarItemFrom(value);
+              currentConfig.currentUser.avatar.accessories = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: currentConfig.currentAvatar.facialHair.libApi,
+            value: currentConfig.currentUser.avatar.facialHair.libApi,
             items: getListItem(facialHairType),
             hint: new Text("select facial hair"),
             onChanged: (value) {
-              currentConfig.currentAvatar.facialHair = SubAvatarItem.getSubAvatarItemFrom(value);
+              currentConfig.currentUser.avatar.facialHair = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: currentConfig.currentAvatar.hairColo.libApi,
+            value: currentConfig.currentUser.avatar.hairColo.libApi,
             items: getListItem(hairColor),
             hint: new Text("select hat"),
             onChanged: (value) {
-              currentConfig.currentAvatar.hairColo = SubAvatarItem.getSubAvatarItemFrom(value);
+              currentConfig.currentUser.avatar.hairColo = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: currentConfig.currentAvatar.clothe.libApi,
+            value: currentConfig.currentUser.avatar.clothe.libApi,
             items: getListItem(clotheType),
             hint: new Text("select clothes"),
             onChanged: (value) {
-              currentConfig.currentAvatar.clothe = SubAvatarItem.getSubAvatarItemFrom(value);
+              currentConfig.currentUser.avatar.clothe = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: currentConfig.currentAvatar.clotheColo.libApi,
+            value: currentConfig.currentUser.avatar.clotheColo.libApi,
             items: getListItem(clotheColor),
             hint: new Text("clothes color"),
             onChanged: (value) {
-              currentConfig.currentAvatar.clotheColo = SubAvatarItem.getSubAvatarItemFrom(value);
+              currentConfig.currentUser.avatar.clotheColo = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: currentConfig.currentAvatar.eye.libApi,
+            value: currentConfig.currentUser.avatar.eye.libApi,
             items: getListItem(eyeType),
             hint: new Text("select eyes"),
             onChanged: (value) {
-              currentConfig.currentAvatar.eye = SubAvatarItem.getSubAvatarItemFrom(value);
+              currentConfig.currentUser.avatar.eye = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),new DropdownButton(
-            value: currentConfig.currentAvatar.eyebrow.libApi,
+            value: currentConfig.currentUser.avatar.eyebrow.libApi,
             items: getListItem(eyebrowType),
             hint: new Text("select eyebrow"),
             onChanged: (value) {
-              currentConfig.currentAvatar.eyebrow = SubAvatarItem.getSubAvatarItemFrom(value);
-              setState(() {
-              });
-            }),new DropdownButton(
-            value: currentConfig.currentAvatar.mouth.libApi,
-            items: getListItem(mouthType),
-            hint: new Text("select mouth"),
-            onChanged: (value) {
-              currentConfig.currentAvatar.mouth = SubAvatarItem.getSubAvatarItemFrom(value);
-              setState(() {
-              });
-            }),new DropdownButton(
-            value: currentConfig.currentAvatar.skinColo.libApi,
-            items: getListItem(skinColor),
-            hint: new Text("select skin"),
-            onChanged: (value) {
-              currentConfig.currentAvatar.skinColo = SubAvatarItem.getSubAvatarItemFrom(value);
+              currentConfig.currentUser.avatar.eyebrow = SubAvatarItem.getSubAvatarItemFrom(value);
               setState(() {
               });
             }),
+        new DropdownButton(
+            value: currentConfig.currentUser.avatar.mouth.libApi,
+            items: getListItem(mouthType),
+            hint: new Text("select mouth"),
+            onChanged: (value) {
+              currentConfig.currentUser.avatar.mouth = SubAvatarItem.getSubAvatarItemFrom(value);
+              setState(() {
+              });
+            }),
+        new DropdownButton(
+            value: currentConfig.currentUser.avatar.skinColo.libApi,
+            items: getListItem(skinColor),
+            hint: new Text("select skin"),
+            onChanged: (value) {
+              currentConfig.currentUser.avatar.skinColo = SubAvatarItem.getSubAvatarItemFrom(value);
+              setState(() {
+              });
+            }),
+        FlatButton(onPressed: (){
+          User.modifyUserAvantarAndBadge(currentConfig.currentUser.badge.name,currentConfig.currentUser.badge.adj);
+        }, child: Text("Save"))
       ]),
     );
   }

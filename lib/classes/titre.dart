@@ -1,6 +1,13 @@
 import 'package:mvvm_flutter_app/main.dart';
 import 'package:mvvm_flutter_app/network/api-connect.dart';
 
+
+
+class Badge{
+  String name ="Marcheur";
+  String adj = "ordinaire";
+  Badge(this.name,this.adj);
+}
 List<NameTitle> name = [
   NameTitle("Chèvre", false),
   NameTitle("Bourrin", false),

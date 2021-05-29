@@ -224,6 +224,12 @@ class ProfileViewState extends State<ProfileView> {
                                           Navigator.pushNamed(context, share)
                                         },
                                       ),
+                                      GestureDetector(
+                                        child: Icon(Icons.edit),
+                                        onTap: () => {
+                                          Navigator.pushNamed(context, editionProfil)
+                                        },
+                                      ),
                                     ],
                                   ),
                                   SizedBox(height: 25),

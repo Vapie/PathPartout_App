@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:mvvm_flutter_app/classes/avatar.dart';
+import 'package:mvvm_flutter_app/classes/titre.dart';
 import 'package:mvvm_flutter_app/main.dart';
 
 import 'package:mvvm_flutter_app/network/api-connect.dart';
+
+
 
 
 class User {
@@ -11,9 +15,13 @@ class User {
   String mail;
   String photoUrl;
   int privilegeLevel;
-  List<dynamic> avatar;
+  Avatar avatar;
+  Badge badge;
   List<dynamic> userData;
   List<int> favoris;
+
+
+
 
   User({this.id,
         this.firstname,
@@ -22,6 +30,7 @@ class User {
         this.photoUrl,
         this.privilegeLevel,
         this.avatar,
+        this.badge,
         this.userData,
         this.favoris
       });
@@ -31,6 +40,15 @@ class User {
     if (json.keys.contains("favoris"))
       currentFav = User.parseFavoris(json["favoris"]);
 
+    Avatar currentAvatar = Avatar();
+    if (json['avatar']!= null && json['avatar'].toString() != "[]")
+      currentAvatar =  User.getAvatarFromString(json['avatar'].toString());
+    Badge currentBadge = Badge("Marcheur","ordinaire");
+    if (json["badge"]!=null && json["badge"].toString()!="[]")
+      currentBadge = User.getBadgeFromString(json["badge"].toString());
+
+
+
     return User(
           id: json['_id'],
           firstname: json['firstname'],
@@ -38,7 +56,8 @@ class User {
           mail: json['mail'],
           photoUrl: json['photoUrl'],
           privilegeLevel: json['privilegeLevel'],
-          avatar: json['avatar'],
+          avatar:currentAvatar,
+          badge: currentBadge,
           userData: User.recoveruserData(json['userData'].toString()),
           favoris: currentFav
       );
@@ -106,8 +125,11 @@ class User {
   static modifyCurrentUserData(String userData) async {
     await modifyCurrentUser("userData",userData);
   }
-  static modifyUserAvatar(String avatar) async {
-    await modifyCurrentUser("avatar",currentConfig.currentAvatar.getApiArray());
+  static modifyUserAvatar() async {
+    await modifyCurrentUser("avatar",currentConfig.currentUser.avatar.getApiArray());
+  }
+  static modifyUserBadge(String selectedName, String selectedAdjective) async {
+    await modifyCurrentUser("badge","["+selectedName+","+selectedAdjective+"]");
   }
   static List<dynamic> recoveruserData(dynamic obj) {
 
@@ -135,5 +157,34 @@ class User {
       currentFav.add(int.parse(splitedData[i]));
     }
     return currentFav;
+  }
+
+  static void modifyUserAvantarAndBadge(String selectedName, String selectedAdjective) {
+    User.modifyUserAvatar();
+    User.modifyUserBadge(selectedName,selectedAdjective);
+  }
+
+  static Avatar getAvatarFromString(String str) {
+    print(str);
+    Avatar av = new Avatar();
+    List<String> paramsArray = str.replaceAll("[", "").replaceAll("]", "").split(",");
+    av.setAvataarParameters(
+        accessories:paramsArray[0],
+        clothe:paramsArray[1],
+        eye:paramsArray[2],
+        eyebrow:paramsArray[3],
+        facialHair:paramsArray[4],
+        hairColo:paramsArray[5],
+        mouth:paramsArray[6],
+        skinColo:paramsArray[7],
+        top:paramsArray[8],
+        clotheColo:paramsArray[9]);
+    return av;
+  }
+
+  static Badge getBadgeFromString(String str) {
+
+    List<String> paramsArray = str.replaceAll("[", "").replaceAll("]", "").split(",");
+    return new Badge(paramsArray[0],paramsArray[1]);
   }
 }

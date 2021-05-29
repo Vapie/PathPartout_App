@@ -142,27 +142,27 @@ class Avatar {
     }
 
 
-    void setAvataarParameters({top,accessories,hairColo,facialHair,clothe,clotheColo,eye,eyebrow,mouth,skinColo}){
+    void setAvataarParameters({String top,String accessories,String hairColo,String facialHair,String clothe,String clotheColo,String eye,String eyebrow,String mouth,String skinColo}){
       if(top!=null)
-        this.top = top;
+        this.top = SubAvatarItem.getSubAvatarItemFrom(top);
       if(accessories!=null)
-        this.accessories = accessories;
+        this.accessories = SubAvatarItem.getSubAvatarItemFrom(accessories);
       if(hairColo!=null)
-        this.hairColo = hairColo;
+        this.hairColo = SubAvatarItem.getSubAvatarItemFrom(hairColo);
       if(facialHair!=null)
-        this.facialHair = facialHair;
+        this.facialHair = SubAvatarItem.getSubAvatarItemFrom(facialHair);
       if(clothe!=null)
-        this.clothe = clothe;
+        this.clothe = SubAvatarItem.getSubAvatarItemFrom(clothe);
       if(clotheColo!=null)
-        this.clotheColo = clotheColo;
+        this.clotheColo = SubAvatarItem.getSubAvatarItemFrom(clotheColo);
       if(eye!=null)
-        this.eye = eye;
+        this.eye = SubAvatarItem.getSubAvatarItemFrom(eye);
       if(eyebrow!=null)
-        this.eyebrow = eyebrow;
+        this.eyebrow = SubAvatarItem.getSubAvatarItemFrom(eyebrow);
       if(mouth!=null)
-        this.mouth = mouth;
+        this.mouth = SubAvatarItem.getSubAvatarItemFrom(mouth);
       if(skinColo!=null)
-        this.skinColo = skinColo;
+        this.skinColo = SubAvatarItem.getSubAvatarItemFrom(skinColo);
     }
 
   String getApiArray() {
@@ -171,7 +171,7 @@ class Avatar {
         + ","+this.eye.libApi+","+this.eyebrow.libApi
         +","+this.facialHair.libApi+","+this.hairColo.libApi
         +"," +this.mouth.libApi+","+ this.skinColo.libApi
-        +","+this.top.libApi+","+this.clothe.libApi+"]";
+        +","+this.top.libApi+","+this.clotheColo.libApi+"]";
   }
 
 

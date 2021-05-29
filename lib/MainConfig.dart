@@ -18,14 +18,12 @@ class MainConfig {
   List<Rando> currentRandoList;
   MqttConsumer currentMqttConsumer;
   List<MqttBaliseMessage>  currentBaliseList=[];
-  Avatar currentAvatar;
 
   MainConfig(){
     currentUser = new User();
     myrandonotif = new RandoNotif();
     currentRando = new Rando();
     currentMqttConsumer =new MqttConsumer();
-    currentAvatar = new Avatar();
   }
 
    List<Rando> getCurrentRandoList(){
