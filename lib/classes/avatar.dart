@@ -2,19 +2,19 @@ import 'package:mvvm_flutter_app/main.dart';
 import 'package:mvvm_flutter_app/network/api-connect.dart';
 
 List<SubAvatarItem> topType = [
-  SubAvatarItem("NoHair", "Boule à z", false),
+  SubAvatarItem("NoHair", "Boule à z", true),
   SubAvatarItem("Eyepatch", "Cache oeil", false),
-  SubAvatarItem("Hat", "Chapeau", false),
+  SubAvatarItem("Hat", "Chapeau", true),
   SubAvatarItem("Hijab", "Voile", false),
   SubAvatarItem("Turban", "Turban", false),
-  SubAvatarItem("WinterHat1", "Chapeau d'hiver 1", false),
+  SubAvatarItem("WinterHat1", "Chapeau d'hiver 1", true),
   SubAvatarItem("LongHairBob", "Coupe au carré", false),
   SubAvatarItem("WinterHat3", "Chapeau d'hiver 2", false),
   SubAvatarItem("WinterHat4", "Chapeau d'hiver 3", false),
   SubAvatarItem("LongHairBigHair", "Cheveux ondulés", false),
   SubAvatarItem("LongHairBun", "Chignon", false),
   SubAvatarItem("LongHairCurly", "Long cheveux bouclés", false),
-  SubAvatarItem("LongHairCurvy", "Cheveux bouclés", false),
+  SubAvatarItem("LongHairCurvy", "Cheveux bouclés", true),
   SubAvatarItem("LongHairDreads", "Dreadlocks", false),
   SubAvatarItem("LongHairFrida", "Cheveux fleuris", false),
   SubAvatarItem("LongHairFro", "Coupe afro", false),
@@ -24,49 +24,49 @@ List<SubAvatarItem> topType = [
   SubAvatarItem("ShortHairCaesarSidePart", "court stylé", false),
 ];
 List<SubAvatarItem> accessoriesType = [
-  SubAvatarItem("Blank", "Blank", false),
-  SubAvatarItem("Kurt", "Kurt", false),
+  SubAvatarItem("Blank", "Blank", true),
+  SubAvatarItem("Kurt", "Kurt", true),
   SubAvatarItem("Prescription01", "Prescription01", false)
 ];
 List<SubAvatarItem> facialHairType = [
-  SubAvatarItem("Blank", "Blank", false),
-  SubAvatarItem("BeardMedium", "BeardMedium", false),
+  SubAvatarItem("Blank", "Blank", true),
+  SubAvatarItem("BeardMedium", "BeardMedium", true),
   SubAvatarItem("BeardLight", "BeardLight", false)
 ];
 List<SubAvatarItem> hairColor = [
-  SubAvatarItem("Auburn", "Auburn", false),
-  SubAvatarItem("Black", "Black", false),
+  SubAvatarItem("Auburn", "Auburn", true),
+  SubAvatarItem("Black", "Black", true),
   SubAvatarItem("Blonde", "Blonde", false)
 ];
 List<SubAvatarItem> clotheType = [
-  SubAvatarItem("BlazerShirt", "BlazerShirt", false),
-  SubAvatarItem("BlazerSweater", "BlazerSweater", false),
+  SubAvatarItem("BlazerShirt", "BlazerShirt", true),
+  SubAvatarItem("BlazerSweater", "BlazerSweater", true),
   SubAvatarItem("CollarSweater", "CollarSweater", false)
 ];
 List<SubAvatarItem> clotheColor = [
-  SubAvatarItem("Black", "Black", false),
-  SubAvatarItem("Blue01", "Blue01", false),
+  SubAvatarItem("Black", "Black", true),
+  SubAvatarItem("Blue01", "Blue01", true),
   SubAvatarItem("Blue02", "Blue02", false)
 ];
 List<SubAvatarItem> eyeType = [
-  SubAvatarItem("Close", "Close", false),
-  SubAvatarItem("Cry", "Cry", false),
+  SubAvatarItem("Close", "Close", true),
+  SubAvatarItem("Cry", "Cry", true),
   SubAvatarItem("Dizzy", "Dizzy", false)
 ];
 List<SubAvatarItem> eyebrowType = [
-  SubAvatarItem("Angry", "Angry", false),
+  SubAvatarItem("Angry", "Angry", true),
   SubAvatarItem("AngryNatural", "AngryNatural", false),
-  SubAvatarItem("Default", "Default", false)
+  SubAvatarItem("Default", "Default", true)
 ];
 List<SubAvatarItem> mouthType = [
-  SubAvatarItem("Concerned", "Concerned", false),
-  SubAvatarItem("Disbelief", "Disbelief", false),
+  SubAvatarItem("Concerned", "Concerned", true),
+  SubAvatarItem("Disbelief", "Disbelief", true),
   SubAvatarItem("Eating", "Eating", false)
 ];
 List<SubAvatarItem> skinColor = [
-  SubAvatarItem("Tanned", "Tanned", false),
+  SubAvatarItem("Tanned", "Tanned", true),
   SubAvatarItem("Yellow", "Yellow", false),
-  SubAvatarItem("Pale", "Pale", false),
+  SubAvatarItem("Pale", "Pale", true),
 ];
 
 class SubAvatarItem {
@@ -100,10 +100,8 @@ class SubAvatarItem {
       if(sub.libApi == lib){
         return sub;
       }
-
     }
   }
-
 }
 
 class Avatar {

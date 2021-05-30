@@ -192,46 +192,53 @@ class _MyHomePageState extends State<editProfilView> {
   List<DropdownMenuItem<String>> getListItem(List<SubAvatarItem> itemList) {
     List<DropdownMenuItem<String>> allItemForDropdown = [];
       for (SubAvatarItem item in itemList){
-        allItemForDropdown.add(new DropdownMenuItem(
-          child: new Text(item.libUI),
-          value: item.libApi,
-        ));
+        if (item.isUnlock) {
+          allItemForDropdown.add(new DropdownMenuItem(
+            child: new Text(item.libUI),
+            value: item.libApi,
+          ));
+        }
       }
     return allItemForDropdown;
   }
 
-
-  getAvatarItemFromValue(List<SubAvatarItem> itemList) {
-    List<DropdownMenuItem<String>> allItemForDropdown = [];
-    for (SubAvatarItem item in itemList){
-      allItemForDropdown.add(new DropdownMenuItem(
-        child: new Text(item.libUI),
-        value: item.libApi,
-      ));
-    }
-    return allItemForDropdown;
-  }
-
-
+  // getAvatarItemFromValue(List<SubAvatarItem> itemList) {
+  //   List<DropdownMenuItem<String>> allItemForDropdown = [];
+  //   for (SubAvatarItem item in itemList) {
+  //     print(item.isUnlock);
+  //     if (item.isUnlock) {
+  //
+  //       allItemForDropdown.add(new DropdownMenuItem(
+  //         child: new Text(item.libUI),
+  //         value: item.libApi,
+  //       ));
+  //     }
+  //   }
+  //   return allItemForDropdown;
+  // }
 
   getListName(List<NameTitle> nameList){
     List<DropdownMenuItem<String>> allNameForTitre = [];
-      for (NameTitle name in nameList){
-        allNameForTitre.add(new DropdownMenuItem(
-          child: new Text(name.libName),
-          value: name.libName,
-        ));
+      for (NameTitle name in nameList) {
+        if (name.isUnlock) {
+          allNameForTitre.add(new DropdownMenuItem(
+            child: new Text(name.libName),
+            value: name.libName,
+          ));
+        }
       }
       return allNameForTitre;
   }
 
   getListAdjective(List<AdjectiveTitle> adjectiveList){
     List<DropdownMenuItem<String>> allAdjectiveList = [];
-      for (AdjectiveTitle adjective in adjectiveList){
-        allAdjectiveList.add(new DropdownMenuItem(
-          child: new Text(adjective.libAdjective),
-          value: adjective.libAdjective,
-        ));
+      for (AdjectiveTitle adjective in adjectiveList) {
+        if (adjective.isUnlock) {
+          allAdjectiveList.add(new DropdownMenuItem(
+            child: new Text(adjective.libAdjective),
+            value: adjective.libAdjective,
+          ));
+        }
       }
       return allAdjectiveList;
   }
