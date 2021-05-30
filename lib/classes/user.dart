@@ -46,12 +46,14 @@ class User {
     Badge currentBadge = Badge("Marcheur","ordinaire");
     if (json["badge"]!=null && json["badge"].toString()!="[]")
       currentBadge = User.getBadgeFromString(json["badge"].toString());
-
+    String firstname = json["firstname"];
+    if (firstname == "")
+      firstname = "Anonyme";
 
 
     return User(
           id: json['_id'],
-          firstname: json['firstname'],
+          firstname: firstname,
           lastname: json['lastname'],
           mail: json['mail'],
           photoUrl: json['photoUrl'],
@@ -91,13 +93,14 @@ class User {
     currentConfig.currentUser = user;
   }
 
-  static createUser(String email, String password) async {
+  static createUser(String email, String password,String pseudo) async {
     final newUserJson = await fetchRequestParameters(
         'pathpartoutapi.herokuapp.com', 'user/create', {
       'token': currentConfig.currentToken,
       'email': email,
       'password': password
     });
+    User.modifyCurrentUserPseudo(pseudo);
     User.authenticate(email, password);
 
   }
@@ -186,5 +189,10 @@ class User {
 
     List<String> paramsArray = str.replaceAll("[", "").replaceAll("]", "").split(",");
     return new Badge(paramsArray[0],paramsArray[1]);
+  }
+
+  static Future<void> modifyCurrentUserPseudo(String pseudo) async {
+    await modifyCurrentUser("firstname",pseudo);
+
   }
 }

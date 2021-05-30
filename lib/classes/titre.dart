@@ -5,6 +5,11 @@ class Badge{
   String name ="Marcheur";
   String adj = "ordinaire";
   Badge(this.name,this.adj);
+
+  String getTitre() {
+    String title = this.name +" " + this.adj;
+    return title;
+  }
 }
 List<NameTitle> name = [
   NameTitle("Chèvre", false),

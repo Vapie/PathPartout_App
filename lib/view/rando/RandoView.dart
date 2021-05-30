@@ -2,8 +2,10 @@ import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:mvvm_flutter_app/classes/review.dart';
 import 'package:mvvm_flutter_app/classes/sorties.dart';
+import 'package:mvvm_flutter_app/classes/user.dart';
 import 'package:mvvm_flutter_app/main.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/widget/appbar/appBar.dart';
@@ -553,18 +555,26 @@ class _RandoViewState extends State<RandoView> {
                         for (var review in _reviews)
                           if (review.avis.replaceAll(" ", "") != "")
                             //for (var i = 0; i < 2; i++)
-                            Container(
+                            FutureBuilder<User>(
+                                future: User.fetchUser(review.userId),
+                                builder: (context, AsyncSnapshot<User> snapshot) {
+                            return Container(
                                 child: Padding(
-                                  padding: EdgeInsets.all(20.0),
+                                  padding: EdgeInsets.all(8.0),
                                   child: Row(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Column(children: [
-                                        CircleAvatar(
-                                          backgroundColor: Colors.grey,
-                                          backgroundImage: AssetImage(
-                                              "assets/picture/portrait.jpg"),
+
+                                      SvgPicture.network(
+
+                                        snapshot.data.avatar.getImageUrl(),
+                                          height: 80,
+                                          width: 80,
+                                          placeholderBuilder: (BuildContext context) => Container(
+                                              padding: const EdgeInsets.all(20.0),
+                                              child: const CircularProgressIndicator()),
                                         ),
                                       ]),
                                       // Avis - Description
@@ -590,7 +600,7 @@ class _RandoViewState extends State<RandoView> {
                                                                     right:
                                                                         10.0),
                                                             child: Text(
-                                                                "utilisateur anonyme",
+                                                                currentConfig.currentUser.firstname,
                                                                 textAlign:
                                                                     TextAlign
                                                                         .left,
@@ -605,7 +615,7 @@ class _RandoViewState extends State<RandoView> {
                                                         padding:
                                                             EdgeInsets.all(5.0),
                                                         child: Text(
-                                                          "Curieuse aguerrie",
+                                                          snapshot.data.badge.getTitre(),
                                                           style: TextStyle(
                                                               color:
                                                                   Colors.white),
@@ -628,11 +638,7 @@ class _RandoViewState extends State<RandoView> {
                                                       padding:
                                                           const EdgeInsets.only(
                                                               top: 10.0),
-                                                      width:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.75,
+
                                                       child: Column(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
@@ -655,7 +661,7 @@ class _RandoViewState extends State<RandoView> {
                                     ],
                                   ),
                                 ),
-                                color: Colors.grey[200])
+                                color: Colors.grey[200]);})
                     ])
                   ],
                 ),
@@ -672,6 +678,7 @@ class _RandoViewState extends State<RandoView> {
   }
 }
 
+//TODO replace this
 //Return text based on difficulty of the hike
 Text getDifficulty(int level) {
   switch (level) {

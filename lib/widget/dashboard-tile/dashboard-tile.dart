@@ -1,6 +1,7 @@
 import 'package:easy_gradient_text/easy_gradient_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import 'package:mvvm_flutter_app/classes/achievement.dart';
 import 'package:mvvm_flutter_app/classes/achievementUnlocked.dart';
@@ -80,16 +81,17 @@ class DashboardTile extends StatelessWidget {
     return performancesData;
   }
 
-  List<Achievement> achievements;
+  List<Achievement> achievements=[];
   List<Achievement> sortedAchievements = [];
   Future<List<Achievement>> getAchievements() async {
-    achievements = await Achievement.getAchievements();
+
     print(achievements);
     await getAchievementsUnlocked();
+    achievements = await Achievement.getAchievements();
     return achievements;
   }
 
-  List<String> achievementsUnlocked;
+  List<String> achievementsUnlocked =[];
   Future<List<String>> getAchievementsUnlocked() async {
     achievementsUnlocked = await AchievementUnlocked.getUserAchievements();
     return achievementsUnlocked;
@@ -124,6 +126,7 @@ class DashboardTile extends StatelessWidget {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+
                             Text(
                               achievementsUnlocked.length.toString() + '/' +
                                   achievements.length.toString(),
@@ -434,10 +437,14 @@ class DashboardTile extends StatelessWidget {
                   padding: EdgeInsets.only(right: 10),
                   child: Column(
                     children: [
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundImage:
-                            AssetImage('assets/picture/portrait.jpg'),
+                      SvgPicture.network(
+
+                        currentConfig.currentUser.avatar.getImageUrl(),
+                        height: 100,
+                        width: 100,
+                        placeholderBuilder: (BuildContext context) => Container(
+                            padding: const EdgeInsets.all(30.0),
+                            child: const CircularProgressIndicator()),
                       )
                     ],
                   ),
@@ -448,7 +455,7 @@ class DashboardTile extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(bottom: 10),
                       child: Text(
-                        "Lauren, 32 ans",
+                        currentConfig.currentUser.firstname,
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.bold,
@@ -462,7 +469,7 @@ class DashboardTile extends StatelessWidget {
                       ),
                       padding:
                           EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                      child: Text("Curieuse aguerrie",
+                      child: Text(currentConfig.currentUser.badge.getTitre(),
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 15,
@@ -472,7 +479,7 @@ class DashboardTile extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.pushNamed(context, profile);
+                    Navigator.pushNamed(context, core, arguments: { "selectedIndex": 2, "randosCollection": currentConfig.getCurrentRandoList()});
                   },
                   child: Icon(
                     Icons.chevron_right_rounded,
