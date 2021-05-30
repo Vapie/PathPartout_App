@@ -21,7 +21,6 @@ class SplashView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 FractionallySizedBox(
-
                   widthFactor: 0.3,
                   child: Image.asset(
                     'assets/picture/logo.png',

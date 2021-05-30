@@ -114,10 +114,11 @@ class _LoginState extends State<LoginView> {
                               await User.authenticate(emailController.text, passwordController.text);
                               await currentConfig.getRandoList();
                               if ((currentConfig.currentUser.userData != null) & (currentConfig.currentUser.userData.toString() != "[]"))
-                                    //Navigator.pushNamed(context, core, arguments: { "selectedIndex": 0, "randosCollection": currentConfig.getCurrentRandoList()});
-                                Navigator.pushNamed(context, dashboard);
+                                 Navigator.pushNamed(context, core, arguments: { "selectedIndex": 1, "randosCollection": currentConfig.getCurrentRandoList()});
+                                //Navigator.pushNamed(context, core);
 
-                              if ((currentConfig.currentUser.userData == null)|| (currentConfig.currentUser.userData.toString() == "[]"))
+                              if ((currentConfig.currentUser.userData ==
+                                  null)|| (currentConfig.currentUser.userData.toString() == "[]"))
                                     Navigator.pushNamed(context, survey);
                             }
                             // on part sur la page de loading avec la fonction embarquée

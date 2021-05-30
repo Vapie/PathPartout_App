@@ -22,12 +22,14 @@ class _RegisterState extends State<RegisterView> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final pseudoController = TextEditingController();
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
+    pseudoController.dispose();
     super.dispose();
   }
 
@@ -75,7 +77,16 @@ class _RegisterState extends State<RegisterView> {
                     color: Colors.black,
                     fontSize: 20)),
           ),
-
+          Padding(
+              padding: EdgeInsets.all(15.0),
+              child: TextField(
+                controller: emailController,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Pseudo',
+                    hintText: 'Entrez votre pseudo'),
+              ),
+            ),
           Padding(
             padding: EdgeInsets.all(15.0),
             child: TextField(
@@ -128,7 +139,7 @@ class _RegisterState extends State<RegisterView> {
                       fontSize: 25),
                 ),
                 onPressed: () {
-                  model.createUser(emailController.text, passwordController.text, confirmPasswordController.text);
+                  model.createUser(emailController.text, passwordController.text, confirmPasswordController.text,pseudoController.text);
                 },
               )),
         ],

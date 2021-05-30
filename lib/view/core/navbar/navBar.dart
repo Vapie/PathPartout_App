@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
+import 'package:mvvm_flutter_app/view/dashboard/DashboardView.dart';
 import 'package:mvvm_flutter_app/view/login/LoginView.dart';
 
 import 'package:mvvm_flutter_app/view/plan/PlanView.dart';
@@ -37,14 +38,14 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
 
     _options = <Widget>[
       RandosView(randos),
-      PlanMultipleView(),
+      DashboardView(),
       ProfileView(),
     ];
   }
   void _onItemTap(int index) {
     _options = <Widget>[
       RandosView(randos),
-      PlanMultipleView(),
+      DashboardView(),
       ProfileView(),
     ];
     setState(() {

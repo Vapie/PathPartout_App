@@ -132,38 +132,56 @@ class ProfileViewState extends State<ProfileView> {
                                   SizedBox(height: 20),
                                   Row(
                                       children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(12.0),
-                                            color: Color(0xFFF29696),
+                                        Column(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+
+
+                                            Padding(
+                                              padding: EdgeInsets.only(bottom: 10),
+                                              child: Text(
+                                                currentConfig.currentUser.firstname,
+                                                style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20),
+                                              ),
+                                            ),
+                                          Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.circular(12.0),
+                                              color: Color(0xFFF29696),
+                                            ),
+                                            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                                            child: Text(
+                                                currentConfig.currentUser.badge.getTitre(),
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 15,
+                                                    fontWeight: FontWeight.w500
+                                                )
+                                            ),
                                           ),
-                                          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                                          child: Text(
-                                              "Curieuse aguerrie",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w500
-                                              )
-                                          ),
-                                        ),
+                                        ],),
+
                                         SizedBox(width: 15),
+                                        Expanded(child:
                                         Container(
                                           decoration: BoxDecoration(
                                               borderRadius: BorderRadius.only(topLeft: Radius.circular(14), bottomLeft: Radius.circular(14)),
                                               color: Color(0xFFF29696)
                                           ),
                                           height: 6,
-                                          width: 52,
-                                        ),
+                                        )),
+                                              SvgPicture.network(
 
-                                       SvgPicture.network(
-                                            currentConfig.currentUser.avatar.getImageUrl(),
-                                            placeholderBuilder: (BuildContext context) => Container(
-                                                padding: const EdgeInsets.all(30.0),
-                                                child: const CircularProgressIndicator()),
-                                          ),
-
+                                                currentConfig.currentUser.avatar.getImageUrl(),
+                                                height: 110,
+                                                width: 110,
+                                                placeholderBuilder: (BuildContext context) => Container(
+                                                    padding: const EdgeInsets.all(30.0),
+                                                    child: const CircularProgressIndicator()),
+                                              )
                                       ]
                                   ),
                                   SizedBox(height: 20),
@@ -180,9 +198,10 @@ class ProfileViewState extends State<ProfileView> {
                                     ],
                                   ),
                                   SizedBox(height: 12),
-                                  Container(child:GradientButton(child: Text("Modifier le profil",style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold),)),width: 200,alignment: AlignmentDirectional.topStart,),
+                                  Container(child:GradientButton(onPressed:(){ Navigator.pushNamed(context, editionProfil);},child: Text("Modifier le profil",style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold),)),width: 200,alignment: AlignmentDirectional.topStart,),
 
                                   SizedBox(height: 5),
+
 
 
                                   // Row(
@@ -229,12 +248,6 @@ class ProfileViewState extends State<ProfileView> {
                                         child: Icon(Icons.share),
                                         onTap: () => {
                                           Navigator.pushNamed(context, share)
-                                        },
-                                      ),
-                                      GestureDetector(
-                                        child: Icon(Icons.edit),
-                                        onTap: () => {
-                                          Navigator.pushNamed(context, editionProfil)
                                         },
                                       ),
                                     ],
