@@ -2,8 +2,9 @@ import 'package:mvvm_flutter_app/main.dart';
 import 'package:mvvm_flutter_app/network/api-connect.dart';
 
 class Badge{
-  String name ="Marcheur";
+  String name = "Marcheur";
   String adj = "ordinaire";
+
   Badge(this.name,this.adj);
 
   String getTitre() {
@@ -16,14 +17,15 @@ List<NameTitle> name = [
   NameTitle("Bourrin", false),
   NameTitle("Patron", false),
   NameTitle("Demi-dieu", false),
-  NameTitle("Escargot", false),
+  NameTitle("Escargot", true),
   NameTitle("Hermite", false),
-  NameTitle("Marcheur", false),
+  NameTitle("Routard", true),
+  NameTitle("Marcheur", true),
 ];
 
 class NameTitle {
   String libName;
-bool isUnlock;
+  bool isUnlock;
 
   NameTitle(
     this.libName,
@@ -32,13 +34,13 @@ bool isUnlock;
 }
 
 List<AdjectiveTitle> adjective = [
-  AdjectiveTitle("des montagnes", false),
+  AdjectiveTitle("des montagnes", true),
   AdjectiveTitle("des Alpes", false),
   AdjectiveTitle("sans pitié", false),
-  AdjectiveTitle("au grand coeur", false),
+  AdjectiveTitle("au grand coeur", true),
   AdjectiveTitle("citadin", false),
   AdjectiveTitle("optimiste", false),
-  AdjectiveTitle("ordinaire", false),
+  AdjectiveTitle("ordinaire", true),
 ];
 
 class AdjectiveTitle {
