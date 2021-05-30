@@ -34,7 +34,7 @@ class DashboardTile extends StatelessWidget {
     offset: Offset(0, 1),
   );
 
-  dynamic performancesData;
+  dynamic performancesData={"nbKm":"?","tempsTot":"?" };
 
 
   Future<dynamic> getSortiesData() async {
@@ -77,15 +77,15 @@ class DashboardTile extends StatelessWidget {
       Dist(MonthLabel[(currentmonth-2)%12],NbPas[(currentmonth-2)%12]),
       Dist(MonthLabel[(currentmonth-1)%12],NbPas[(currentmonth-1)%12])];
 
-    performancesData = {"nbKm":nbKm.round(),"tempsTot":(heure + min/60 ).round().toString() +" h "+ (min%60).round().toString() + "min","LastPost":tabpas};
+    performancesData = {"nbKm":nbKm.round().toString(),"tempsTot":(heure + min/60 ).round().toString() +" h "+ (min%60).round().toString() + "min","LastPost":tabpas};
     return performancesData;
   }
 
   List<Achievement> achievements=[];
+
   List<Achievement> sortedAchievements = [];
   Future<List<Achievement>> getAchievements() async {
-
-    print(achievements);
+    performancesData = await getSortiesData();
     await getAchievementsUnlocked();
     achievements = await Achievement.getAchievements();
     return achievements;
@@ -112,7 +112,7 @@ class DashboardTile extends StatelessWidget {
               child: Column(
                 children: [
                   Expanded(
-                    flex: 1,
+                    flex: 6,
                     child: Row(
                         children: [
                           Text(
@@ -135,7 +135,14 @@ class DashboardTile extends StatelessWidget {
                             ),
                           ]
                       )
-                  )
+                  ),
+              Container(
+                height: 100,
+
+                child:
+                  LoadImage("https://img-premium.flaticon.com/png/512/2927/2927917.png?token=exp=1622401390~hmac=668313a87dd4637047e15f2b31f3413e")
+              ),
+              Container(height:40)
                 ],
               ),
               decoration: BoxDecoration(
@@ -281,6 +288,9 @@ class DashboardTile extends StatelessWidget {
     }
 
     if (type == "performances") {
+      return FutureBuilder<dynamic>(
+          future: getSortiesData(),
+          builder: (context, AsyncSnapshot<dynamic> snapshot) {
       return Container(
         padding: const EdgeInsets.all(10.0),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -315,15 +325,15 @@ class DashboardTile extends StatelessWidget {
                         Container(
                           alignment: Alignment.bottomRight,
                           margin: EdgeInsets.only(top: 10),
-                          child: Text(
-                            //TODO
-                            '12 km',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25),
-                          ),
+                          child: Text(performancesData["nbKm"].toString()+" km",
+
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25),
+                                ),
                         ),
+
                       ],
                     ),
                   ),
@@ -361,7 +371,7 @@ class DashboardTile extends StatelessWidget {
                           margin: EdgeInsets.only(top: 10),
                           child: GradientText(
                             //TODO
-                            text: "3",
+                            text: sorties.length.toString(),
                             colors: <Color>[
                               Color(0xFF2AB7F6),
                               Color(0xFF5EC8F8),
@@ -386,7 +396,7 @@ class DashboardTile extends StatelessWidget {
                     ),
                     child: Column(children: [
                       Text(
-                        "Mes pas",
+                        "Temps Total",
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.white),
                       ),
@@ -394,8 +404,7 @@ class DashboardTile extends StatelessWidget {
                         alignment: Alignment.bottomRight,
                         margin: EdgeInsets.only(top: 10),
                         child: Text(
-                          //TODO
-                          '50 000',
+                          performancesData["tempsTot"].toString(),
                           style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
@@ -412,7 +421,7 @@ class DashboardTile extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10)),
           boxShadow: [boxShadow],
         ),
-      );
+      );});
     }
 
     if (type == "profil") {

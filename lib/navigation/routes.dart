@@ -88,7 +88,7 @@ class Router {
       case achievements:
         return MaterialPageRoute(builder: (_) => AchievementsView());
       case onBoarding:
-        return MaterialPageRoute(builder: (_) => OnBoardingView());
+        return MaterialPageRoute(builder: (_) => OnBoardingPage());
       case editionProfil:
         return MaterialPageRoute(builder: (_) => editProfilView());
       default:

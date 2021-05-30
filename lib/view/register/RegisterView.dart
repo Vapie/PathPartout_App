@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_flutter_app/classes/user.dart';
+import 'package:mvvm_flutter_app/main.dart';
+import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/view/register/RegisterViewModel.dart';
 import 'package:mvvm_flutter_app/widget/media/outlined-gradient-button.dart';
 import 'package:stacked/stacked.dart';
@@ -80,7 +83,7 @@ class _RegisterState extends State<RegisterView> {
           Padding(
               padding: EdgeInsets.all(15.0),
               child: TextField(
-                controller: emailController,
+                controller: pseudoController,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Pseudo',
@@ -138,8 +141,15 @@ class _RegisterState extends State<RegisterView> {
                       fontWeight: FontWeight.bold,
                       fontSize: 25),
                 ),
-                onPressed: () {
-                  model.createUser(emailController.text, passwordController.text, confirmPasswordController.text,pseudoController.text);
+                onPressed: (){
+                  Future<void> asyncFunc() async {
+                    await currentConfig.getRandoList();
+                    await User.createUser(emailController.text, passwordController.text, pseudoController.text);
+                    Navigator.pushNamed(context, onBoarding);
+                  }
+                  // on part sur la page de loading avec la fonction embarquée
+                  Navigator.pushNamed(context, loading, arguments: { "asyncFunc": asyncFunc});
+
                 },
               )),
         ],

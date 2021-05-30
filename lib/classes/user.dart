@@ -100,8 +100,10 @@ class User {
       'email': email,
       'password': password
     });
-    User.modifyCurrentUserPseudo(pseudo);
-    User.authenticate(email, password);
+
+    await User.authenticate(email, password);
+    currentConfig.currentUser.firstname = pseudo;
+    await User.modifyCurrentUserPseudo(pseudo);
 
   }
 
