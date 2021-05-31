@@ -1,3 +1,4 @@
+import 'package:mvvm_flutter_app/MainConfig.dart';
 import 'package:mvvm_flutter_app/network/api-connect.dart';
 
 import '../main.dart';
@@ -35,6 +36,20 @@ class AchievementUnlocked{
     return achievementsUnlocked;
   }
 
+  static Future<List<AchievementUnlocked>> getUserAchievementsObj() async {
+    List<AchievementUnlocked> achievementsUnlocked = [];
+    final achievementsUnlockedJson = await fetchRequestParameters('pathpartoutapi.herokuapp.com', 'achievements/get/user', {
+      'token': currentConfig.currentToken,
+      'userId': currentConfig.currentUser.id,
+      //key: value
+    });
+    for(Map<String, dynamic> element in achievementsUnlockedJson){
+      AchievementUnlocked achievement = AchievementUnlocked.fromJson(element);
+      achievementsUnlocked.add(achievement);
+    }
+    return achievementsUnlocked;
+  }
+
   static Future<dynamic> unlockAchivement(String achievementId ) async {
 
     await fetchRequestParameters('pathpartoutapi.herokuapp.com', 'achievements/unlock', {
@@ -44,4 +59,6 @@ class AchievementUnlocked{
     });
     return 'onébon';
   }
+
+  static unlockItems(MainConfig currentConfig, List<AchievementUnlocked> data) {}
 }
