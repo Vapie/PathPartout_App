@@ -184,12 +184,11 @@ class DashboardTile extends StatelessWidget {
                 children: [
                   Stack(alignment: Alignment.bottomLeft, children: [
                     if (currentConfig.currentRandoList[0].images != null)
-                      Container(
+                      Expanded(
                           child: LoadImage(
                               currentConfig.currentRandoList[0].images[0])),
                     Container(
-                      height:
-                      MediaQuery.of(context).size.height * height,
+                      height: MediaQuery.of(context).size.height*height ,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -520,9 +519,10 @@ class DashboardTile extends StatelessWidget {
     if (type == "pub") {
       return Container(
         height: MediaQuery.of(context).size.height * height,
-        padding: const EdgeInsets.all(10.0),
-        child: Text(title),
+
+        child:Container( child:LoadImage("https://cdn.discordapp.com/attachments/760143997590175747/848964250805600308/unknown.png")),
         decoration: BoxDecoration(
+
           color: Colors.white,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(10),
