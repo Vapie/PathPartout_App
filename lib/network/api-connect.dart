@@ -36,7 +36,7 @@ Future<dynamic> fetchRequestSingle(String address, String params) async {
 }
 
   Future<dynamic> fetchRequestParameters(String address, String params,Map<String,dynamic> postparameters ) async {
-
+      print(postparameters.toString());
       print(address + "/" + params);
       final response = await http.post(
         Uri.https(address, params),

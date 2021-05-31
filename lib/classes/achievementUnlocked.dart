@@ -22,7 +22,6 @@ class AchievementUnlocked{
   }
 
   static Future<List<String>> getUserAchievements() async {
-    print('passed episode 2');
     List<String> achievementsUnlocked = [];
     final achievementsUnlockedJson = await fetchRequestParameters('pathpartoutapi.herokuapp.com', 'achievements/get/user', {
       'token': currentConfig.currentToken,
@@ -36,4 +35,13 @@ class AchievementUnlocked{
     return achievementsUnlocked;
   }
 
+  static Future<dynamic> unlockAchivement(String achievementId ) async {
+
+    await fetchRequestParameters('pathpartoutapi.herokuapp.com', 'achievements/unlock', {
+      'token': currentConfig.currentToken,
+      'userId': currentConfig.currentUser.id,
+      'achievementId': achievementId.toString()
+    });
+    return 'onébon';
+  }
 }

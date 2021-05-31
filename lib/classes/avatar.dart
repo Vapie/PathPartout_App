@@ -95,12 +95,13 @@ class SubAvatarItem {
         return l;
   }
 
-  static SubAvatarItem getSubAvatarItemFrom(String lib){
+  static SubAvatarItem getSubAvatarItemFrom(String lib,SubAvatarItem replacement){
     for (SubAvatarItem sub in SubAvatarItem.getALLSubAvatarItem()){
       if(sub.libApi == lib){
         return sub;
       }
     }
+    return replacement;
   }
 }
 
@@ -139,28 +140,28 @@ class Avatar {
           +"&topType="+this.top.libApi+"&clotheColor="+this.clothe.libApi;
     }
 
-
     void setAvataarParameters({String top,String accessories,String hairColo,String facialHair,String clothe,String clotheColo,String eye,String eyebrow,String mouth,String skinColo}){
+    print({ top, accessories, hairColo, facialHair, clothe, clotheColo, eye, eyebrow, mouth, skinColo});
       if(top!=null)
-        this.top = SubAvatarItem.getSubAvatarItemFrom(top);
+        this.top = SubAvatarItem.getSubAvatarItemFrom(top,topType[0]);
       if(accessories!=null)
-        this.accessories = SubAvatarItem.getSubAvatarItemFrom(accessories);
+        this.accessories = SubAvatarItem.getSubAvatarItemFrom(accessories,accessoriesType[0]);
       if(hairColo!=null)
-        this.hairColo = SubAvatarItem.getSubAvatarItemFrom(hairColo);
+        this.hairColo = SubAvatarItem.getSubAvatarItemFrom(hairColo,hairColor[0]);
       if(facialHair!=null)
-        this.facialHair = SubAvatarItem.getSubAvatarItemFrom(facialHair);
+        this.facialHair = SubAvatarItem.getSubAvatarItemFrom(facialHair,facialHairType[0]);
       if(clothe!=null)
-        this.clothe = SubAvatarItem.getSubAvatarItemFrom(clothe);
+        this.clothe = SubAvatarItem.getSubAvatarItemFrom(clothe,clotheType[0]);
       if(clotheColo!=null)
-        this.clotheColo = SubAvatarItem.getSubAvatarItemFrom(clotheColo);
+        this.clotheColo = SubAvatarItem.getSubAvatarItemFrom(clotheColo,clotheColor[0]);
       if(eye!=null)
-        this.eye = SubAvatarItem.getSubAvatarItemFrom(eye);
+        this.eye = SubAvatarItem.getSubAvatarItemFrom(eye,eyeType[0]);
       if(eyebrow!=null)
-        this.eyebrow = SubAvatarItem.getSubAvatarItemFrom(eyebrow);
+        this.eyebrow = SubAvatarItem.getSubAvatarItemFrom(eyebrow,eyebrowType[0]);
       if(mouth!=null)
-        this.mouth = SubAvatarItem.getSubAvatarItemFrom(mouth);
+        this.mouth = SubAvatarItem.getSubAvatarItemFrom(mouth,mouthType[0]);
       if(skinColo!=null)
-        this.skinColo = SubAvatarItem.getSubAvatarItemFrom(skinColo);
+        this.skinColo = SubAvatarItem.getSubAvatarItemFrom(skinColo,skinColor[0]);
     }
 
   String getApiArray() {

@@ -253,7 +253,11 @@ class DashboardTile extends StatelessWidget {
       return Container(
         height: MediaQuery.of(context).size.height * height,
         padding: const EdgeInsets.all(10.0),
-        child: Column(
+        child:GestureDetector(
+            onTap:(){
+              Navigator.pushNamed(context, qr);
+            },
+            child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
@@ -267,7 +271,7 @@ class DashboardTile extends StatelessWidget {
               color: Colors.white,
             )
           ],
-        ),
+        )),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(10),

@@ -7,6 +7,7 @@ import 'package:mvvm_flutter_app/main.dart';
 import 'package:mvvm_flutter_app/classes/titre.dart';
 import 'package:easy_gradient_text/easy_gradient_text.dart';
 import 'package:esys_flutter_share/esys_flutter_share.dart';
+import 'package:mvvm_flutter_app/navigation/routes.dart';
 
 /// Assets to test network access.
 
@@ -167,7 +168,7 @@ class _MyHomePageState extends State<editProfilView> {
                                   items: getListItem(topType),
                                   hint: new Text("select hat"),
                                     onChanged: (value) {
-                                    currentConfig.currentUser.avatar.top = SubAvatarItem.getSubAvatarItemFrom(value);
+                                    currentConfig.currentUser.avatar.top = SubAvatarItem.getSubAvatarItemFrom(value,topType[0]);
                                     setState(() {
                                   });
                                 })
@@ -183,7 +184,7 @@ class _MyHomePageState extends State<editProfilView> {
                                     items: getListItem(accessoriesType),
                                     hint: new Text("select accessories"),
                                     onChanged: (value) {
-                                      currentConfig.currentUser.avatar.accessories = SubAvatarItem.getSubAvatarItemFrom(value);
+                                      currentConfig.currentUser.avatar.accessories = SubAvatarItem.getSubAvatarItemFrom(value,accessoriesType[0]);
                                       setState(() {
                                       });
                                     })
@@ -203,7 +204,7 @@ class _MyHomePageState extends State<editProfilView> {
                                     items: getListItem(facialHairType),
                                     hint: new Text("select facial hair"),
                                     onChanged: (value) {
-                                      currentConfig.currentUser.avatar.facialHair = SubAvatarItem.getSubAvatarItemFrom(value);
+                                      currentConfig.currentUser.avatar.facialHair = SubAvatarItem.getSubAvatarItemFrom(value,facialHairType[0]);
                                     setState(() {
                                   });
                                 })
@@ -219,7 +220,7 @@ class _MyHomePageState extends State<editProfilView> {
                                     items: getListItem(hairColor),
                                     hint: new Text("select hair color"),
                                     onChanged: (value) {
-                                      currentConfig.currentUser.avatar.hairColo = SubAvatarItem.getSubAvatarItemFrom(value);
+                                      currentConfig.currentUser.avatar.hairColo = SubAvatarItem.getSubAvatarItemFrom(value,hairColor[0]);
                                       setState(() {
                                       });
                                     })
@@ -239,7 +240,7 @@ class _MyHomePageState extends State<editProfilView> {
                                     items: getListItem(clotheType),
                                     hint: new Text("select clothes"),
                                     onChanged: (value) {
-                                      currentConfig.currentUser.avatar.clothe = SubAvatarItem.getSubAvatarItemFrom(value);
+                                      currentConfig.currentUser.avatar.clothe = SubAvatarItem.getSubAvatarItemFrom(value,clotheType[0]);
                                     setState(() {
                                   });
                                 })
@@ -255,7 +256,7 @@ class _MyHomePageState extends State<editProfilView> {
                                     items: getListItem(clotheColor),
                                     hint: new Text("clothes color"),
                                     onChanged: (value) {
-                                      currentConfig.currentUser.avatar.clotheColo = SubAvatarItem.getSubAvatarItemFrom(value);
+                                      currentConfig.currentUser.avatar.clotheColo = SubAvatarItem.getSubAvatarItemFrom(value,clotheColor[0]);
                                       setState(() {
                                       });
                                     })
@@ -275,7 +276,7 @@ class _MyHomePageState extends State<editProfilView> {
                                     items: getListItem(eyeType),
                                     hint: new Text("select eyes"),
                                     onChanged: (value) {
-                                      currentConfig.currentUser.avatar.eye = SubAvatarItem.getSubAvatarItemFrom(value);
+                                      currentConfig.currentUser.avatar.eye = SubAvatarItem.getSubAvatarItemFrom(value,eyeType[0]);
                                     setState(() {
                                   });
                                 })
@@ -291,7 +292,7 @@ class _MyHomePageState extends State<editProfilView> {
                                     items: getListItem(eyebrowType),
                                     hint: new Text("select eyebrow"),
                                     onChanged: (value) {
-                                      currentConfig.currentUser.avatar.eyebrow = SubAvatarItem.getSubAvatarItemFrom(value);
+                                      currentConfig.currentUser.avatar.eyebrow = SubAvatarItem.getSubAvatarItemFrom(value,eyebrowType[0]);
                                       setState(() {
                                       });
                                     })
@@ -311,7 +312,7 @@ class _MyHomePageState extends State<editProfilView> {
                                     items: getListItem(mouthType),
                                     hint: new Text("select mouth"),
                                     onChanged: (value) {
-                                      currentConfig.currentUser.avatar.mouth = SubAvatarItem.getSubAvatarItemFrom(value);
+                                      currentConfig.currentUser.avatar.mouth = SubAvatarItem.getSubAvatarItemFrom(value,mouthType[0]);
                                     setState(() {
                                   });
                                 })
@@ -327,7 +328,7 @@ class _MyHomePageState extends State<editProfilView> {
                                     items: getListItem(skinColor),
                                     hint: new Text("select skin"),
                                     onChanged: (value) {
-                                      currentConfig.currentUser.avatar.skinColo = SubAvatarItem.getSubAvatarItemFrom(value);
+                                      currentConfig.currentUser.avatar.skinColo = SubAvatarItem.getSubAvatarItemFrom(value,skinColor[0]);
                                       setState(() {
                                       });
                                     })
@@ -344,6 +345,7 @@ class _MyHomePageState extends State<editProfilView> {
         ),
         FlatButton(onPressed: (){
           User.modifyUserAvantarAndBadge(currentConfig.currentUser.badge.name,currentConfig.currentUser.badge.adj);
+          Navigator.pushNamed(context, core, arguments: { "selectedIndex": 2, "randosCollection": currentConfig.getCurrentRandoList()});
         }, child: Text("Save"))
       ]),
     );
@@ -364,13 +366,15 @@ class _MyHomePageState extends State<editProfilView> {
 
   getListName(List<NameTitle> nameList) {
     List<DropdownMenuItem<String>> allNameForTitre = [];
+    print(nameList);
     for (NameTitle name in nameList) {
-      if (name.isUnlock) {
+      print(name.isUnlock);
+      if (name.isUnlock)
         allNameForTitre.add(new DropdownMenuItem(
           child: new Text(name.libName),
           value: name.libName,
         ));
-      }
+
     }
     return allNameForTitre;
   }

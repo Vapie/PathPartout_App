@@ -11,6 +11,7 @@ class AchievementRow extends StatelessWidget {
   AchievementRow(Achievement pAchievement, List<String> pAchievementsUnlocked,
       {Key key})
       : super(key: key) {
+    print(pAchievementsUnlocked);
     this.userAchievement = pAchievement;
     this.achievementsUnlocked = pAchievementsUnlocked;
 

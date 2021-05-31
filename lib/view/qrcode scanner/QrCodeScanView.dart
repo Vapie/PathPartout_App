@@ -4,12 +4,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mvvm_flutter_app/MainConfig.dart';
+import 'package:mvvm_flutter_app/classes/achievementUnlocked.dart';
 import 'package:mvvm_flutter_app/classes/rando.dart';
 import 'package:mvvm_flutter_app/navigation/routes.dart';
 import 'package:mvvm_flutter_app/notification/rando-notif.dart';
 import 'package:mvvm_flutter_app/view/splash/SplashViewModel.dart';
 import 'package:mvvm_flutter_app/widget/podometer/Podometre.dart';
 import 'package:stacked/stacked.dart';
+import '../../main.dart';
 import 'QrCodeScanViewModel.dart';
 import 'dart:io';
 
@@ -18,8 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 //pour générer les qr : https://www.the-qrcode-generator.com/
-//Format PathPartoutLesBoss:Unlock:1
-
+//Format PathPartoutLesBoss:Unlock:60b26b19ad64d61c84e77baf
 class QRCodeScanView extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _QRViewScanViewState();
@@ -81,9 +82,11 @@ class _QRViewScanViewState extends State<QRCodeScanView> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         print(scanData.code);
-        if (scanData.code.contains("PathPartoutLesBoss:Unlock:")){
-          UnlockItem(int.parse(scanData.code.split(":")[2]));
-          Navigator.pushNamed(context, splash);
+        List<String> availableArchivements =["60b26b19ad64d61c84e77baf","60b26b19ad64d61c84e77bb0","60b26b19ad64d61c84e77bb1"];
+        if (scanData.code.contains("PathPartoutLesBoss:Unlock:"  )){
+          if (availableArchivements.contains(scanData.code.split(":")[2]))
+            AchievementUnlocked.unlockAchivement(scanData.code.split(":")[2]);
+          Navigator.pushNamed(context, core, arguments: { "selectedIndex": 1, "randosCollection": currentConfig.getCurrentRandoList()});
           dispose();
         }
       });
@@ -97,6 +100,3 @@ class _QRViewScanViewState extends State<QRCodeScanView> {
   }
 }
 
-void UnlockItem(int UnlockId) {
-  print("onunlock " + UnlockId.toString());
-}

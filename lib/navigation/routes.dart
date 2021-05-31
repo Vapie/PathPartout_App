@@ -30,7 +30,7 @@ const String detailRando = '/DetailRando';
 const String splash = '/splash';
 const String profile = '/profile';
 const String qr = '/qr';
-const String loading = '/qr';
+const String loading = '/loading';
 const String editionProfil = '/editProfil';
 
 

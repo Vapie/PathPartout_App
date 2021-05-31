@@ -12,7 +12,7 @@ class AchievementsWrapper extends StatelessWidget {
   SortiesWrapper() {}
   Future<List<Achievement>> getAchievements() async {
     achievements = await Achievement.getAchievements();
-    print(achievements);
+    //(achievements);
     await getAchievementsUnlocked();
     sortedAchievements = await achievementsSorter(achievements);
     return sortedAchievements;

@@ -66,8 +66,8 @@ class _MyNavigationBarState extends State<MyNavigationBar> {
                 label: 'Randos',
                 backgroundColor: Colors.white),
             BottomNavigationBarItem(
-                icon: Icon(Icons.map_outlined),
-                label: 'Map',
+                icon: Icon(Icons.home),
+                label: 'Home',
                 backgroundColor: Colors.white),
             BottomNavigationBarItem(
               icon: Icon(Icons.person_outlined),
