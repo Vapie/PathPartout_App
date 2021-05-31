@@ -13,16 +13,18 @@ import 'package:mvvm_flutter_app/widget/media/slide-loadimages.dart';
 class RandoTile extends StatelessWidget {
   Rando rando;
   bool isFavorite = false;
+  bool isBig = false;
 
-  RandoTile(Rando rando, {Key key}) : super(key: key) {
+  RandoTile(Rando rando, bool bigTile, {Key key}) : super(key: key) {
     this.rando = rando;
     isFavorite = currentConfig.currentUser.favoris.contains(rando.id);
+    isBig = bigTile;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height * 0.3,
+        height: MediaQuery.of(context).size.height * 0.28,
         width: MediaQuery.of(context).size.width * 0.5,
         child: Expanded(
           child: Card(
@@ -69,9 +71,7 @@ class RandoTile extends StatelessWidget {
                                     FavoriteButton(
                                       iconColor: Colors.pinkAccent,
                                       isFavorite: isFavorite,
-                                      iconSize:
-                                          MediaQuery.of(context).size.height *
-                                              0.05,
+                                      iconSize: (isBig)?MediaQuery.of(context).size.height * 0.03:MediaQuery.of(context).size.height * 0.05,
                                       iconDisabledColor: Colors.white,
                                       valueChanged: (_isFavorite) {
                                         print('Is Favorite : $_isFavorite');
@@ -81,14 +81,14 @@ class RandoTile extends StatelessWidget {
                                     )
                                   ]))),
                       Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: const EdgeInsets.only(top:14.0, left: 14.0, bottom: 22.0, right: 14.0),
                         child: Text(
                           rando.name,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 3,
                           textScaleFactor: 1,
-                          strutStyle: StrutStyle(fontSize: 25),
-                          style: TextStyle(color: Colors.white, fontSize: 25),
+                          strutStyle: (isBig)?StrutStyle(fontSize: 14):StrutStyle(fontSize: 20),
+                          style: (isBig)?TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.bold):TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
                         ),
                       ),
                       Padding(padding: EdgeInsets.all(16.0)),
@@ -102,21 +102,18 @@ class RandoTile extends StatelessWidget {
                                     color: getColor(rando.difficulty)))),
                       ),
                       Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0, bottom: 10.0),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               if (rando.distance != null)
                                 Text(
                                   rando.distance.round().toString() + 'km',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 25),
+                                  style: (isBig)?TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold):TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
                                 ),
                               Text(
-
                                 (rando.duration/60).toInt().toString()+"h"+(rando.duration%60).toInt().toString(),
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 25),
+                                style: (isBig)?TextStyle(color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold):TextStyle(color: Colors.black, fontSize: 22, fontWeight: FontWeight.bold),
                               ),
                             ],
                           ))
