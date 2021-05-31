@@ -25,32 +25,30 @@ class RandosList extends StatelessWidget {
         }
 
         return ListView(
-            children: [Column(
-          children: [
-            RandoTile(randos.elementAt(0)),
+            children: [
+              Column(
+                children: [
+                  RandoTile(randos.elementAt(0), false),
+                  Row(
+                    children: [
+                      Column(
+                        children: [
+                          //TODO maybe viewmodel
+                          for (var i=0;i < randos.skip(1).length; i++ ) if (i%2 == 1 )  RandoTile(randos[i+1], false),
+                          if(randos.length%2 == 0 ) AddRandoTile(),
+                        ],
+                      ),
+                      Column(
+                        //TODO maybeviewmodel
+                        children: [
+                          for (var i=0;i < randos.skip(1).length; i++ ) if (i%2 == 0 )  RandoTile(randos[i+1], false),
 
-
-
-            Row(
-              children: [
-                Column(
-                  children: [
-                    //TODO maybe viewmodel
-                    for (var i=0;i < randos.skip(1).length; i++ ) if (i%2 == 1 )  RandoTile(randos[i+1]),
-                    if(randos.length%2 == 0 ) AddRandoTile(),
-                  ],
-                ),
-                Column(
-                  //TODO maybeviewmodel
-                  children: [
-                    for (var i=0;i < randos.skip(1).length; i++ ) if (i%2 == 0 )  RandoTile(randos[i+1]),
-
-                  ],
-                )
-              ],
-            )
-          ],
-        ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
             ]);
       })())),
     );

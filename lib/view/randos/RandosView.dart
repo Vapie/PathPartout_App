@@ -40,17 +40,20 @@ class RandosView extends StatelessWidget {
                           children: [
                             Expanded(
                                 child: FittedBox(
-                              fit: BoxFit.fitWidth,
-                              child: RandoTile(randos.elementAt(0)),
-                            ))
-                          ])),
+                                  fit: BoxFit.fitWidth,
+                                  child: RandoTile(randos.elementAt(0), true),
+                                )
+                            )
+                          ]
+                      )
+                  ),
                   Row(
                     children: [
                       Column(
                         children: [
                           //TODO maybe viewmodel
                           for (var i = 0; i < randos.skip(1).length; i++)
-                            if (i % 2 == 1) RandoTile(randos[i + 1]),
+                            if (i % 2 == 1) RandoTile(randos[i + 1], false),
                           if (randos.length % 2 == 0) AddRandoTile(),
                         ],
                       ),
@@ -58,7 +61,7 @@ class RandosView extends StatelessWidget {
                         //TODO maybeviewmodel
                         children: [
                           for (var i = 0; i < randos.skip(1).length; i++)
-                            if (i % 2 == 0) RandoTile(randos[i + 1]),
+                            if (i % 2 == 0) RandoTile(randos[i + 1], false),
                         ],
                       )
                     ],
