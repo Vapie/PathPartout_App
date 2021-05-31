@@ -140,7 +140,8 @@ class DashboardTile extends StatelessWidget {
                 height: 100,
 
                 child:
-                  LoadImage("https://img-premium.flaticon.com/png/512/2927/2927917.png?token=exp=1622401390~hmac=668313a87dd4637047e15f2b31f3413e")
+                  Image.asset("assets/picture/coupe.png")
+                  //LoadImage("https://img-premium.flaticon.com/png/512/2927/2927917.png?token=exp=1622401390~hmac=668313a87dd4637047e15f2b31f3413e")
               ),
               Container(height:40)
                 ],
