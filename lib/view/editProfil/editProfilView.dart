@@ -85,6 +85,7 @@ class _MyHomePageState extends State<editProfilView> {
                       Row(
                         children: [
                           Container(
+                            alignment: Alignment.topLeft,
                             margin: EdgeInsets.only(right: 50),
                             child: Column(
                               children : <Widget>[
@@ -101,6 +102,7 @@ class _MyHomePageState extends State<editProfilView> {
                             ),
                           ),
                           Container(
+                            alignment: Alignment.topRight,
                             margin: EdgeInsets.only(left: 40),
                             width: 150,
                             child: Column(
@@ -126,7 +128,6 @@ class _MyHomePageState extends State<editProfilView> {
         ),
 
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Expanded(
               child: Container(
@@ -157,7 +158,7 @@ class _MyHomePageState extends State<editProfilView> {
                       ),
 
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
                             margin: EdgeInsets.only(right: 10),
@@ -194,9 +195,9 @@ class _MyHomePageState extends State<editProfilView> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 20),
                             child: Column(
                               children : <Widget>[
                                 new DropdownButton(
@@ -212,7 +213,6 @@ class _MyHomePageState extends State<editProfilView> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: 40),
                             child: Column(
                               children : <Widget>[
                                 new DropdownButton(
@@ -230,9 +230,9 @@ class _MyHomePageState extends State<editProfilView> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 20),
                             child: Column(
                               children : <Widget>[
                                 new DropdownButton(
@@ -248,7 +248,6 @@ class _MyHomePageState extends State<editProfilView> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: 60),
                             child: Column(
                               children : <Widget>[
                                 new DropdownButton(
@@ -266,9 +265,9 @@ class _MyHomePageState extends State<editProfilView> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 20),
                             child: Column(
                               children : <Widget>[
                                 new DropdownButton(
@@ -284,7 +283,6 @@ class _MyHomePageState extends State<editProfilView> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: 75),
                             child: Column(
                               children : <Widget>[
                                 new DropdownButton(
@@ -302,9 +300,9 @@ class _MyHomePageState extends State<editProfilView> {
                         ],
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            margin: EdgeInsets.only(left: 20),
                             child: Column(
                               children : <Widget>[
                                 new DropdownButton(
@@ -320,7 +318,6 @@ class _MyHomePageState extends State<editProfilView> {
                             ),
                           ),
                           Container(
-                            margin: EdgeInsets.only(left: 80),
                             child: Column(
                               children : <Widget>[
                                 new DropdownButton(

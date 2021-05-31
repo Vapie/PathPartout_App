@@ -8,65 +8,109 @@ List<SubAvatarItem> topType = [
   SubAvatarItem("Hijab", "Voile", false),
   SubAvatarItem("Turban", "Turban", false),
   SubAvatarItem("WinterHat1", "Chapeau d'hiver 1", true),
-  SubAvatarItem("LongHairBob", "Coupe au carré", false),
+  SubAvatarItem("LongHairBob", "Coupe au carré", true),
   SubAvatarItem("WinterHat3", "Chapeau d'hiver 2", false),
-  SubAvatarItem("WinterHat4", "Chapeau d'hiver 3", false),
+  SubAvatarItem("WinterHat4", "Chapeau d'hiver 3", true),
   SubAvatarItem("LongHairBigHair", "Cheveux ondulés", false),
-  SubAvatarItem("LongHairBun", "Chignon", false),
+  SubAvatarItem("LongHairBun", "Chignon", true),
   SubAvatarItem("LongHairCurly", "Long cheveux bouclés", false),
   SubAvatarItem("LongHairCurvy", "Cheveux bouclés", true),
   SubAvatarItem("LongHairDreads", "Dreadlocks", false),
-  SubAvatarItem("LongHairFrida", "Cheveux fleuris", false),
-  SubAvatarItem("LongHairFro", "Coupe afro", false),
+  SubAvatarItem("LongHairFrida", "Cheveux fleuris", true),
+  SubAvatarItem("LongHairFro", "Coupe afro", true),
   SubAvatarItem("LongHairFroBand", "Coupe afro + bandeau", false),
-  SubAvatarItem("LongHairNotTooLong", "mi-long", false),
+  SubAvatarItem("LongHairNotTooLong", "mi-long", true),
   SubAvatarItem("LongHairShavedSides", "long et rasés sur les côtés", false),
-  SubAvatarItem("ShortHairCaesarSidePart", "court stylé", false),
+  SubAvatarItem("ShortHairCaesarSidePart", "court stylé", false)
 ];
 List<SubAvatarItem> accessoriesType = [
   SubAvatarItem("Blank", "Blank", true),
-  SubAvatarItem("Kurt", "Kurt", true),
-  SubAvatarItem("Prescription01", "Prescription01", false)
+  SubAvatarItem("Kurt", "Jet set", true),
+  SubAvatarItem("Prescription01", "Prescription", false),
+  SubAvatarItem("Prescription01", "Lunettes rondes", true),
+  SubAvatarItem("Prescription01", "Lunettes de soleil", false)
 ];
 List<SubAvatarItem> facialHairType = [
   SubAvatarItem("Blank", "Blank", true),
   SubAvatarItem("BeardMedium", "BeardMedium", true),
-  SubAvatarItem("BeardLight", "BeardLight", false)
+  SubAvatarItem("BeardLight", "BeardLight", true),
+  SubAvatarItem("BeardMajestic", "Barbe longue", false),
+  SubAvatarItem("MoustacheFancy", "Moustache", true),
+  SubAvatarItem("MoustacheMagnum", "Moustache +", false)
 ];
 List<SubAvatarItem> hairColor = [
   SubAvatarItem("Auburn", "Auburn", true),
   SubAvatarItem("Black", "Black", true),
-  SubAvatarItem("Blonde", "Blonde", false)
+  SubAvatarItem("Blonde", "Blonde", true),
+  SubAvatarItem("PastelPink", "Rose", true),
+  SubAvatarItem("Platinum", "Platine", true),
+  SubAvatarItem("Red", "Roux", true),
+  SubAvatarItem("SilverGray", "Gris", true),
 ];
 List<SubAvatarItem> clotheType = [
   SubAvatarItem("BlazerShirt", "BlazerShirt", true),
-  SubAvatarItem("BlazerSweater", "BlazerSweater", true),
-  SubAvatarItem("CollarSweater", "CollarSweater", false)
+  SubAvatarItem("BlazerSweater", "Blazer Sweater", true),
+  SubAvatarItem("CollarSweater", "Collar Sweater", false),
+  SubAvatarItem("GraphicShirt", "T-Shirt", false),
+  SubAvatarItem("Hoodie", "Sweat à capuche", true),
+  SubAvatarItem("Overall", "Salopette", true),
+  SubAvatarItem("ShirtVNeck", "T-Shirt V", false)
 ];
 List<SubAvatarItem> clotheColor = [
   SubAvatarItem("Black", "Black", true),
-  SubAvatarItem("Blue01", "Blue01", true),
-  SubAvatarItem("Blue02", "Blue02", false)
+  SubAvatarItem("Blue02", "Bleu", true),
+  SubAvatarItem("Gray01", "Beige", true),
+  SubAvatarItem("Gray02", "Gris", false),
+  SubAvatarItem("Heather", "Bleu marine", true),
+  SubAvatarItem("PastelGreen", "Vert fluo", true),
+  SubAvatarItem("PastelRed", "Pastel", false),
+  SubAvatarItem("PastelYellow", "Jaune", false),
+  SubAvatarItem("Pink", "Rose", true),
+  SubAvatarItem("Red", "Rouge", true),
+  SubAvatarItem("White", "Blanc", true)
 ];
 List<SubAvatarItem> eyeType = [
   SubAvatarItem("Close", "Close", true),
   SubAvatarItem("Cry", "Cry", true),
-  SubAvatarItem("Dizzy", "Dizzy", false)
+  SubAvatarItem("Dizzy", "Assommé", true),
+  SubAvatarItem("EyeRoll", "Révulsés", false),
+  SubAvatarItem("Happy", "Joyeux", false),
+  SubAvatarItem("Hearts", "Amoureux", true),
+  SubAvatarItem("Side", "Coté", true),
+  SubAvatarItem("Squint", "Peur", false),
+  SubAvatarItem("Surprised", "Surpris", true),
+  SubAvatarItem("Side", "Coté", false),
+  SubAvatarItem("Wink", "Clin d'oeil", false)
 ];
 List<SubAvatarItem> eyebrowType = [
   SubAvatarItem("Angry", "Angry", true),
   SubAvatarItem("AngryNatural", "AngryNatural", false),
-  SubAvatarItem("Default", "Default", true)
+  SubAvatarItem("FlatNatural", "Froncés", true),
+  SubAvatarItem("RaisedExcited", "Soulevés", true),
+  SubAvatarItem("SadConcerned", "Triste", true),
+  SubAvatarItem("UnibrowNatural", "Monosourcil", true),
+  SubAvatarItem("UpDownNatural", "Haut et bas", true)
 ];
 List<SubAvatarItem> mouthType = [
-  SubAvatarItem("Concerned", "Concerned", true),
-  SubAvatarItem("Disbelief", "Disbelief", true),
-  SubAvatarItem("Eating", "Eating", false)
+  SubAvatarItem("Concerned", "Bouche B", true),
+  SubAvatarItem("Disbelief", "Incrédule", true),
+  SubAvatarItem("Eating", "Eating", true),
+  SubAvatarItem("Grimace", "Grimace", false),
+  SubAvatarItem("Sad", "Triste", false),
+  SubAvatarItem("ScreamOpen", "Cri", false),
+  SubAvatarItem("Serious", "Sérieux", true),
+  SubAvatarItem("Smile", "Sourire", true),
+  SubAvatarItem("Tongue", "Langue", false),
+  SubAvatarItem("Vomit", "Vomi", false)
 ];
 List<SubAvatarItem> skinColor = [
   SubAvatarItem("Tanned", "Tanned", true),
-  SubAvatarItem("Yellow", "Yellow", false),
+  SubAvatarItem("Yellow", "Yellow", true),
   SubAvatarItem("Pale", "Pale", true),
+  SubAvatarItem("Light", "Claire", true),
+  SubAvatarItem("Brown", "Mate", true),
+  SubAvatarItem("DarkBrown", "Marron", true),
+  SubAvatarItem("Black", "Noir", true),
 ];
 
 class SubAvatarItem {
