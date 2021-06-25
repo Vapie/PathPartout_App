@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  location: ^2.0.0
   user_location: any
   mqtt_client: ^7.2.1
   favorite_button: ^0.0.4

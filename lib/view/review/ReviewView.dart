@@ -254,19 +254,20 @@ class _ReviewViewState extends State<ReviewView> {
                                         ),
                                         onPressed: () {
                                           if (_imageUrl!=null) {
+                                            _sendImage(model);
+                                          }
+                                          else{
                                             review.addAll({
                                               'avis': reviewController.text,
                                               'note': rating,
-                                              'imageUrl': _imageUrl
+                                              'imageUrl': ''
                                             });
                                             model.store(review);
                                             Navigator.pushNamed(
                                                 context, detailRando,
                                                 arguments: currentConfig
                                                     .currentRando.id);
-                                          }
-                                          else{
-                                            _sendImage(model);
+
                                           }
                                          //
                                         },
