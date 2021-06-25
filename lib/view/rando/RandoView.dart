@@ -61,7 +61,6 @@ class _RandoViewState extends State<RandoView> {
     // var test = futur;
     // print(futureSorties.toString());
 
-    print('#########');
     if (futureSorties != null) {
       for (var sortie in futureSorties) {
         if (sortie.randonnee.id == currentConfig.currentRando.id)
@@ -70,7 +69,6 @@ class _RandoViewState extends State<RandoView> {
         // print(sortie);
       }
     }
-    print('@@@@@@');
 
     // for(var sortie in futureSorties){
     //   print(sortie.id);
@@ -611,8 +609,8 @@ class _RandoViewState extends State<RandoView> {
                                                                           right:
                                                                               10.0),
                                                                   child: Text(
-                                                                      currentConfig
-                                                                          .currentUser
+                                                                      snapshot
+                                                                          .data
                                                                           .firstname,
                                                                       textAlign:
                                                                           TextAlign
@@ -652,6 +650,8 @@ class _RandoViewState extends State<RandoView> {
                                                       Row(
                                                         children: [
                                                           Container(
+
+
                                                             padding:
                                                                 const EdgeInsets
                                                                         .only(
@@ -662,11 +662,18 @@ class _RandoViewState extends State<RandoView> {
                                                                       .start,
                                                               children: <
                                                                   Widget>[
-                                                                new Text(
-                                                                    review.avis,
-                                                                    textAlign:
+                                                                    Container(
+                                                                        width: MediaQuery.of(context).size.width * 0.645,
+                                                                        child:
+                                                                     Text(
+
+                                                                        review.avis,
+                                                                        overflow: TextOverflow.ellipsis,
+                                                                        textAlign:
                                                                         TextAlign
                                                                             .left)
+                                                                    )
+
                                                               ],
                                                             ),
                                                           )
