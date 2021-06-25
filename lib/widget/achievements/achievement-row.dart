@@ -24,7 +24,13 @@ class AchievementRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Card(
+
+    clipBehavior: Clip.antiAliasWithSaveLayer,
+    semanticContainer: true,
+    shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(const Radius.circular(15.0))),
+    child:Column(
       children: <Widget>[
         if (achievementIsUnlocked)
           Container(
@@ -75,7 +81,7 @@ class AchievementRow extends StatelessWidget {
               alignment: Alignment.centerLeft,
               width: MediaQuery.of(context).size.width,
               foregroundDecoration: BoxDecoration(
-                color: Colors.grey,
+                 color: Colors.white,
                 backgroundBlendMode: BlendMode.saturation,
               ),
               child: Padding(
@@ -121,84 +127,7 @@ class AchievementRow extends StatelessWidget {
               /*child: Text("non"),*/
               )
       ],
-      /*child: Expanded(
-          child: Card(
-              color: getColor(sortieRando.difficulty),
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              semanticContainer: true,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(const Radius.circular(15.0))),
-              child: new InkWell(
-                onTap: () {
-                  print("LA DIFF: " + sortieRando);
-                  print("tapped " + sortieRando.name);
-                  Navigator.pushNamed(context, detailRando, arguments: sortieRando.id);
-                },
-                child: Column(
-                  children: [
-                    Stack(
-                        alignment: Alignment.bottomLeft,
-                        children: [
-                          if( sortieRando.images != null) Container(
-                              height: MediaQuery.of(context).size.height * 0.203,
-                              width: MediaQuery.of(context).size.width,
-                              child: FittedBox(
-                                  child: LoadImage(sortieRando.images[0]),
-                                  fit: BoxFit.fill
-                              )
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width,
-                            height: MediaQuery.of(context).size.height * 0.1,
-
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.bottomCenter,
-                                end: Alignment.topCenter,
-                                colors: [
-                                  const Color(0xCC000000),
-                                  const Color(0x00000000),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
-                            child:  Text(
-                              sortieRando.name,
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 3,
-                              textScaleFactor: 1,
-                              */ /*strutStyle: StrutStyle(fontSize: 25),*/ /*
-                              style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                          Padding(padding: EdgeInsets.all(17.0))
-                        ]),
-                    Column(children: [
-
-                      */ /*Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              if(sortieRando.distance != null) Text(
-                                sortieRando.distance.round().toString() + 'km',
-                                style: TextStyle(color: Colors.black, fontSize: 25),
-                              ),
-                              Text(
-                                '3h30',
-                                style: TextStyle(color: Colors.black, fontSize: 25),
-                              ),
-                            ],
-                          ))*/ /*
-                    ]),
-                  ],
-                ),
-              )
-          ),
-
-        )*/
+    )
     );
   }
 }

@@ -22,6 +22,8 @@ class Review {
       });
 
   factory Review.fromJson(Map<String, dynamic> json) {
+    print("yo");
+    print(json);
     return Review(
         id: json['_id'],
         avis: json['avis'],

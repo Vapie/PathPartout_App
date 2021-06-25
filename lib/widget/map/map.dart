@@ -38,6 +38,7 @@ class _MyMapState extends State<MyMap> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return new FlutterMap(
+
                 options: new MapOptions(
                   center: new LatLng(
                       snapshot.data.gpx[0][1], snapshot.data.gpx[0][0]),

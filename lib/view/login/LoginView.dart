@@ -75,19 +75,20 @@ class _LoginState extends State<LoginView> {
                             hintText: 'Entrez votre mot de passe'),
                       ),
                     ),
+                    SizedBox(height: 20,),
 
-                    TextButton(
-                      onPressed: () {
-                        // TODO
-                      },
-                      child: Text(
-                        'Mot de passe oublié',
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 15,
-                            decoration: TextDecoration.underline),
-                      ),
-                    ),
+                    // TextButton(
+                    //   onPressed: () {
+                    //     // TODO
+                    //   },
+                    //   child: Text(
+                    //     'Mot de passe oublié',
+                    //     style: TextStyle(
+                    //         color: Colors.grey,
+                    //         fontSize: 15,
+                    //         decoration: TextDecoration.underline),
+                    //   ),
+                    // ),
 
                     // Bouton de connexion
                     Container(

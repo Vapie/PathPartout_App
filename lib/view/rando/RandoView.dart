@@ -48,11 +48,11 @@ class _RandoViewState extends State<RandoView> {
     futureRandos = await currentConfig.getCurrentRandoList();
   }
 
-  canBeShown(List reviews){
+  canBeShown(List reviews) {
     var status = false;
-    if(reviews != null){
-      for(var review in reviews){
-        if(review.userId == currentConfig.currentUser.id){
+    if (reviews != null) {
+      for (var review in reviews) {
+        if (review.userId == currentConfig.currentUser.id) {
           status = true;
         }
       }
@@ -62,9 +62,10 @@ class _RandoViewState extends State<RandoView> {
     // print(futureSorties.toString());
 
     print('#########');
-    if(futureSorties != null){
-      for(var sortie in futureSorties){
-        if(sortie.randonnee.id == currentConfig.currentRando.id) status = false;
+    if (futureSorties != null) {
+      for (var sortie in futureSorties) {
+        if (sortie.randonnee.id == currentConfig.currentRando.id)
+          status = false;
         // if(sortie == null)
         // print(sortie);
       }
@@ -153,29 +154,29 @@ class _RandoViewState extends State<RandoView> {
                       ),
                     ),
                   ),
-                  if(!isHidden)
-                  Positioned(
-                    top: 10,
-                    right: 10,
-                    child: TextButton(
-                      onPressed: () {
-                        print(widget.randoId);
-                        Navigator.pushNamed(context, review);
-                      },
-                      style: TextButton.styleFrom(
-                        primary: Colors.white,
-                        backgroundColor: getColor(snapshot.data.difficulty),
-                        onSurface: Colors.grey,
-                      ),
-                      child: Text(
-                        "Ajouter un avis",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15),
+                  if (!isHidden)
+                    Positioned(
+                      top: 10,
+                      right: 10,
+                      child: TextButton(
+                        onPressed: () {
+                          print(widget.randoId);
+                          Navigator.pushNamed(context, review);
+                        },
+                        style: TextButton.styleFrom(
+                          primary: Colors.white,
+                          backgroundColor: getColor(snapshot.data.difficulty),
+                          onSurface: Colors.grey,
+                        ),
+                        child: Text(
+                          "Ajouter un avis",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15),
+                        ),
                       ),
                     ),
-                  ),
 
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0, bottom: 60.0),
@@ -557,111 +558,130 @@ class _RandoViewState extends State<RandoView> {
                             //for (var i = 0; i < 2; i++)
                             FutureBuilder<User>(
                                 future: User.fetchUser(review.userId),
-                                builder: (context, AsyncSnapshot<User> snapshot) {
-                            return Container(
-                                child: Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Column(children: [
+                                builder:
+                                    (context, AsyncSnapshot<User> snapshot) {
+                                  return Container(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            if (snapshot.data != null)
+                                            Column(children: [
 
-                                      SvgPicture.network(
+                                                SvgPicture.network(
+                                                  snapshot.data.avatar
+                                                      .getImageUrl(),
+                                                  height: 80,
+                                                  width: 80,
+                                                  placeholderBuilder: (BuildContext
+                                                          context) =>
+                                                      Container(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(20.0),
+                                                          child:
+                                                              const CircularProgressIndicator()),
+                                                ),
+                                            ]),
+                                            // Avis - Description
 
-                                        snapshot.data.avatar.getImageUrl(),
-                                          height: 80,
-                                          width: 80,
-                                          placeholderBuilder: (BuildContext context) => Container(
-                                              padding: const EdgeInsets.all(20.0),
-                                              child: const CircularProgressIndicator()),
-                                        ),
-                                      ]),
-                                      // Avis - Description
-
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(left: 10),
-                                            child: Column(
+                                            Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
-                                                Row(
-                                                  children: [
-                                                    Column(
-                                                      children: [
-                                                        Padding(
-                                                            padding:
-                                                                EdgeInsets.only(
-                                                                    left: 0,
-                                                                    right:
-                                                                        10.0),
-                                                            child: Text(
-                                                                currentConfig.currentUser.firstname,
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                                style: TextStyle(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold)))
-                                                      ],
-                                                    ),
-                                                    Column(children: [
-                                                      Container(
-                                                        padding:
-                                                            EdgeInsets.all(5.0),
-                                                        child: Text(
-                                                          snapshot.data.badge.getTitre(),
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white),
-                                                        ),
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius.all(
-                                                                    const Radius
-                                                                            .circular(
-                                                                        15.0)),
-                                                            color: Colors
-                                                                .red[300]),
-                                                      ),
-                                                    ])
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Container(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 10.0),
+                                                Padding(
+                                                  padding:
+                                                      EdgeInsets.only(left: 10),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          Column(
+                                                            children: [
+                                                              Padding(
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          left:
+                                                                              0,
+                                                                          right:
+                                                                              10.0),
+                                                                  child: Text(
+                                                                      currentConfig
+                                                                          .currentUser
+                                                                          .firstname,
+                                                                      textAlign:
+                                                                          TextAlign
+                                                                              .left,
+                                                                      style: TextStyle(
+                                                                          fontWeight:
+                                                                              FontWeight.bold)))
+                                                            ],
+                                                          ),
+                                                          if (snapshot.data != null)
+                                                          Column(children: [
+                                                            Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(5.0),
 
-                                                      child: Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: <Widget>[
-                                                          new Text(review.avis,
-                                                              textAlign:
-                                                                  TextAlign
-                                                                      .left)
+                                                              child: Text(
+                                                                snapshot
+                                                                    .data.badge
+                                                                    .getTitre(),
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white),
+                                                              ),
+                                                              decoration: BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius.all(
+                                                                          const Radius.circular(
+                                                                              15.0)),
+                                                                  color: Colors
+                                                                          .red[
+                                                                      300]),
+                                                            ),
+                                                          ])
                                                         ],
                                                       ),
-                                                    )
-                                                  ],
-                                                ),
+                                                      Row(
+                                                        children: [
+                                                          Container(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    top: 10.0),
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: <
+                                                                  Widget>[
+                                                                new Text(
+                                                                    review.avis,
+                                                                    textAlign:
+                                                                        TextAlign
+                                                                            .left)
+                                                              ],
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
                                               ],
-                                            ),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                color: Colors.grey[200]);})
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      color: Colors.grey[200]);
+                                })
                     ])
                   ],
                 ),

@@ -47,6 +47,7 @@ Future<dynamic> fetchRequestSingle(String address, String params) async {
       );
 
       if (response.statusCode == 200) {
+        print(response.statusCode.toString());
         // If the server did return a 200 OK response,
         // then parse the JSON.
         return jsonDecode(response.body);

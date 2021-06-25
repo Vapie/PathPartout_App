@@ -44,7 +44,8 @@ class _RegisterState extends State<RegisterView> {
       // appBar: AppBar(
       //   title: Text("Login Page"),
       // ),
-      body:
+      body:SingleChildScrollView(
+    child:
           // Background ok avec container sinon pixel overflowed bottom
           // decoration: BoxDecoration(
           //     gradient: RadialGradient(
@@ -153,6 +154,7 @@ class _RegisterState extends State<RegisterView> {
                 },
               )),
         ],
+      ),
       ),
     ),
       viewModelBuilder: () => RegisterViewModel(),

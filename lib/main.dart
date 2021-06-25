@@ -11,21 +11,25 @@ void main() {
     statusBarColor: Colors.transparent,
   ));
   configure();
-  runApp(MyApp());
+  runApp( MaterialApp(
+    debugShowCheckedModeBanner: false,
+    onGenerateRoute: navRoute.Router.generateRoute,
+    initialRoute: navRoute.splash,
+  ));
 }
-
-class MyApp extends StatelessWidget {
-
-  @override
-  Widget build(BuildContext context) {
-    runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: navRoute.Router.generateRoute,
-      initialRoute: navRoute.splash,
-    ));
-  }
+//
+// class MyApp extends StatelessWidget {
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     runApp(MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       onGenerateRoute: navRoute.Router.generateRoute,
+//       initialRoute: navRoute.splash,
+//     ));
+//   }
 //Navigator.pushNamed(context, secondScreenRoute, arguments: 'Data from home');
 
-}
+// }
 
 

@@ -23,6 +23,7 @@ class SortieTile extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.8,
         width: MediaQuery.of(context).size.width * 0.35,
         child: Expanded(
+
             child: Card(
               color: getColor(sortieRando.difficulty),
                 clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -35,8 +36,9 @@ class SortieTile extends StatelessWidget {
                     print("tapped " + sortieRando.name);
                     Navigator.pushNamed(context, detailRando, arguments: sortieRando.id);
                   },
-                  child: Column(
-                    children: [
+                  child:Column(children:[ Expanded(
+                    flex: 40,
+                    child:
                       Stack(
                           alignment: Alignment.bottomLeft,
                           children: [
@@ -64,7 +66,7 @@ class SortieTile extends StatelessWidget {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 15.0),
+                              padding: const EdgeInsets.only(left: 15.0, right: 15.0, bottom: 20.0),
                               child:  Text(
                                 sortieRando.name,
                                 overflow: TextOverflow.ellipsis,
@@ -74,10 +76,15 @@ class SortieTile extends StatelessWidget {
                                 style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
                               ),
                             ),
-                            Padding(padding: EdgeInsets.all(17.0))
+                            // Padding(padding: EdgeInsets.all(17.0))
                           ]),
-                    ],
+
                   ),
+                    Expanded(
+                        flex:2,
+                        child: Container())
+
+              ]),
                 )
             ),
 

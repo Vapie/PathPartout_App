@@ -83,7 +83,7 @@ class _ReviewViewState extends State<ReviewView> {
                 children: [
                   ListTile(
                       leading: Icon(Icons.photo_library),
-                      title: Text('Depuis la ggallllerie'),
+                      title: Text('Depuis la galerie'),
                       onTap: (){
                         _imgFromGallery();
                         Navigator.of(context).pop();
@@ -111,7 +111,9 @@ class _ReviewViewState extends State<ReviewView> {
     return ViewModelBuilder<ReviewViewModel>.reactive(
         builder: (context, model, child) =>
             Scaffold(
-                body: Container(
+                body: SingleChildScrollView(
+                    child:Container(
+                      height:  MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
                       gradient: RadialGradient(
                           colors: [
@@ -171,6 +173,25 @@ class _ReviewViewState extends State<ReviewView> {
                                             children: [
                                               Row(
                                                 children: [
+                                                  RatingBar.builder(
+                                                    initialRating: rating,
+                                                    minRating: 1,
+                                                    direction: Axis.horizontal,
+                                                    allowHalfRating: true,
+                                                    itemCount: 5,
+                                                    itemPadding: EdgeInsets.symmetric(
+                                                        horizontal: 2.0),
+                                                    itemBuilder: (context, _) => Icon(
+                                                      Icons.brightness_1_rounded,
+                                                      color: Colors.white,
+                                                    ),
+                                                    onRatingUpdate: (currentRating) {
+                                                       setState(() {
+                                                         rating = currentRating;
+                                                       });
+                                                    },
+                                                    itemSize: 20.0,
+                                                  ),
                                                   Padding(
                                                     padding: EdgeInsets.only(right: 10.0),
                                                     child: Text(
@@ -232,7 +253,22 @@ class _ReviewViewState extends State<ReviewView> {
                                               BorderRadius.all(Radius.circular(10))),
                                         ),
                                         onPressed: () {
-                                          _sendImage(model);
+                                          if (_imageUrl!=null) {
+                                            review.addAll({
+                                              'avis': reviewController.text,
+                                              'note': rating,
+                                              'imageUrl': _imageUrl
+                                            });
+                                            model.store(review);
+                                            Navigator.pushNamed(
+                                                context, detailRando,
+                                                arguments: currentConfig
+                                                    .currentRando.id);
+                                          }
+                                          else{
+                                            _sendImage(model);
+                                          }
+                                         //
                                         },
                                       ),
 
@@ -258,6 +294,7 @@ class _ReviewViewState extends State<ReviewView> {
                           ]
                       )
                   ),
+                )
                 )
             ),
         viewModelBuilder: () => ReviewViewModel(),
