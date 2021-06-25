@@ -140,12 +140,18 @@ Color getColor(int level) {
       return Color(0xFFFF8A65);
     return Color(0xFFFFA000);
   }
-  switch (level) {
+  switch(level){
     case 1:
       return Color(0xFF00E676);
     case 2:
-      return Color(0xFFFFA000);
-    default:
+      return Color(0xFFf5cd79);
+    case 3:
       return Color(0xFFFF8A65);
+    case 4:
+      return Color(0xFFe66767);
+    case 5:
+      return Color(0xFF574b90);
+    default:
+      return Color(0xFFFFFFFF);
   }
 }
